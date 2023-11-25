@@ -57,3 +57,9 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+/fluke8050a.X/build/
+/previous_projects/ken_kaarvik/fluke8050a_ili9341/dist/
+/previous_projects/ken_kaarvik/fluke8050a_ili9341/build/
+/src/8050A_TFT.X/dist/
+/src/8050A_TFT.X/build/
+/fluke8050a.X/dist/
