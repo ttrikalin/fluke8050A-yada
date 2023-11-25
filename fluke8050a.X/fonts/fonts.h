@@ -1,11 +1,31 @@
+#ifndef _SRC_FONTS_H_
+#define _SRC_FONTS_H_
+
+
+
+#define FONT_REGULAR_CHARACTER_WIDTH     30
+#define FONT_REGULAR_CHARACTER_HEIGHT    67
+#define FONT_REGULAR_BYTES_PER_ROW        9
+#define FONT_REGULAR_DECIMAL_POINT_WIDTH 12
+#define FONT_REGULAR_BLANK_WIDTH         12
+#define FONT_SMALL_CHARACTER_WIDTH       21
+#define FONT_SMALL_CHARACTER_HEIGHT      36
+#define FONT_SMALL_BYTES_PER_ROW          5
+#define FONT_SMALL_BLANK_WIDTH            2
+#define FONT_RANGE_CHARACTER_WIDTH       16
+#define FONT_RANGE_CHARACTER_HEIGHT      17
+#define FONT_RANGE_BYTES_PER_ROW          3
+#define FONT_RANGE_BLANK_WIDTH            2
+
+
 //  font created using dot factory
 //  http://www.pavius.net/2009/07/the-dot-factory-an-lcd-font-and-image-generator/
 
-
-// const uint_8 fontBitmaps       0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, space, +, -
-// const uint_8 fontDecimalPoint  \.
-// const fontSmallBitmaps         A, B, C, D, M, S, V, d, k, m, n, \omega, \mu  
-// const fontRange                \space, 0, 2, E, H, L, R, V
+// enum regular_char_bitmap {REG_ZERO, REG_ONE, REG_TWO, REG_THREE, REG_FOUR, REG_FIVE, REG_SIX};
+// fontBitmaps       0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, space, +, -
+// fontDecimalPoint  \.
+// fontSmallBitmaps  A, B, C, D, M, S, V, d, k, m, n, \omega, \mu  
+// fontRange         \space, 0, 2, E, H, L, R, V
 
 const unsigned char fontBitmaps[] = 
 {
@@ -1102,4 +1122,4 @@ const unsigned char fontRange[] =
 };
 
 
-
+#endif

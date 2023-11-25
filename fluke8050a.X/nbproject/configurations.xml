@@ -6,9 +6,8 @@
                    projectFiles="true">
       <logicalFolder name="fonts" displayName="fonts" projectFiles="true">
       </logicalFolder>
-      <itemPath>functions.h</itemPath>
-      <itemPath>setup.h</itemPath>
-      <itemPath>xc8.h</itemPath>
+      <itemPath>setup_pic18f4420.h</itemPath>
+      <itemPath>../../../../../../../Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_ili9341.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -20,7 +19,7 @@
       <itemPath>main.c</itemPath>
       <itemPath>functions.c</itemPath>
       <itemPath>setup_display.c</itemPath>
-      <itemPath>setup_mc.c</itemPath>
+      <itemPath>setup_pic18f4420.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -29,7 +28,7 @@
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
-    <Elem>fonts</Elem>
+    <Elem>../../../../../../../Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -270,8 +269,6 @@
         <property key="user-pack-device-support" value=""/>
         <property key="wpo-lto" value="false"/>
       </XC8-config-global>
-      <item path="setup_mc.c" ex="true" overriding="false">
-      </item>
     </conf>
   </confs>
 </configurationDescriptor>
