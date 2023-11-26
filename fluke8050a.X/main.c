@@ -7,16 +7,13 @@
 // xc8 --CHIP=18F4420 <files.c>
 
 unsigned long  counter, counter_bcd;
-unsigned int   number_display_x, number_display_y;
-unsigned int   foreground_color, background_color;
+unsigned int  number_display_x, number_display_y;
+unsigned int  foreground_color, background_color;
 unsigned int  ten_thousands, thousands, hundreds, tens, ones, display_bcd;
 unsigned int  range, range_old, function, hv, db_scanning_mode;
 enum u_fontsize {REGULAR, SMALL, RANGE} fontsize; 
 
-void print_character(unsigned int digit, 
-                     enum u_fontsize fontsize, 
-                     unsigned int foreground_color, 
-                     unsigned int background_color) {
+void print_character(unsigned int digit, enum u_fontsize fontsize) {
   unsigned int row = 0;                //  0 -> (character_width-1)
   unsigned int column_pixel = 0;       //  0 -> (character_height-1)
   unsigned int column_byte_bit = 0;    //  0 -> 7 which pixel in column_byte_index
@@ -58,9 +55,7 @@ void print_character(unsigned int digit,
   } 
 }
 
-void print_blank_columns(unsigned int blank_columns, 
-                         enum u_fontsize fontsize, 
-                         unsigned int background_color) {
+void print_blank_columns(unsigned int blank_columns, enum u_fontsize fontsize) {
   unsigned int char_height;
   if(fontsize == REGULAR){
     char_height = FONT_REGULAR_CHARACTER_HEIGHT;
@@ -106,7 +101,6 @@ void print_decimal_point()
           column_byte_bit =   column_byte_bit +1;
           column_pixel  = column_pixel+1;
           }
-    
         }
       row++;
       } 
@@ -115,16 +109,13 @@ void print_decimal_point()
 
 
 void main(void){
-  mc_pin_setup();
-  
   foreground_color = CONFIG_COLOR_FOREGROUND;
   background_color = CONFIG_COLOR_BACKGROUND; 
   
+  mc_pin_setup();
   display_setup();
   
   while(1){
-
-
 
   while(!fluke8050a_ST0); 
   while(fluke8050a_ST0);    
@@ -140,7 +131,7 @@ void main(void){
   if (((function&0x06)==0x06)&&(!(range>>1))) //extra set of strobe pulse when in dB REF Z mode 
     {
     db_scanning_mode=1;
-    if (range_old!=range) //three sets of stobe pulse when first going in REF Z- disregard first two stobe sets
+    if (range_old!=range) //three sets of strobe pulse when first going in REF Z- disregard first two strobe sets
       {         //could get fancy and grab REF Z value and display it
       while(!fluke8050a_ST0); 
       while(fluke8050a_ST0);
@@ -192,71 +183,71 @@ void main(void){
  
   if  (ten_thousands&0x04)
     {
-    print_character(0x10, REGULAR, foreground_color, background_color); //plus sign
+    print_character(0x10, REGULAR); //plus sign
     }
   else if
     (ten_thousands&0x08)
       {
-      print_character(0x11, REGULAR, foreground_color, background_color); //minus sign
+      print_character(0x11, REGULAR); //minus sign
       }
     else
-      print_blank_columns(FONT_REGULAR_CHARACTER_WIDTH, REGULAR, background_color);
+      print_blank_columns(FONT_REGULAR_CHARACTER_WIDTH, REGULAR);
 
 
-  print_blank_columns(FONT_REGULAR_BLANK_WIDTH, REGULAR, background_color);
+  print_blank_columns(FONT_REGULAR_BLANK_WIDTH, REGULAR);
   if (((ten_thousands&0x01)==0) &&  ((hundreds&0x10)|(tens&0x10)|(ones&0x10)|db_scanning_mode))
-    print_blank_columns(FONT_REGULAR_CHARACTER_WIDTH, REGULAR, background_color);  //blank leading zeros
+    print_blank_columns(FONT_REGULAR_CHARACTER_WIDTH, REGULAR);  //blank leading zeros
   else
-    print_character(ten_thousands&0x01, REGULAR, foreground_color, background_color); 
+    print_character(ten_thousands&0x01, REGULAR); 
 
 
-  print_blank_columns(FONT_REGULAR_BLANK_WIDTH, REGULAR, background_color);
+  print_blank_columns(FONT_REGULAR_BLANK_WIDTH, REGULAR);
   if  (thousands&0x10)
     {
     print_decimal_point();
-    print_blank_columns(FONT_REGULAR_BLANK_WIDTH, REGULAR, background_color);
+    print_blank_columns(FONT_REGULAR_BLANK_WIDTH, REGULAR);
     }
     
     
   if ((ten_thousands&0x01)==0&&(thousands&0x0f)==0&&((tens&0x10)|(ones&0x10)))  
-    print_blank_columns(FONT_REGULAR_CHARACTER_WIDTH, REGULAR, background_color);  //blank leading zeros
+    print_blank_columns(FONT_REGULAR_CHARACTER_WIDTH, REGULAR);  //blank leading zeros
   else
-    print_character(thousands&0x0f, REGULAR, foreground_color, background_color);
+    print_character(thousands&0x0f, REGULAR);
 
-  print_blank_columns(FONT_REGULAR_BLANK_WIDTH, REGULAR, background_color);
+  print_blank_columns(FONT_REGULAR_BLANK_WIDTH, REGULAR);
   if  (hundreds&0x10)
     {
     print_decimal_point();
-    print_blank_columns(FONT_REGULAR_BLANK_WIDTH, REGULAR, background_color);
+    print_blank_columns(FONT_REGULAR_BLANK_WIDTH, REGULAR);
     }
     
   if ((ten_thousands&0x01)==0&&(thousands&0x0f)==0&&(hundreds&0x0f)==0&&(ones&0x10))  
-    print_blank_columns(FONT_REGULAR_CHARACTER_WIDTH, REGULAR, background_color);  //blank leading zeros
+    print_blank_columns(FONT_REGULAR_CHARACTER_WIDTH, REGULAR);  //blank leading zeros
   else  
-    print_character(hundreds&0x0f, REGULAR, foreground_color, background_color);
+    print_character(hundreds&0x0f, REGULAR);
     
-  print_blank_columns(FONT_REGULAR_BLANK_WIDTH, REGULAR, background_color);
+  print_blank_columns(FONT_REGULAR_BLANK_WIDTH, REGULAR);
   if  (tens&0x10)
     {
     print_decimal_point();
-    print_blank_columns(FONT_REGULAR_BLANK_WIDTH, REGULAR, background_color);
+    print_blank_columns(FONT_REGULAR_BLANK_WIDTH, REGULAR);
     }
-  print_character(tens&0x0f, REGULAR, foreground_color, background_color);
+  print_character(tens&0x0f, REGULAR);
 
 
   if  ((ones<0x19)||(tens<0x19))  //hack to not overwrite right side of display during error
   {
-  print_blank_columns(FONT_REGULAR_BLANK_WIDTH, REGULAR, background_color);
+  print_blank_columns(FONT_REGULAR_BLANK_WIDTH, REGULAR);
   if  (ones&0x10)
     {
     print_decimal_point();
-    print_blank_columns(FONT_REGULAR_BLANK_WIDTH, REGULAR, background_color);
+    print_blank_columns(FONT_REGULAR_BLANK_WIDTH, REGULAR);
     }
-  print_character(ones&0x0f, REGULAR, foreground_color, background_color);
+  print_character(ones&0x0f, REGULAR);
   }
 
   if  (db_scanning_mode)
-    print_blank_columns(FONT_REGULAR_CHARACTER_WIDTH, REGULAR, background_color);  //hack to clear right side when no decimal point
+    print_blank_columns(FONT_REGULAR_CHARACTER_WIDTH, REGULAR);  //hack to clear right side when no decimal point
   
   
   number_display_x  = 95;
@@ -298,21 +289,21 @@ void main(void){
   {
     foreground_color = volts_colour;
     if ((range)==0x03)
-      print_character(9, SMALL, foreground_color, background_color);  //m
+      print_character(9, SMALL);  //m
     else
-      print_blank_columns(FONT_SMALL_CHARACTER_WIDTH, SMALL, background_color);  //_
+      print_blank_columns(FONT_SMALL_CHARACTER_WIDTH, SMALL);  //_
 
-    print_character(6, SMALL, foreground_color, background_color);  //V
+    print_character(6, SMALL);  //V
     
     if (function&0x01)
       {
       foreground_color = ac_colour;
-      print_character(0, SMALL, foreground_color, background_color);  //A
+      print_character(0, SMALL);  //A
       }
     else
-      print_character(3, SMALL, foreground_color, background_color);  //D
+      print_character(3, SMALL);  //D
 
-    print_character(2, SMALL, foreground_color, background_color);  //C
+    print_character(2, SMALL);  //C
     foreground_color = volts_colour;
   }
 
@@ -322,21 +313,21 @@ void main(void){
     foreground_color = amps_colour;
   
     if ((range)==0x03)
-      print_character(12, SMALL, foreground_color, background_color); //u
+      print_character(12, SMALL); //u
     else
-      print_character(9, SMALL, foreground_color, background_color);  //m
+      print_character(9, SMALL);  //m
 
-    print_character(0, SMALL, foreground_color, background_color);  //a
+    print_character(0, SMALL);  //a
 
     if (function&0x01)
       {
       foreground_color = ac_colour;
-      print_character(0, SMALL, foreground_color, background_color);  //A
+      print_character(0, SMALL);  //A
       }
     else
-      print_character(3, SMALL, foreground_color, background_color);  //D
+      print_character(3, SMALL);  //D
 
-    print_character(2, SMALL, foreground_color, background_color);  //C
+    print_character(2, SMALL);  //C
     foreground_color = amps_colour;
   }
 
@@ -344,28 +335,28 @@ void main(void){
   if (((function&0x06)==0x00)     && (range!=1)&&(range!=2))  // if function = ohms
   {
     foreground_color = ohms_colour;
-    print_blank_columns(FONT_SMALL_CHARACTER_WIDTH, SMALL, background_color);  //_
-    print_blank_columns(FONT_SMALL_CHARACTER_WIDTH, SMALL, background_color);  //_ 
+    print_blank_columns(FONT_SMALL_CHARACTER_WIDTH, SMALL);  //_
+    print_blank_columns(FONT_SMALL_CHARACTER_WIDTH, SMALL);  //_ 
     if ((range)==0x03)
-      print_blank_columns(FONT_SMALL_CHARACTER_WIDTH, SMALL, background_color);  //_
+      print_blank_columns(FONT_SMALL_CHARACTER_WIDTH, SMALL);  //_
     else  if  ((range)==0x00)
-        print_character(4, SMALL, foreground_color, background_color);  //M
+        print_character(4, SMALL);  //M
       else
-        print_character(8, SMALL, foreground_color, background_color);  //k
-    print_character(11, SMALL, foreground_color, background_color); //omega
+        print_character(8, SMALL);  //k
+    print_character(11, SMALL); //omega
   } 
   
 
   if (((function&0x06)==0x00)     && ((range==1)||(range==2)))  // if function = Siemens
   {
     foreground_color = siemens_colour;
-    print_blank_columns(FONT_SMALL_CHARACTER_WIDTH, SMALL, background_color);  //_
-    print_blank_columns(FONT_SMALL_CHARACTER_WIDTH, SMALL, background_color);  //_ 
+    print_blank_columns(FONT_SMALL_CHARACTER_WIDTH, SMALL);  //_
+    print_blank_columns(FONT_SMALL_CHARACTER_WIDTH, SMALL);  //_ 
     if ((range)==0x02)
-        print_character(9, SMALL, foreground_color, background_color);  //m
+        print_character(9, SMALL);  //m
     else
-        print_character(10, SMALL, foreground_color, background_color); //n
-    print_character(5, SMALL, foreground_color, background_color);  //S
+        print_character(10, SMALL); //n
+    print_character(5, SMALL);  //S
   }   
 
   if ((function&0x06)==0x06)  // if function = dB 
@@ -374,19 +365,19 @@ void main(void){
     if  (db_scanning_mode)
       {
       foreground_color = db_colour;
-      print_blank_columns(FONT_SMALL_CHARACTER_WIDTH, SMALL, background_color);  //_
-      print_blank_columns(FONT_SMALL_CHARACTER_WIDTH, SMALL, background_color);  //_ 
-      print_blank_columns(FONT_SMALL_CHARACTER_WIDTH, SMALL, background_color);  //_ 
-      print_character(11, SMALL, foreground_color, background_color); //omega
+      print_blank_columns(FONT_SMALL_CHARACTER_WIDTH, SMALL);  //_
+      print_blank_columns(FONT_SMALL_CHARACTER_WIDTH, SMALL);  //_ 
+      print_blank_columns(FONT_SMALL_CHARACTER_WIDTH, SMALL);  //_ 
+      print_character(11, SMALL); //omega
       }
 
     else
       {
       foreground_color = db_colour;
-      print_blank_columns(FONT_SMALL_CHARACTER_WIDTH, SMALL, background_color);  //_
-      print_blank_columns(FONT_SMALL_CHARACTER_WIDTH, SMALL, background_color);  //_ 
-      print_character(7, SMALL, foreground_color, background_color);  //d
-      print_character(1, SMALL, foreground_color, background_color);  //B
+      print_blank_columns(FONT_SMALL_CHARACTER_WIDTH, SMALL);  //_
+      print_blank_columns(FONT_SMALL_CHARACTER_WIDTH, SMALL);  //_ 
+      print_character(7, SMALL);  //d
+      print_character(1, SMALL);  //B
       }
   }   
   
@@ -406,85 +397,85 @@ void main(void){
 
   // if function = dB don't show range, should show
   if ((function&0x06)==0x06) {  
-    print_character(0, RANGE, foreground_color, background_color);//_
-    print_character(0, RANGE, foreground_color, background_color);//_
-    print_character(0, RANGE, foreground_color, background_color);//_
-    print_character(0, RANGE, foreground_color, background_color);//_
+    print_character(0, RANGE);//_
+    print_character(0, RANGE);//_
+    print_character(0, RANGE);//_
+    print_character(0, RANGE);//_
   } else { 
     if (range==0) { //20 Mohm
       if  ((function&0b0110)==0) {
-        print_character(0, RANGE, foreground_color, background_color);//_
-        print_character(0, RANGE, foreground_color, background_color);//_
-        print_character(2, RANGE, foreground_color, background_color);//2
-        print_character(1, RANGE, foreground_color, background_color);//0
+        print_character(0, RANGE);//_
+        print_character(0, RANGE);//_
+        print_character(2, RANGE);//2
+        print_character(1, RANGE);//0
       }
       else {
-        print_character(0, RANGE, foreground_color, background_color);//_
-        print_character(0, RANGE, foreground_color, background_color);//_
-        print_character(0, RANGE, foreground_color, background_color);//_
-        print_character(0, RANGE, foreground_color, background_color);//_
+        print_character(0, RANGE);//_
+        print_character(0, RANGE);//_
+        print_character(0, RANGE);//_
+        print_character(0, RANGE);//_
       }
     }
     if (range==1) { //200 nS
       if  ((function&0b0110)==0) {
-        print_character(0, RANGE, foreground_color, background_color);//_
-        print_character(2, RANGE, foreground_color, background_color);//2
-        print_character(1, RANGE, foreground_color, background_color);//0
-        print_character(1, RANGE, foreground_color, background_color);//0
+        print_character(0, RANGE);//_
+        print_character(2, RANGE);//2
+        print_character(1, RANGE);//0
+        print_character(1, RANGE);//0
       } else {
-        print_character(0, RANGE, foreground_color, background_color);//_
-        print_character(0, RANGE, foreground_color, background_color);//_
-        print_character(0, RANGE, foreground_color, background_color);//_
-        print_character(0, RANGE, foreground_color, background_color);//_
+        print_character(0, RANGE);//_
+        print_character(0, RANGE);//_
+        print_character(0, RANGE);//_
+        print_character(0, RANGE);//_
       }
     }
       
     if (range==2) { //2 mS
       if  ((function&0b0110)==0) {
-        print_character(0, RANGE, foreground_color, background_color);//_
-        print_character(0, RANGE, foreground_color, background_color);//_
-        print_character(0, RANGE, foreground_color, background_color);//_
-        print_character(2, RANGE, foreground_color, background_color);//2
+        print_character(0, RANGE);//_
+        print_character(0, RANGE);//_
+        print_character(0, RANGE);//_
+        print_character(2, RANGE);//2
       } else {
-        print_character(0, RANGE, foreground_color, background_color);//_
-        print_character(0, RANGE, foreground_color, background_color);//_
-        print_character(0, RANGE, foreground_color, background_color);//_
-        print_character(0, RANGE, foreground_color, background_color);//_
+        print_character(0, RANGE);//_
+        print_character(0, RANGE);//_
+        print_character(0, RANGE);//_
+        print_character(0, RANGE);//_
       }
     }
     if (range==3) { //200 ohm,uA,mV
-      print_character(0, RANGE, foreground_color, background_color);//_
-      print_character(2, RANGE, foreground_color, background_color);//2
-      print_character(1, RANGE, foreground_color, background_color);//0
-      print_character(1, RANGE, foreground_color, background_color);//0
+      print_character(0, RANGE);//_
+      print_character(2, RANGE);//2
+      print_character(1, RANGE);//0
+      print_character(1, RANGE);//0
     }
 
     if (range==4) { //200 kohm,mA,V
-      print_character(0, RANGE, foreground_color, background_color);//_
-      print_character(2, RANGE, foreground_color, background_color);//2
-      print_character(1, RANGE, foreground_color, background_color);//0
-      print_character(1, RANGE, foreground_color, background_color);//0
+      print_character(0, RANGE);//_
+      print_character(2, RANGE);//2
+      print_character(1, RANGE);//0
+      print_character(1, RANGE);//0
     }
 
     if (range==5) { //20 kohm,mA,V
-      print_character(0, RANGE, foreground_color, background_color);//_
-      print_character(0, RANGE, foreground_color, background_color);//_
-      print_character(2, RANGE, foreground_color, background_color);//2
-      print_character(1, RANGE, foreground_color, background_color);//0
+      print_character(0, RANGE);//_
+      print_character(0, RANGE);//_
+      print_character(2, RANGE);//2
+      print_character(1, RANGE);//0
     }
 
     if (range==6) { //2 kohm,mA,V
-      print_character(0, RANGE, foreground_color, background_color);//_
-      print_character(0, RANGE, foreground_color, background_color);//_
-      print_character(0, RANGE, foreground_color, background_color);//_
-      print_character(2, RANGE, foreground_color, background_color);//2
+      print_character(0, RANGE);//_
+      print_character(0, RANGE);//_
+      print_character(0, RANGE);//_
+      print_character(2, RANGE);//2
     }
 
     if (range==7) { //2000 kohm,mA,V
-      print_character(2, RANGE, foreground_color, background_color);//2
-      print_character(1, RANGE, foreground_color, background_color);//0
-      print_character(1, RANGE, foreground_color, background_color);//0
-      print_character(1, RANGE, foreground_color, background_color);//0
+      print_character(2, RANGE);//2
+      print_character(1, RANGE);//0
+      print_character(1, RANGE);//0
+      print_character(1, RANGE);//0
     }
 
   } 
@@ -505,15 +496,15 @@ void main(void){
   //if (function&0x08)  // /REL <button>
   if (ten_thousands&0x10) // REL <display>
       {
-      print_character(6, RANGE, foreground_color, background_color);//R
-      print_character(3, RANGE, foreground_color, background_color);//E
-      print_character(5, RANGE, foreground_color, background_color);//L
+      print_character(6, RANGE);//R
+      print_character(3, RANGE);//E
+      print_character(5, RANGE);//L
       }
     else
       {
-      print_character(0, RANGE, foreground_color, background_color);//_
-      print_character(0, RANGE, foreground_color, background_color);//_
-      print_character(0, RANGE, foreground_color, background_color);//_
+      print_character(0, RANGE);//_
+      print_character(0, RANGE);//_
+      print_character(0, RANGE);//_
       }
         
       
@@ -531,13 +522,13 @@ void main(void){
 
   if (hv) // HV  ***do lighting bolt?
       {
-      print_character(4, RANGE, foreground_color, background_color);//H
-      print_character(7, RANGE, foreground_color, background_color);//V
+      print_character(4, RANGE);//H
+      print_character(7, RANGE);//V
       }
     else  
       {
-      print_character(0, RANGE, foreground_color, background_color);//_
-      print_character(0, RANGE, foreground_color, background_color);//_
+      print_character(0, RANGE);//_
+      print_character(0, RANGE);//_
       }
 
   counter++;
