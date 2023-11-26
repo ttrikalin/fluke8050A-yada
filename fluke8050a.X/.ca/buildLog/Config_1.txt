@@ -1,0 +1,26 @@
+make -f nbproject/Makefile-Config_1.mk SUBPROJECTS= .clean-conf
+make[1]: Entering directory '/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X'
+rm -f  -r .ca/build/Config_1/production
+rm -f  -r .ca/dist/Config_1/production
+make[1]: Leaving directory '/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X'
+[32mCLEAN SUCCESSFUL (total time: 55ms)[0m
+make -f nbproject/Makefile-Config_1.mk SUBPROJECTS= .build-conf
+make[1]: Entering directory '/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X'
+make  -f nbproject/Makefile-Config_1.mk .ca/dist/Config_1/production/fluke8050a.X.production.hex
+make[2]: Entering directory '/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X'
+"/Applications/microchip/xc8/v2.45/bin/xc8-cc"  -mcpu=18F4420 -c   -mdfp="/Applications/microchip/mplabx/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O1 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_Config_1=Config_1  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits   -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o .ca/build/Config_1/production/main.p1 main.c 
+"/Applications/microchip/xc8/v2.45/bin/xc8-cc"  -mcpu=18F4420 -c   -mdfp="/Applications/microchip/mplabx/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O1 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_Config_1=Config_1  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits   -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o .ca/build/Config_1/production/functions.p1 functions.c 
+"/Applications/microchip/xc8/v2.45/bin/xc8-cc"  -mcpu=18F4420 -c   -mdfp="/Applications/microchip/mplabx/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O1 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_Config_1=Config_1  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits   -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o .ca/build/Config_1/production/setup_display.p1 setup_display.c 
+"/Applications/microchip/xc8/v2.45/bin/xc8-cc"  -mcpu=18F4420 -c   -mdfp="/Applications/microchip/mplabx/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O1 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_Config_1=Config_1  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits   -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o .ca/build/Config_1/production/setup_pic18f4420.p1 setup_pic18f4420.c 
+"/Applications/microchip/xc8/v2.45/bin/xc8-cc"  -mcpu=18F4420 -Wl,-Map=.ca/dist/Config_1/production/fluke8050a.X.production.map  -DXPRJ_Config_1=Config_1  -Wl,--defsym=__MPLAB_BUILD=1   -mdfp="/Applications/microchip/mplabx/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O1 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto      -Wl,--memorysummary,.ca/dist/Config_1/production/memoryfile.xml -o .ca/dist/Config_1/production/fluke8050a.X.production.elf  .ca/build/Config_1/production/main.p1 .ca/build/Config_1/production/functions.p1 .ca/build/Config_1/production/setup_display.p1 .ca/build/Config_1/production/setup_pic18f4420.p1     
+
+Memory Summary:
+    Program space        used  380Ch ( 14348) of  4000h bytes   ( 87.6%)
+    Data space           used    57h (    87) of   300h bytes   ( 11.3%)
+    Configuration bits   used     0h (     0) of     7h words   (  0.0%)
+    EEPROM space         used     0h (     0) of   100h bytes   (  0.0%)
+    ID Location space    used     0h (     0) of     8h bytes   (  0.0%)
+
+make[2]: Leaving directory '/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X'
+make[1]: Leaving directory '/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X'
+[32mBUILD SUCCESSFUL (total time: 1s)[0m

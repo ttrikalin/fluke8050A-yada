@@ -1,0 +1,424 @@
+[p GLOBOPT AUTOSTATIC IEEE_FLT IEEE_DBL LFSROK EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F4420 ]
+[d frameptr 4065 ]
+"14 /Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+[e E2609 u_fontsize `uc
+REGULAR 0
+SMALL 1
+RANGE 2
+]
+"4 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/fleq.c
+[v ___fleq __fleq `(b  1 e 0 0 ]
+"62 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/float.c
+[v ___ftpack __ftpack `(f  1 e 4 0 ]
+"86 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/ftadd.c
+[v ___ftadd __ftadd `(f  1 e 4 0 ]
+"54 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 4 0 ]
+"62 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/ftmul.c
+[v ___ftmul __ftmul `(f  1 e 4 0 ]
+"19 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/ftsub.c
+[v ___ftsub __ftsub `(f  1 e 4 0 ]
+"10 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"245
+[v ___flsub __flsub `(d  1 e 4 0 ]
+"11 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+"8 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+"15 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+"15 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"91 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/Umul64.c
+[v ___omul __omul `(uo  1 e 8 0 ]
+"16 /Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+[v _print_character print_character `(v  1 e 1 0 ]
+"61
+[v _print_blank_columns print_blank_columns `(v  1 e 1 0 ]
+"79
+[v _print_decimal_point print_decimal_point `(v  1 e 1 0 ]
+"117
+[v _main main `(v  1 e 1 0 ]
+"3 /Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+[v _display_write_command display_write_command `(v  1 e 1 0 ]
+"17
+[v _display_write_data display_write_data `(v  1 e 1 0 ]
+"30
+[v _display_write_data16 display_write_data16 `(v  1 e 1 0 ]
+"45
+[v _delay_10ms_steps delay_10ms_steps `(v  1 e 1 0 ]
+"51
+[v _display_clear_screen display_clear_screen `(v  1 e 1 0 ]
+"60
+[v _display_setup display_setup `(v  1 e 1 0 ]
+"3 /Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_pic18f4420.c
+[v _mc_pin_setup mc_pin_setup `(v  1 e 1 0 ]
+"30 /Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/fonts/fonts.h
+[v _fontBitmaps fontBitmaps `C[4860]uc  1 e 4860 0 ]
+"644
+[v _fontDecimalPoint fontDecimalPoint `C[153]uc  1 e 153 0 ]
+[s S118 . 1 `uc 1 RA0 1 0 :1:0 
+`uc 1 RA1 1 0 :1:1 
+`uc 1 RA2 1 0 :1:2 
+`uc 1 RA3 1 0 :1:3 
+`uc 1 RA4 1 0 :1:4 
+`uc 1 RA5 1 0 :1:5 
+`uc 1 RA6 1 0 :1:6 
+`uc 1 RA7 1 0 :1:7 
+]
+"116 /Applications/microchip/mplabx/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8/pic/include/proc/pic18f4420.h
+[s S127 . 1 `uc 1 AN0 1 0 :1:0 
+`uc 1 AN1 1 0 :1:1 
+`uc 1 AN2 1 0 :1:2 
+`uc 1 AN3 1 0 :1:3 
+`uc 1 T0CKI 1 0 :1:4 
+`uc 1 AN4 1 0 :1:5 
+`uc 1 OSC2 1 0 :1:6 
+`uc 1 OSC1 1 0 :1:7 
+]
+[s S136 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 VREFN 1 0 :1:2 
+`uc 1 VREFP 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 SS 1 0 :1:5 
+`uc 1 CLKO 1 0 :1:6 
+`uc 1 CLKI 1 0 :1:7 
+]
+[s S144 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 NOT_SS 1 0 :1:5 
+]
+[s S147 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 CVREF 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 nSS 1 0 :1:5 
+]
+[s S152 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 LVDIN 1 0 :1:5 
+]
+[s S155 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 HLVDIN 1 0 :1:5 
+]
+[s S158 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 C1OUT 1 0 :1:4 
+`uc 1 C2OUT 1 0 :1:5 
+]
+[s S162 . 1 `uc 1 ULPWUIN 1 0 :1:0 
+`uc 1 . 1 0 :6:1 
+`uc 1 RJPU 1 0 :1:7 
+]
+[u S166 . 1 `S118 1 . 1 0 `S127 1 . 1 0 `S136 1 . 1 0 `S144 1 . 1 0 `S147 1 . 1 0 `S152 1 . 1 0 `S155 1 . 1 0 `S158 1 . 1 0 `S162 1 . 1 0 ]
+[v _PORTAbits PORTAbits `VES166  1 e 1 @3968 ]
+[s S283 . 1 `uc 1 RB0 1 0 :1:0 
+`uc 1 RB1 1 0 :1:1 
+`uc 1 RB2 1 0 :1:2 
+`uc 1 RB3 1 0 :1:3 
+`uc 1 RB4 1 0 :1:4 
+`uc 1 RB5 1 0 :1:5 
+`uc 1 RB6 1 0 :1:6 
+`uc 1 RB7 1 0 :1:7 
+]
+"315
+[s S292 . 1 `uc 1 INT0 1 0 :1:0 
+`uc 1 INT1 1 0 :1:1 
+`uc 1 INT2 1 0 :1:2 
+`uc 1 CCP2 1 0 :1:3 
+`uc 1 KBI0 1 0 :1:4 
+`uc 1 KBI1 1 0 :1:5 
+`uc 1 KBI2 1 0 :1:6 
+`uc 1 KBI3 1 0 :1:7 
+]
+[s S301 . 1 `uc 1 AN12 1 0 :1:0 
+`uc 1 AN10 1 0 :1:1 
+`uc 1 AN8 1 0 :1:2 
+`uc 1 AN9 1 0 :1:3 
+`uc 1 AN11 1 0 :1:4 
+`uc 1 PGM 1 0 :1:5 
+`uc 1 PGC 1 0 :1:6 
+`uc 1 PGD 1 0 :1:7 
+]
+[s S310 . 1 `uc 1 FLT0 1 0 :1:0 
+]
+[s S312 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 CCP2_PA2 1 0 :1:3 
+]
+[u S315 . 1 `S283 1 . 1 0 `S292 1 . 1 0 `S301 1 . 1 0 `S310 1 . 1 0 `S312 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES315  1 e 1 @3969 ]
+[s S41 . 1 `uc 1 RC0 1 0 :1:0 
+`uc 1 RC1 1 0 :1:1 
+`uc 1 RC2 1 0 :1:2 
+`uc 1 RC3 1 0 :1:3 
+`uc 1 RC4 1 0 :1:4 
+`uc 1 RC5 1 0 :1:5 
+`uc 1 RC6 1 0 :1:6 
+`uc 1 RC7 1 0 :1:7 
+]
+"497
+[s S50 . 1 `uc 1 T1OSO 1 0 :1:0 
+`uc 1 T1OSI 1 0 :1:1 
+`uc 1 CCP1 1 0 :1:2 
+`uc 1 SCK 1 0 :1:3 
+`uc 1 SDI 1 0 :1:4 
+`uc 1 SDO 1 0 :1:5 
+`uc 1 TX 1 0 :1:6 
+`uc 1 RX 1 0 :1:7 
+]
+[s S59 . 1 `uc 1 T13CKI 1 0 :1:0 
+`uc 1 CCP2 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 SCL 1 0 :1:3 
+`uc 1 SDA 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 CK 1 0 :1:6 
+`uc 1 DT 1 0 :1:7 
+]
+[s S68 . 1 `uc 1 T1CKI 1 0 :1:0 
+`uc 1 . 1 0 :1:1 
+`uc 1 P1A 1 0 :1:2 
+]
+[s S72 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 PA2 1 0 :1:1 
+`uc 1 PA1 1 0 :1:2 
+]
+[u S76 . 1 `S41 1 . 1 0 `S50 1 . 1 0 `S59 1 . 1 0 `S68 1 . 1 0 `S72 1 . 1 0 ]
+[v _PORTCbits PORTCbits `VES76  1 e 1 @3970 ]
+[s S225 . 1 `uc 1 RD0 1 0 :1:0 
+`uc 1 RD1 1 0 :1:1 
+`uc 1 RD2 1 0 :1:2 
+`uc 1 RD3 1 0 :1:3 
+`uc 1 RD4 1 0 :1:4 
+`uc 1 RD5 1 0 :1:5 
+`uc 1 RD6 1 0 :1:6 
+`uc 1 RD7 1 0 :1:7 
+]
+"669
+[s S234 . 1 `uc 1 PSP0 1 0 :1:0 
+`uc 1 PSP1 1 0 :1:1 
+`uc 1 PSP2 1 0 :1:2 
+`uc 1 PSP3 1 0 :1:3 
+`uc 1 PSP4 1 0 :1:4 
+`uc 1 PSP5 1 0 :1:5 
+`uc 1 PSP6 1 0 :1:6 
+`uc 1 PSP7 1 0 :1:7 
+]
+[s S243 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 P1B 1 0 :1:5 
+`uc 1 P1C 1 0 :1:6 
+`uc 1 P1D 1 0 :1:7 
+]
+[s S248 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 SS2 1 0 :1:7 
+]
+[u S251 . 1 `S225 1 . 1 0 `S234 1 . 1 0 `S243 1 . 1 0 `S248 1 . 1 0 ]
+[v _PORTDbits PORTDbits `VES251  1 e 1 @3971 ]
+[s S354 . 1 `uc 1 RE0 1 0 :1:0 
+`uc 1 RE1 1 0 :1:1 
+`uc 1 RE2 1 0 :1:2 
+`uc 1 RE3 1 0 :1:3 
+]
+"832
+[s S359 . 1 `uc 1 RD 1 0 :1:0 
+`uc 1 WR 1 0 :1:1 
+`uc 1 CS 1 0 :1:2 
+`uc 1 MCLR 1 0 :1:3 
+]
+[s S364 . 1 `uc 1 NOT_RD 1 0 :1:0 
+]
+[s S366 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 NOT_WR 1 0 :1:1 
+]
+[s S369 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_CS 1 0 :1:2 
+]
+[s S372 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 NOT_MCLR 1 0 :1:3 
+]
+[s S375 . 1 `uc 1 nRD 1 0 :1:0 
+`uc 1 nWR 1 0 :1:1 
+`uc 1 nCS 1 0 :1:2 
+`uc 1 nMCLR 1 0 :1:3 
+]
+[s S380 . 1 `uc 1 AN5 1 0 :1:0 
+`uc 1 AN6 1 0 :1:1 
+`uc 1 AN7 1 0 :1:2 
+`uc 1 VPP 1 0 :1:3 
+]
+[s S385 . 1 `uc 1 PD2 1 0 :1:0 
+`uc 1 PC2 1 0 :1:1 
+`uc 1 CCP10 1 0 :1:2 
+`uc 1 CCP9E 1 0 :1:3 
+]
+[s S390 . 1 `uc 1 RDE 1 0 :1:0 
+`uc 1 WRE 1 0 :1:1 
+`uc 1 PB2 1 0 :1:2 
+`uc 1 PC3E 1 0 :1:3 
+]
+[u S395 . 1 `S354 1 . 1 0 `S359 1 . 1 0 `S364 1 . 1 0 `S366 1 . 1 0 `S369 1 . 1 0 `S372 1 . 1 0 `S375 1 . 1 0 `S380 1 . 1 0 `S385 1 . 1 0 `S390 1 . 1 0 ]
+[v _PORTEbits PORTEbits `VES395  1 e 1 @3972 ]
+"1477
+[v _TRISA TRISA `VEuc  1 e 1 @3986 ]
+"1699
+[v _TRISB TRISB `VEuc  1 e 1 @3987 ]
+"1921
+[v _TRISC TRISC `VEuc  1 e 1 @3988 ]
+"2143
+[v _TRISD TRISD `VEuc  1 e 1 @3989 ]
+"2365
+[v _TRISE TRISE `VEuc  1 e 1 @3990 ]
+"2529
+[v _OSCTUNE OSCTUNE `VEuc  1 e 1 @3995 ]
+"4619
+[v _ADCON2 ADCON2 `VEuc  1 e 1 @4032 ]
+"4690
+[v _ADCON1 ADCON1 `VEuc  1 e 1 @4033 ]
+"4775
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @4034 ]
+"5010
+[v _SSPCON1 SSPCON1 `VEuc  1 e 1 @4038 ]
+"5080
+[v _SSPSTAT SSPSTAT `VEuc  1 e 1 @4039 ]
+"5308
+[v _SSPBUF SSPBUF `VEuc  1 e 1 @4041 ]
+"6085
+[v _OSCCON OSCCON `VEuc  1 e 1 @4051 ]
+"8351
+[v _SSPIF SSPIF `VEb  1 e 0 @31987 ]
+"9 /Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+[v _counter counter `ul  1 e 4 0 ]
+"10
+[v _number_display_x number_display_x `ui  1 e 2 0 ]
+"11
+[v _foreground_color foreground_color `ui  1 e 2 0 ]
+[v _background_color background_color `ui  1 e 2 0 ]
+"12
+[v _ten_thousands ten_thousands `ui  1 e 2 0 ]
+[v _thousands thousands `ui  1 e 2 0 ]
+[v _hundreds hundreds `ui  1 e 2 0 ]
+[v _tens tens `ui  1 e 2 0 ]
+[v _ones ones `ui  1 e 2 0 ]
+"13
+[v _range range `ui  1 e 2 0 ]
+[v _range_old range_old `ui  1 e 2 0 ]
+[v _function function `ui  1 e 2 0 ]
+[v _hv hv `ui  1 e 2 0 ]
+[v _db_scanning_mode db_scanning_mode `ui  1 e 2 0 ]
+"117
+[v _main main `(v  1 e 1 0 ]
+{
+"547
+} 0
+"79
+[v _print_decimal_point print_decimal_point `(v  1 e 1 0 ]
+{
+"82
+[v print_decimal_point@column_pixel column_pixel `ui  1 a 2 10 ]
+"83
+[v print_decimal_point@column_byte_bit column_byte_bit `ui  1 a 2 8 ]
+"84
+[v print_decimal_point@work_column_byte work_column_byte `ui  1 a 2 6 ]
+"86
+[v print_decimal_point@lookup lookup `ui  1 a 2 4 ]
+"81
+[v print_decimal_point@row row `ui  1 a 2 2 ]
+"113
+} 0
+"16
+[v _print_character print_character `(v  1 e 1 0 ]
+{
+"21
+[v print_character@column_pixel column_pixel `ui  1 a 2 31 ]
+"22
+[v print_character@column_byte_bit column_byte_bit `ui  1 a 2 29 ]
+"25
+[v print_character@char_height char_height `ui  1 a 2 27 ]
+[v print_character@char_width char_width `ui  1 a 2 25 ]
+"23
+[v print_character@work_column_byte work_column_byte `ui  1 a 2 23 ]
+"25
+[v print_character@bytes_per_row bytes_per_row `ui  1 a 2 21 ]
+"39
+[v print_character@lookup lookup `ui  1 a 2 19 ]
+"20
+[v print_character@row row `ui  1 a 2 17 ]
+"16
+[v print_character@digit digit `ui  1 p 2 6 ]
+"17
+[v print_character@fontsize fontsize `E2609  1 p 1 8 ]
+"18
+[v print_character@foreground_color foreground_color `ui  1 p 2 9 ]
+"19
+[v print_character@background_color background_color `ui  1 p 2 11 ]
+"59
+} 0
+"61
+[v _print_blank_columns print_blank_columns `(v  1 e 1 0 ]
+{
+"64
+[v print_blank_columns@char_height char_height `ui  1 a 2 13 ]
+"72
+[v print_blank_columns@work_counter work_counter `ui  1 a 2 11 ]
+"61
+[v print_blank_columns@blank_columns blank_columns `ui  1 p 2 6 ]
+"62
+[v print_blank_columns@fontsize fontsize `E2609  1 p 1 8 ]
+"63
+[v print_blank_columns@background_color background_color `ui  1 p 2 9 ]
+"77
+} 0
+"30 /Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+[v _display_write_data16 display_write_data16 `(v  1 e 1 0 ]
+{
+[v display_write_data16@data data `ui  1 p 2 0 ]
+"43
+} 0
+"15 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+{
+"17
+[v ___wmul@product product `ui  1 a 2 4 ]
+"15
+[v ___wmul@multiplier multiplier `ui  1 p 2 0 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 2 ]
+"53
+} 0
+"3 /Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_pic18f4420.c
+[v _mc_pin_setup mc_pin_setup `(v  1 e 1 0 ]
+{
+"26
+} 0
+"60 /Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+[v _display_setup display_setup `(v  1 e 1 0 ]
+{
+"164
+} 0
+"3
+[v _display_write_command display_write_command `(v  1 e 1 0 ]
+{
+[v display_write_command@data data `ui  1 p 2 0 ]
+"12
+} 0
+"51
+[v _display_clear_screen display_clear_screen `(v  1 e 1 0 ]
+{
+"52
+[v display_clear_screen@counter counter `ul  1 a 4 2 ]
+"58
+} 0
+"17
+[v _display_write_data display_write_data `(v  1 e 1 0 ]
+{
+[v display_write_data@data data `ui  1 p 2 0 ]
+"26
+} 0
+"45
+[v _delay_10ms_steps delay_10ms_steps `(v  1 e 1 0 ]
+{
+"46
+[v delay_10ms_steps@i i `ui  1 a 2 3 ]
+"45
+[v delay_10ms_steps@steps steps `ui  1 p 2 0 ]
+"49
+} 0

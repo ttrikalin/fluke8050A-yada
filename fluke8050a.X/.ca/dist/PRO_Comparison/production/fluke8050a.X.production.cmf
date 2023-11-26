@@ -1,0 +1,899 @@
+%CMF
+# %PSECTS Section
+# For each object file, details of its psects are enumerated here.
+# The begining of the section is indicated by %PSECTS.  The first
+# line indicates the name of the first object file, e.g.
+#    $foo.obj
+# Each line that follows describes a psect in that object file, until
+# the next object file.  The lines that describe a psect have the
+# format:
+#    <psect name> <class name> <space> <link address> <load addresses> <length> <delta> <reloc>
+# All addresses and the length are given in unqualified hexadecimal
+# in delta units.  Any other numeric values are decimal.
+%PSECTS
+$.ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+cinit CODE 0 326 326 16 1 2
+text0 CODE 0 B40 B40 1A54 1 2
+text1 CODE 0 522 522 F6 1 2
+text2 CODE 0 618 618 1BC 1 2
+text3 CODE 0 486 486 9C 1 2
+text4 CODE 0 3C8 3C8 30 1 2
+text5 CODE 0 374 374 26 1 2
+text6 CODE 0 39A 39A 2E 1 2
+text7 CODE 0 7D4 7D4 36C 1 2
+text8 CODE 0 358 358 1C 1 2
+text9 CODE 0 432 432 54 1 2
+nvCOMRAM COMRAM 1 56 56 2 1 1
+text10 CODE 0 33C 33C 1C 1 2
+text11 CODE 0 3F8 3F8 3A 1 2
+cstackCOMRAM COMRAM 1 1 1 30 1 1
+bssCOMRAM COMRAM 1 31 31 25 1 1
+mediumconst MEDIUMCONST 0 2594 2594 1A6C 1 2
+$/tmp/xc5rudwNa/driver_tmp_9.o
+init CODE 0 0 0 4 1 2
+# %UNUSED Section
+# This section enumerates the unused ranges of each CLASS. Each entry
+# is described on a single line as follows:
+#    <class name> <range> <delta>
+# Addresses given in the range are in hexadecimal and units of delta.
+%UNUSED
+RAM 80-2FF 1
+SFR F80-FFF 1
+BANK0 80-FF 1
+BANK1 100-1FF 1
+BANK2 200-2FF 1
+CONST 4-325 1
+IDLOC 200000-200007 1
+SMALLCONST 300-325 1
+CODE 4-325 1
+BIGRAM 58-2FF 1
+BIGSFR F80-FFF 1
+COMRAM 58-7F 1
+CONFIG 300000-30000D 1
+EEDATA F00000-F000FF 1
+MEDIUMCONST 300-325 1
+# %LINETAB Section
+# This section enumerates the file/line to address mappings.
+# The beginning of the section is indicated by %LINETAB.
+# The first line indicates the name of the first object file, e.g.
+#   $foo.obj
+# Each line that follows describes a single mapping until the next
+# object file.  Mappings have the following format:
+#    <address> <psect name> <class name> ><line number>:<file name>
+# The address is absolute and given given in unqualified hex 
+# in delta units of the psect. All mappings within an object file
+# are in ascending order of addresses.
+# All other numeric values are in decimal.
+%LINETAB
+$.ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+3F8 text11 CODE >45:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+3F8 text11 CODE >46:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+404 text11 CODE >47:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+416 text11 CODE >48:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+430 text11 CODE >49:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+33C text10 CODE >17:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+33C text10 CODE >18:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+33E text10 CODE >19:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+340 text10 CODE >21:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+344 text10 CODE >22:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+352 text10 CODE >23:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+354 text10 CODE >25:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+356 text10 CODE >26:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+432 text9 CODE >51:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+432 text9 CODE >52:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+442 text9 CODE >53:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+446 text9 CODE >54:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+452 text9 CODE >55:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+45E text9 CODE >56:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+46A text9 CODE >53:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+46A text9 CODE >57:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+484 text9 CODE >58:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+358 text8 CODE >3:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+358 text8 CODE >4:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+35A text8 CODE >5:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+35C text8 CODE >7:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+360 text8 CODE >8:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+36E text8 CODE >9:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+370 text8 CODE >11:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+372 text8 CODE >12:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+7D4 text7 CODE >60:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+7D4 text7 CODE >61:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+7D6 text7 CODE >62:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+7E2 text7 CODE >63:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+7E4 text7 CODE >64:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+7F0 text7 CODE >65:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+7F2 text7 CODE >66:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+7FE text7 CODE >68:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+80A text7 CODE >69:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+816 text7 CODE >70:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+822 text7 CODE >71:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+82E text7 CODE >72:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+83A text7 CODE >73:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+846 text7 CODE >75:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+852 text7 CODE >76:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+85E text7 CODE >77:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+86A text7 CODE >78:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+876 text7 CODE >81:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+882 text7 CODE >82:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+88E text7 CODE >83:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+89A text7 CODE >84:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+8A6 text7 CODE >85:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+8B2 text7 CODE >87:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+8BE text7 CODE >88:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+8CA text7 CODE >89:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+8D6 text7 CODE >90:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+8E2 text7 CODE >92:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+8EE text7 CODE >93:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+8FA text7 CODE >94:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+906 text7 CODE >95:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+912 text7 CODE >96:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+91E text7 CODE >97:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+92A text7 CODE >99:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+936 text7 CODE >100:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+942 text7 CODE >102:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+94E text7 CODE >103:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+95A text7 CODE >104:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+966 text7 CODE >106:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+972 text7 CODE >107:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+97E text7 CODE >109:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+98A text7 CODE >110:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+996 text7 CODE >112:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+9A2 text7 CODE >113:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+9AE text7 CODE >114:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+9BA text7 CODE >116:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+9C6 text7 CODE >117:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+9D2 text7 CODE >119:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+9DE text7 CODE >120:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+9EA text7 CODE >121:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+9F6 text7 CODE >123:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+A02 text7 CODE >124:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+A0E text7 CODE >125:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+A1A text7 CODE >126:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+A26 text7 CODE >127:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+A32 text7 CODE >129:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+A3E text7 CODE >130:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+A4A text7 CODE >132:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+A56 text7 CODE >133:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+A62 text7 CODE >135:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+A6E text7 CODE >136:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+A7A text7 CODE >137:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+A86 text7 CODE >138:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+A92 text7 CODE >139:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+A9E text7 CODE >141:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+AAA text7 CODE >142:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+AB6 text7 CODE >143:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+AC2 text7 CODE >144:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+ACE text7 CODE >145:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+ADA text7 CODE >148:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+AE6 text7 CODE >150:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+AF2 text7 CODE >151:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+AFE text7 CODE >154:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+B0A text7 CODE >156:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+B16 text7 CODE >158:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+B22 text7 CODE >160:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+B2E text7 CODE >162:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+B3A text7 CODE >163:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+B3E text7 CODE >164:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+39A text6 CODE >3:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_pic18f4420.c
+39A text6 CODE >5:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_pic18f4420.c
+39E text6 CODE >8:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_pic18f4420.c
+3A2 text6 CODE >9:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_pic18f4420.c
+3A6 text6 CODE >11:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_pic18f4420.c
+3AA text6 CODE >12:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_pic18f4420.c
+3AE text6 CODE >15:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_pic18f4420.c
+3B0 text6 CODE >16:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_pic18f4420.c
+3B2 text6 CODE >17:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_pic18f4420.c
+3B6 text6 CODE >18:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_pic18f4420.c
+3BA text6 CODE >19:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_pic18f4420.c
+3BC text6 CODE >21:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_pic18f4420.c
+3BE text6 CODE >24:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_pic18f4420.c
+3C2 text6 CODE >25:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_pic18f4420.c
+3C6 text6 CODE >26:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_pic18f4420.c
+374 text5 CODE >15:/Applications/microchip/xc8/v2.45/pic/sources/c99/common/Umul16.c
+374 text5 CODE >37:/Applications/microchip/xc8/v2.45/pic/sources/c99/common/Umul16.c
+380 text5 CODE >38:/Applications/microchip/xc8/v2.45/pic/sources/c99/common/Umul16.c
+388 text5 CODE >39:/Applications/microchip/xc8/v2.45/pic/sources/c99/common/Umul16.c
+390 text5 CODE >52:/Applications/microchip/xc8/v2.45/pic/sources/c99/common/Umul16.c
+398 text5 CODE >53:/Applications/microchip/xc8/v2.45/pic/sources/c99/common/Umul16.c
+3C8 text4 CODE >30:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+3C8 text4 CODE >31:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+3CA text4 CODE >32:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+3CC text4 CODE >34:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+3D0 text4 CODE >35:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+3DE text4 CODE >36:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+3E0 text4 CODE >38:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+3E4 text4 CODE >39:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+3F2 text4 CODE >40:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+3F4 text4 CODE >42:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+3F6 text4 CODE >43:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c
+486 text3 CODE >61:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+486 text3 CODE >65:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+496 text3 CODE >66:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+49E text3 CODE >67:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+4B2 text3 CODE >68:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+4BA text3 CODE >69:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+4D0 text3 CODE >70:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+4D8 text3 CODE >72:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+4F8 text3 CODE >73:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+4FC text3 CODE >74:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+508 text3 CODE >75:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+50E text3 CODE >73:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+520 text3 CODE >77:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+618 text2 CODE >16:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+618 text2 CODE >20:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+620 text2 CODE >22:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+628 text2 CODE >23:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+630 text2 CODE >26:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+640 text2 CODE >27:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+648 text2 CODE >28:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+650 text2 CODE >29:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+658 text2 CODE >30:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+66C text2 CODE >31:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+674 text2 CODE >32:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+67C text2 CODE >33:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+684 text2 CODE >34:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+69A text2 CODE >35:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+6A2 text2 CODE >36:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+6AA text2 CODE >37:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+6B2 text2 CODE >39:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+6EA text2 CODE >40:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+6EE text2 CODE >41:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+6EE text2 CODE >42:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+6F6 text2 CODE >43:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+6FA text2 CODE >44:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+712 text2 CODE >45:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+71A text2 CODE >46:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+71E text2 CODE >47:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+72C text2 CODE >48:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+738 text2 CODE >49:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+73C text2 CODE >50:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+748 text2 CODE >52:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+752 text2 CODE >53:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+75E text2 CODE >54:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+76A text2 CODE >46:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+7A2 text2 CODE >43:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+7B8 text2 CODE >57:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+7BC text2 CODE >40:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+7D2 text2 CODE >59:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+522 text1 CODE >79:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+522 text1 CODE >81:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+52A text1 CODE >83:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+532 text1 CODE >86:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+53A text1 CODE >88:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+53E text1 CODE >90:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+53E text1 CODE >91:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+546 text1 CODE >93:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+54A text1 CODE >95:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+562 text1 CODE >96:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+56A text1 CODE >98:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+56E text1 CODE >100:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+57C text1 CODE >101:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+58C text1 CODE >103:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+598 text1 CODE >105:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+5A2 text1 CODE >106:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+5AE text1 CODE >107:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+5BA text1 CODE >98:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+5E6 text1 CODE >93:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+5FC text1 CODE >111:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+600 text1 CODE >88:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+616 text1 CODE >113:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+B40 text0 CODE >117:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+B40 text0 CODE >118:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+B44 text0 CODE >120:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+B4C text0 CODE >121:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+B54 text0 CODE >123:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+B58 text0 CODE >129:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+B66 text0 CODE >130:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+B74 text0 CODE >131:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+B7C text0 CODE >132:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+B84 text0 CODE >136:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+BEC text0 CODE >138:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+C54 text0 CODE >140:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+C90 text0 CODE >142:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+C98 text0 CODE >143:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+CB0 text0 CODE >145:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+CBE text0 CODE >146:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+CCC text0 CODE >148:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+CDA text0 CODE >149:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+CE8 text0 CODE >152:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+DB8 text0 CODE >154:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+DD2 text0 CODE >156:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+DE0 text0 CODE >157:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+DEE text0 CODE >158:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+EBE text0 CODE >160:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+ECC text0 CODE >161:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+EDA text0 CODE >162:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+FAA text0 CODE >164:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+FB8 text0 CODE >165:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+FC6 text0 CODE >166:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1096 text0 CODE >168:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+10A4 text0 CODE >169:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+10B2 text0 CODE >170:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1182 text0 CODE >173:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+119E text0 CODE >174:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+11AE text0 CODE >175:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+11AE text0 CODE >180:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+11B6 text0 CODE >182:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+11C2 text0 CODE >183:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+11CE text0 CODE >184:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+11DE text0 CODE >186:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+11EA text0 CODE >187:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+11F6 text0 CODE >188:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1202 text0 CODE >190:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+120E text0 CODE >193:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+121C text0 CODE >195:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+123C text0 CODE >196:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1240 text0 CODE >197:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+124E text0 CODE >200:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+126E text0 CODE >201:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1272 text0 CODE >203:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+128A text0 CODE >206:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+12A2 text0 CODE >207:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1306 text0 CODE >208:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1322 text0 CODE >210:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1342 text0 CODE >213:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+135A text0 CODE >214:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1368 text0 CODE >216:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+136C text0 CODE >217:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1384 text0 CODE >221:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+13E6 text0 CODE >222:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1402 text0 CODE >224:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1422 text0 CODE >226:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+143A text0 CODE >227:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1448 text0 CODE >229:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+144C text0 CODE >230:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1464 text0 CODE >233:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+14BC text0 CODE >234:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+14D8 text0 CODE >236:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+14F8 text0 CODE >238:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1510 text0 CODE >239:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+151E text0 CODE >241:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1522 text0 CODE >242:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+153A text0 CODE >244:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+155A text0 CODE >247:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1586 text0 CODE >249:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+159E text0 CODE >250:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+15AC text0 CODE >252:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+15B0 text0 CODE >253:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+15C8 text0 CODE >255:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+15E8 text0 CODE >258:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+15FA text0 CODE >259:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1612 text0 CODE >262:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+161A text0 CODE >264:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1626 text0 CODE >265:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1632 text0 CODE >266:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1642 text0 CODE >268:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+164E text0 CODE >269:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+165A text0 CODE >270:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1666 text0 CODE >272:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1672 text0 CODE >297:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1692 text0 CODE >299:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+169A text0 CODE >300:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+16AE text0 CODE >301:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+16D2 text0 CODE >303:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+16EA text0 CODE >305:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+170A text0 CODE >307:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1718 text0 CODE >309:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+171C text0 CODE >310:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+173C text0 CODE >311:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1740 text0 CODE >313:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1760 text0 CODE >315:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1780 text0 CODE >316:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1788 text0 CODE >320:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+17A8 text0 CODE >322:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+17B0 text0 CODE >324:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+17C4 text0 CODE >325:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+17E8 text0 CODE >327:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1808 text0 CODE >329:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1828 text0 CODE >331:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1836 text0 CODE >333:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+183A text0 CODE >334:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+185A text0 CODE >335:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+185E text0 CODE >337:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+187E text0 CODE >339:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+189E text0 CODE >340:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+18A6 text0 CODE >344:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+18EA text0 CODE >346:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+18F2 text0 CODE >347:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+190A text0 CODE >348:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1922 text0 CODE >349:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1936 text0 CODE >350:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1952 text0 CODE >351:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1964 text0 CODE >352:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1988 text0 CODE >354:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+19A8 text0 CODE >355:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+19C8 text0 CODE >359:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1A0C text0 CODE >361:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1A10 text0 CODE >362:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1A28 text0 CODE >363:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1A40 text0 CODE >364:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1A54 text0 CODE >365:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1A78 text0 CODE >367:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1A98 text0 CODE >368:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1AB8 text0 CODE >371:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1AD8 text0 CODE >374:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1AEA text0 CODE >376:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1AF0 text0 CODE >377:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1B08 text0 CODE >378:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1B20 text0 CODE >379:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1B38 text0 CODE >380:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1B58 text0 CODE >381:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1B5C text0 CODE >385:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1B62 text0 CODE >386:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1B7A text0 CODE >387:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1B92 text0 CODE >388:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1BB2 text0 CODE >389:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1BD2 text0 CODE >391:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1BD2 text0 CODE >394:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1BDA text0 CODE >396:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1BE6 text0 CODE >397:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1BF2 text0 CODE >398:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1C02 text0 CODE >400:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1C0E text0 CODE >401:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1C1A text0 CODE >402:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1C26 text0 CODE >404:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1C32 text0 CODE >408:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1C52 text0 CODE >409:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1C72 text0 CODE >410:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1C92 text0 CODE >411:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1CB2 text0 CODE >412:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1CD2 text0 CODE >413:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1CD6 text0 CODE >414:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1CE8 text0 CODE >415:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1D06 text0 CODE >416:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1D26 text0 CODE >417:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1D46 text0 CODE >418:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1D66 text0 CODE >419:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1D86 text0 CODE >420:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1D8A text0 CODE >422:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1DAA text0 CODE >423:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1DCA text0 CODE >424:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1DEA text0 CODE >425:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1E0A text0 CODE >428:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1E1C text0 CODE >429:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1E3A text0 CODE >430:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1E5A text0 CODE >431:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1E7A text0 CODE >432:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1E9A text0 CODE >433:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1EBA text0 CODE >434:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1EBE text0 CODE >435:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1EDE text0 CODE >436:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1EFE text0 CODE >437:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1F1E text0 CODE >438:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1F3E text0 CODE >442:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1F52 text0 CODE >443:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1F70 text0 CODE >444:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1F90 text0 CODE >445:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1FB0 text0 CODE >446:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1FD0 text0 CODE >447:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1FF0 text0 CODE >448:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+1FF4 text0 CODE >449:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2014 text0 CODE >450:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2034 text0 CODE >451:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2054 text0 CODE >452:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2074 text0 CODE >455:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2088 text0 CODE >456:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+20A8 text0 CODE >457:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+20C8 text0 CODE >458:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+20E8 text0 CODE >459:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2108 text0 CODE >462:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+211C text0 CODE >463:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+213C text0 CODE >464:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+215C text0 CODE >465:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+217C text0 CODE >466:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+219C text0 CODE >469:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+21B0 text0 CODE >470:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+21D0 text0 CODE >471:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+21F0 text0 CODE >472:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2210 text0 CODE >473:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2230 text0 CODE >476:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2244 text0 CODE >477:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2264 text0 CODE >478:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2284 text0 CODE >479:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+22A4 text0 CODE >480:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+22C4 text0 CODE >483:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+22D8 text0 CODE >484:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+22F8 text0 CODE >485:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2318 text0 CODE >486:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2338 text0 CODE >487:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2358 text0 CODE >493:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2360 text0 CODE >495:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+236C text0 CODE >496:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2378 text0 CODE >497:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2388 text0 CODE >499:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2394 text0 CODE >500:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+23A0 text0 CODE >501:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+23AC text0 CODE >503:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+23B8 text0 CODE >506:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+23C6 text0 CODE >508:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+23E6 text0 CODE >509:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2406 text0 CODE >510:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2426 text0 CODE >511:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+242A text0 CODE >514:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+244A text0 CODE >515:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+246A text0 CODE >516:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+248A text0 CODE >520:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2492 text0 CODE >522:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+249E text0 CODE >523:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+24AA text0 CODE >524:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+24BA text0 CODE >526:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+24C6 text0 CODE >527:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+24D2 text0 CODE >528:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+24DE text0 CODE >530:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+24EA text0 CODE >532:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+24FC text0 CODE >534:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+251C text0 CODE >535:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+253C text0 CODE >536:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2540 text0 CODE >539:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2560 text0 CODE >540:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+2580 text0 CODE >543:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c
+326 cinit CODE >7818:/tmp/xc5rudwNa/driver_tmp_1.s
+326 cinit CODE >7820:/tmp/xc5rudwNa/driver_tmp_1.s
+326 cinit CODE >7823:/tmp/xc5rudwNa/driver_tmp_1.s
+326 cinit CODE >7887:/tmp/xc5rudwNa/driver_tmp_1.s
+32A cinit CODE >7888:/tmp/xc5rudwNa/driver_tmp_1.s
+32C cinit CODE >7889:/tmp/xc5rudwNa/driver_tmp_1.s
+32C cinit CODE >7890:/tmp/xc5rudwNa/driver_tmp_1.s
+32E cinit CODE >7891:/tmp/xc5rudwNa/driver_tmp_1.s
+330 cinit CODE >7892:/tmp/xc5rudwNa/driver_tmp_1.s
+332 cinit CODE >7898:/tmp/xc5rudwNa/driver_tmp_1.s
+332 cinit CODE >7901:/tmp/xc5rudwNa/driver_tmp_1.s
+334 cinit CODE >7902:/tmp/xc5rudwNa/driver_tmp_1.s
+336 cinit CODE >7903:/tmp/xc5rudwNa/driver_tmp_1.s
+338 cinit CODE >7904:/tmp/xc5rudwNa/driver_tmp_1.s
+# %SYMTAB Section
+# An enumeration of all symbols in the program.
+# The beginning of the section is indicated by %SYMTAB.
+# Each line describes a single symbol as follows:
+#    <label> <value> [-]<load-adj> <class> <space> <psect> <file-name>
+# The value and load-adj are both in unqualified hexadecimal.
+# All other numeric values are in decimal.  The load-adj is the
+# quantity one needs to add to the symbol value in order to obtain the load
+# address of the symbol.  This value may be signed. If the symbol
+# was defined in a psect then <psect> will be "-". File-name
+# is the name of the object file in which the symbol was defined.
+%SYMTAB
+__Lmediumconst 2594 0 MEDIUMCONST 0 mediumconst .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hspace_0 4000 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hspace_1 58 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hspace_2 0 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hspace_4 0 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__end_of_display_setup B40 0 CODE 0 text7 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hibigdata 0 0 CODE 0 ibigdata .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__mediumconst 2594 0 MEDIUMCONST 0 mediumconst /tmp/xc5rudwNa/driver_tmp_9.o
+__Heeprom_data 0 0 EEDATA 0 eeprom_data .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+print_decimal_point@row 3 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_hv 3B 0 COMRAM 1 bssCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__L__absolute__ 0 0 ABS 0 __absolute__ .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lsmallconst 0 0 SMALLCONST 0 smallconst .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__end_of_fontSmallBitmaps 3DE6 0 MEDIUMCONST 0 mediumconst .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+print_character@column_byte_bit 1E 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+___sp 0 0 STACK 2 stack /tmp/xc5rudwNa/driver_tmp_9.o
+_main B40 0 CODE 0 text0 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_ones 45 0 COMRAM 1 bssCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_tens 47 0 COMRAM 1 bssCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+___stack_hi 0 0 STACK 2 stack /tmp/xc5rudwNa/driver_tmp_9.o
+___stack_lo 0 0 STACK 2 stack /tmp/xc5rudwNa/driver_tmp_9.o
+start 0 0 CODE 0 init /tmp/xc5rudwNa/driver_tmp_9.o
+print_blank_columns@char_height E 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_db_scanning_mode 39 0 COMRAM 1 bssCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__HbssCOMRAM 0 0 ABS 0 bssCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__end_of_display_write_data 358 0 CODE 0 text10 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+?___wmul 1 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hpowerup 0 0 CODE 0 powerup .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+print_decimal_point@lookup 5 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__LnvCOMRAM 0 0 ABS 0 nvCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__accesstop 80 0 ABS 0 - /tmp/xc5rudwNa/driver_tmp_9.o
+intlevel0 0 0 CODE 0 text /tmp/xc5rudwNa/driver_tmp_9.o
+intlevel1 0 0 CODE 0 text /tmp/xc5rudwNa/driver_tmp_9.o
+intlevel2 0 0 CODE 0 text /tmp/xc5rudwNa/driver_tmp_9.o
+intlevel3 0 0 CODE 0 text /tmp/xc5rudwNa/driver_tmp_9.o
+__LbssCOMRAM 0 0 ABS 0 bssCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_background_color 4F 0 COMRAM 1 bssCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_range_old 3F 0 COMRAM 1 bssCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__LnvFARRAM 0 0 FARRAM 0 nvFARRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hifardata 0 0 CODE 0 ifardata .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_display_write_data 33C 0 CODE 0 text10 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hclrtext 0 0 ABS 0 clrtext .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_display_clear_screen 432 0 CODE 0 text9 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+___wmul@multiplicand 3 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_ADCON0 FC2 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_ADCON1 FC1 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_ADCON2 FC0 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+print_character@bytes_per_row 16 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+___inthi_sp 0 0 STACK 2 stack /tmp/xc5rudwNa/driver_tmp_9.o
+___intlo_sp 0 0 STACK 2 stack /tmp/xc5rudwNa/driver_tmp_9.o
+__Hintcode_body 0 0 ABS 0 intcode_body .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+print_decimal_point@work_column_byte 7 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__end_of___wmul 39A 0 CODE 0 text5 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__end_of_display_write_command 374 0 CODE 0 text8 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lintsave_regs 0 0 BIGRAM 1 intsave_regs .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hmediumconst 4000 0 MEDIUMCONST 0 mediumconst .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hintcodelo 0 0 CODE 0 intcodelo .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_display_write_command 358 0 CODE 0 text8 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+print_character@foreground_color A 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__end_of_display_write_data16 3F8 0 CODE 0 text4 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_print_decimal_point 522 0 CODE 0 text1 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+print_character@row 12 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__HnvCOMRAM 0 0 ABS 0 nvCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lintcodelo 0 0 CODE 0 intcodelo .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+start_initialization 326 0 CODE 0 cinit .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_OSCCON FD3 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__HnvFARRAM 0 0 FARRAM 0 nvFARRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_fontBitmaps 2595 0 MEDIUMCONST 0 mediumconst .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+___rparam_used 1 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_display_bcd 43 0 COMRAM 1 bssCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+print_character@char_height 1C 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_ten_thousands 4D 0 COMRAM 1 bssCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_SSPBUF FC9 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_hundreds 49 0 COMRAM 1 bssCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+isa$xinst 0 0 ABS 0 - /tmp/xc5rudwNa/driver_tmp_9.o
+__Hbank0 0 0 ABS 0 bank0 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hbank1 0 0 ABS 0 bank1 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hbank2 0 0 ABS 0 bank2 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hcinit 0 0 ABS 0 cinit .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hconst 0 0 CONST 0 const .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hidata 0 0 CODE 0 idata .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hidloc 0 0 ABS 0 idloc .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hnvbit 0 0 COMRAM 1 nvbit .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hparam 0 0 COMRAM 1 rparam .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hrdata 0 0 COMRAM 1 rdata .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hstack 0 0 STACK 2 stack .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Htext0 0 0 ABS 0 text0 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Htext1 0 0 ABS 0 text1 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Htext2 0 0 ABS 0 text2 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Htext3 0 0 ABS 0 text3 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Htext4 0 0 ABS 0 text4 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Htext5 0 0 ABS 0 text5 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Htext6 0 0 ABS 0 text6 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Htext7 0 0 ABS 0 text7 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Htext8 0 0 ABS 0 text8 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Htext9 0 0 ABS 0 text9 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hbigbss 0 0 BIGRAM 1 bigbss .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hbigram 0 0 ABS 0 bigram .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hbigsfr 0 0 ABS 0 bigsfr .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__smallconst 0 0 SMALLCONST 0 smallconst /tmp/xc5rudwNa/driver_tmp_9.o
+_counter_bcd 31 0 COMRAM 1 bssCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hcomram 0 0 ABS 0 comram .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hconfig 0 0 ABS 0 config .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lbank0 0 0 ABS 0 bank0 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lbank1 0 0 ABS 0 bank1 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lbank2 0 0 ABS 0 bank2 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lcinit 0 0 ABS 0 cinit .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lconst 0 0 CONST 0 const .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lidata 0 0 CODE 0 idata .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lidloc 0 0 ABS 0 idloc .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lnvbit 0 0 COMRAM 1 nvbit .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lparam 0 0 COMRAM 1 rparam .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lrdata 0 0 COMRAM 1 rdata .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+print_character@column_pixel 20 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lstack 0 0 STACK 2 stack .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Ltext0 0 0 ABS 0 text0 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Ltext1 0 0 ABS 0 text1 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Ltext2 0 0 ABS 0 text2 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Ltext3 0 0 ABS 0 text3 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Ltext4 0 0 ABS 0 text4 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Ltext5 0 0 ABS 0 text5 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Ltext6 0 0 ABS 0 text6 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Ltext7 0 0 ABS 0 text7 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Ltext8 0 0 ABS 0 text8 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Ltext9 0 0 ABS 0 text9 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hfarbss 0 0 FARRAM 0 farbss .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lintcode_body 0 0 ABS 0 intcode_body .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_PORTAbits F80 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_PORTBbits F81 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_PORTCbits F82 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_PORTDbits F83 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_PORTEbits F84 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Habs1 0 0 ABS 0 abs1 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hdata 0 0 ABS 0 data .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hheap 0 0 HEAP 7 heap .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hinit 4 0 CODE 0 init .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hrbit 0 0 COMRAM 1 rbit .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hrbss 0 0 COMRAM 1 rbss .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Htemp 0 0 COMRAM 1 temp .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Htext 0 0 ABS 0 text .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Labs1 0 0 ABS 0 abs1 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Ldata 0 0 ABS 0 data .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lheap 0 0 HEAP 7 heap .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Linit 0 0 CODE 0 init .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lrbit 0 0 COMRAM 1 rbit .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lrbss 0 0 COMRAM 1 rbss .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Ltemp 0 0 COMRAM 1 temp .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Ltext 0 0 ABS 0 text .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+___wmul 374 0 CODE 0 text5 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__HcstackCOMRAM 0 0 ABS 0 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+print_blank_columns@fontsize 9 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hintret 0 0 ABS 0 intret .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hirdata 0 0 CODE 0 irdata .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__S0 4000 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__S1 58 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__S4 0 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__S5 0 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__end_of_print_decimal_point 618 0 CODE 0 text1 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+print_blank_columns@work_counter C 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+delay_10ms_steps@steps 1 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__pnvCOMRAM 56 0 COMRAM 1 nvCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+print_character@fontsize 9 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_function 3D 0 COMRAM 1 bssCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lbigdata 0 0 BIGRAM 1 bigdata .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hnvrram 0 0 COMRAM 1 nvrram .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_delay_10ms_steps 3F8 0 CODE 0 text11 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_print_character$1318 10 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+print_character@background_color C 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+print_decimal_point@column_pixel B 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+delay_10ms_steps@i 4 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+display_write_command@data 1 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lintentry 0 0 ABS 0 intentry .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+print_character@char_width 1A 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hramtop 300 0 RAM 0 ramtop .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hrparam 0 0 COMRAM 1 rparam .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__activetblptr 2 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hstruct 0 0 COMRAM 1 struct .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Htext10 0 0 ABS 0 text10 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Htext11 0 0 ABS 0 text11 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+print_blank_columns@blank_columns 7 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__ptext10 33C 0 CODE 0 text10 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__ptext11 3F8 0 CODE 0 text11 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lbigbss 0 0 BIGRAM 1 bigbss .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lbigram 0 0 ABS 0 bigram .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lbigsfr 0 0 ABS 0 bigsfr .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+display_write_data16@data 1 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lcomram 0 0 ABS 0 comram .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lconfig 0 0 ABS 0 config .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_mc_pin_setup 39A 0 CODE 0 text6 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+___wmul@multiplier 1 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lfarbss 0 0 FARRAM 0 farbss .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+___inthi_stack_hi 0 0 STACK 2 stack /tmp/xc5rudwNa/driver_tmp_9.o
+___inthi_stack_lo 0 0 STACK 2 stack /tmp/xc5rudwNa/driver_tmp_9.o
+__end_of_fontRange 3F66 0 MEDIUMCONST 0 mediumconst .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lfardata 0 0 FARRAM 0 fardata .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+isa$std 1 0 ABS 0 - /tmp/xc5rudwNa/driver_tmp_9.o
+_number_display_x 53 0 COMRAM 1 bssCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_number_display_y 51 0 COMRAM 1 bssCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+stackhi 0 0 ABS 0 - /tmp/xc5rudwNa/driver_tmp_9.o
+stacklo 0 0 ABS 0 - /tmp/xc5rudwNa/driver_tmp_9.o
+__Lintcode 0 0 CODE 0 intcode .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_OSCTUNE F9B 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lintret 0 0 ABS 0 intret .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lirdata 0 0 CODE 0 irdata .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lspace_0 0 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lspace_1 0 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lspace_2 0 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lspace_4 0 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__pbssCOMRAM 31 0 COMRAM 1 bssCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__end_of_delay_10ms_steps 432 0 CODE 0 text11 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_display_write_data16 3C8 0 CODE 0 text4 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_fontRange 3DE6 0 MEDIUMCONST 0 mediumconst .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_fontsize 55 0 COMRAM 1 bssCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__LcstackCOMRAM 0 0 ABS 0 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+print_character@digit 7 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+end_of_initialization 332 0 CODE 0 cinit .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_print_blank_columns 486 0 CODE 0 text3 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lnvrram 0 0 COMRAM 1 nvrram .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hintentry 0 0 ABS 0 intentry .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_display_setup 7D4 0 CODE 0 text7 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__end_of_fontBitmaps 3891 0 MEDIUMCONST 0 mediumconst .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__end_of_print_character 7D4 0 CODE 0 text2 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hreset_vec 0 0 CODE 0 reset_vec .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__end_of_display_clear_screen 486 0 CODE 0 text9 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lramtop 300 0 RAM 0 ramtop .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lrparam 0 0 COMRAM 1 rparam .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__pcinit 326 0 CODE 0 cinit .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_fontDecimalPoint 3F66 0 MEDIUMCONST 0 mediumconst .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__ptext0 B40 0 CODE 0 text0 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__ptext1 522 0 CODE 0 text1 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__ptext2 618 0 CODE 0 text2 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__ptext3 486 0 CODE 0 text3 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__ptext4 3C8 0 CODE 0 text4 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__ptext5 374 0 CODE 0 text5 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__ptext6 39A 0 CODE 0 text6 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__ptext7 7D4 0 CODE 0 text7 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__ptext8 358 0 CODE 0 text8 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__ptext9 432 0 CODE 0 text9 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lstruct 0 0 COMRAM 1 struct .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Ltext10 0 0 ABS 0 text10 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Ltext11 0 0 ABS 0 text11 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+display_clear_screen@counter 3 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__ramtop 300 0 RAM 0 ramtop /tmp/xc5rudwNa/driver_tmp_9.o
+__end_of_mc_pin_setup 3C8 0 CODE 0 text6 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lpowerup 0 0 CODE 0 powerup .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Leeprom_data 0 0 EEDATA 0 eeprom_data .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__H__absolute__ 0 0 ABS 0 __absolute__ .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+print_character@work_column_byte 18 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lreset_vec 0 0 CODE 0 reset_vec .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+___heap_hi 0 0 ABS 0 - /tmp/xc5rudwNa/driver_tmp_9.o
+___heap_lo 0 0 ABS 0 - /tmp/xc5rudwNa/driver_tmp_9.o
+___param_bank 0 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+___intlo_stack_hi 0 0 STACK 2 stack /tmp/xc5rudwNa/driver_tmp_9.o
+___intlo_stack_lo 0 0 STACK 2 stack /tmp/xc5rudwNa/driver_tmp_9.o
+__Hbigdata 0 0 BIGRAM 1 bigdata .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__end_of__initialization 332 0 CODE 0 cinit .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Libigdata 0 0 CODE 0 ibigdata .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lclrtext 0 0 ABS 0 clrtext .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+print_blank_columns@background_color A 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+display_write_data@data 1 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_print_character 618 0 CODE 0 text2 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_foreground_color 56 0 COMRAM 1 nvCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_fontSmallBitmaps 3891 0 MEDIUMCONST 0 mediumconst .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__pcstackCOMRAM 1 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__pmediumconst 2594 0 MEDIUMCONST 0 mediumconst .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_SSPCON1 FC6 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_SSPSTAT FC7 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+print_character@lookup 14 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__end_of_main 2594 0 CODE 0 text0 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_SSPIF 7CF3 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_TRISA F92 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_TRISB F93 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_TRISC F94 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_TRISD F95 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_TRISE F96 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__HRAM 0 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hbss 0 0 RAM 1 bss .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hram 0 0 ABS 0 ram .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hsfr 0 0 ABS 0 sfr .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__LRAM 1 0 ABS 0 - .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lbss 0 0 RAM 1 bss .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lram 0 0 ABS 0 ram .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lsfr 0 0 ABS 0 sfr .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_range 41 0 COMRAM 1 bssCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__end_of_print_blank_columns 522 0 CODE 0 text3 .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_thousands 4B 0 COMRAM 1 bssCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+print_decimal_point@column_byte_bit 9 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__end_of_fontDecimalPoint 3FFF 0 MEDIUMCONST 0 mediumconst .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__initialization 326 0 CODE 0 cinit .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+_counter 35 0 COMRAM 1 bssCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hfardata 0 0 FARRAM 0 fardata .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+___wmul@product 5 0 COMRAM 1 cstackCOMRAM .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hsmallconst 0 0 SMALLCONST 0 smallconst .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Lifardata 0 0 CODE 0 ifardata .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hintsave_regs 0 0 BIGRAM 1 intsave_regs .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+__Hintcode 0 0 CODE 0 intcode .ca/dist/PRO_Comparison/production/fluke8050a.X.production.o
+# %SPLITSTAB Section
+# This section enumerates all the psect splits performed by the assembler.
+# The beginning of the section is indicated by %SPLITSTAB.
+# Each line is a record a particular split, where the parent psect is on
+# the left and the child on the right.  Note that a child psect is always
+# split form the top of the parent psect. All splits from a given parent
+# are listed in the order in which they occurred.
+%SPLITSTAB
+# %DABS Section
+# This section contains a table of all usuage of the assember
+# directive DABS in the program. Each line has the following format:
+#   <name> <space> <address> <size>
+# If the DABS was originally labelled then that shall be <name>,
+# otherwise name will be "-".  The <space> number is in decimal.
+# <address> and <size> are in byte units as unqaulified hexadecimal
+%DABS
+# %SEGMENTS Section
+# This sections enumerates the segments of the program.  Each segment
+# is described on a single line as follows:
+#    <name> <space> <link address> <file address> <size> <delta>
+# Addresses and size are in unqualified hexadecimal.  The link address
+# and size are in units of delta. The file address is in units of bytes.
+# All other numeric quantities are in decimal.
+%SEGMENTS
+cinit 0 326 326 16 1
+text0 0 B40 B40 1A54 1
+text1 0 522 522 F6 1
+text2 0 618 618 1BC 1
+text3 0 486 486 9C 1
+text4 0 3C8 3C8 30 1
+text5 0 374 374 26 1
+text6 0 39A 39A 2E 1
+text7 0 7D4 7D4 36C 1
+text8 0 358 358 1C 1
+text9 0 432 432 54 1
+text10 0 33C 33C 1C 1
+text11 0 3F8 3F8 3A 1
+cstackCOMRAM 1 1 1 57 1
+reset_vec 0 0 0 4 1
+mediumconst 0 2594 2594 1A6C 1
+# %NOTES Section
+# This section contains data of all the note-psects.  The beginning of the section
+# is indicated by %NOTES. The first line indicates the name and decimal
+# byte-length of the first note-psect, e.g.
+#   $codecov_info_hdr 16
+# Each line that follows contains the byte-data of the psect in hexadecimal as a
+# space-separated list. These lines are limited to 16 bytes of data.
+%NOTES

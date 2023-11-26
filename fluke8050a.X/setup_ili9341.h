@@ -3,6 +3,7 @@
 
 #include "fonts/fonts.h"
 #include "setup_pic18f4420.h"
+#include "config_color_scheme.h"
 
 // Display is portrait mode
 // Horizontal is 240 (short)

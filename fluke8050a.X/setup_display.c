@@ -58,11 +58,11 @@ void display_clear_screen(void){
 }
 
 void display_setup(void){
-  display_reset = 1;
+  DISPLAY_RESET = 1;
   delay_10ms_steps(10);
-  display_reset = 0;
+  DISPLAY_RESET = 0;
   delay_10ms_steps(2);
-  display_reset = 1;
+  DISPLAY_RESET = 1;
   delay_10ms_steps(12);
   
   display_write_command(DISPLAY_OFF);  

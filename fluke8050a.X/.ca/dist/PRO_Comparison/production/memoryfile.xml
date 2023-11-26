@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <executable name=".ca/dist/PRO_Comparison/production/fluke8050a.X.production.hex">
+    <memory name="program">
+      <units>bytes</units>
+      <length>16384</length>
+      <used>15582</used>
+      <free>802</free>
+    </memory>
+    <memory name="data">
+      <units>bytes</units>
+      <length>768</length>
+      <used>87</used>
+      <free>681</free>
+    </memory>
+  </executable>
+</project>
