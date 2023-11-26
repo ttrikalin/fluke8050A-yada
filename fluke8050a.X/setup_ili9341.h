@@ -55,16 +55,15 @@
 
 
 
+unsigned int foreground_color, background_color;
+
 void display_write_command (unsigned int data);
 void display_write_data (unsigned int data);
 void display_write_data16 (unsigned int data);
 void display_clear_screen(void);
-// void print_number(unsigned int digit);
-// void print_blank_columns(unsigned int blank_columns);
-// void print_decimal_point(); 
-// void print_small_characters(unsigned int digit);
-// void print_small_blank_columns(unsigned int blank_columns); 
-// void print_range_number(unsigned int digit); 
+void print_character(unsigned int digit, enum u_fontsize fontsize);
+void print_blank_columns(unsigned int blank_columns, enum u_fontsize fontsize);
+void print_decimal_point(void); 
 void display_setup(void); 
 void delay_10ms_steps(unsigned int steps); 
 

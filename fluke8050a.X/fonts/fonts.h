@@ -1,7 +1,7 @@
 #ifndef _SRC_FONTS_H_
 #define _SRC_FONTS_H_
 
-
+enum u_fontsize {REGULAR, SMALL, RANGE} fontsize;  
 
 #define FONT_REGULAR_CHARACTER_WIDTH     30
 #define FONT_REGULAR_CHARACTER_HEIGHT    67
@@ -17,6 +17,11 @@
 #define FONT_RANGE_BYTES_PER_ROW          3
 #define FONT_RANGE_BLANK_WIDTH            2
 
+
+#define FONT_REGULAR               fontBitmaps
+#define FONT_SMALL                 fontSmallBitmaps
+#define FONT_REGULAR_DECIMAL_POINT fontDecimalPoint
+#define FONT_RANGE                 fontRange
 
 //  font created using dot factory
 //  http://www.pavius.net/2009/07/the-dot-factory-an-lcd-font-and-image-generator/

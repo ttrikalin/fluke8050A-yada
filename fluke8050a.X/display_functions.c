@@ -26,6 +26,9 @@ void display_write_data (unsigned int data) {
 }
 
 
+
+
+
 // send 16 bits  of data 
 void display_write_data16 (unsigned int data) {
   DISPLAY_DC = 1; 
@@ -56,6 +59,95 @@ void display_clear_screen(void){
     display_write_data(0x00);
   }
 }
+
+
+void print_character(unsigned int digit, enum u_fontsize fontsize, unsigned char __rom * const bitmap[]) {
+  unsigned int row = 0;                //  0 -> (character_width-1)
+  unsigned int column_pixel = 0;       //  0 -> (character_height-1)
+  unsigned int column_byte_bit = 0;    //  0 -> 7 which pixel in column_byte_index
+  unsigned int work_column_byte = 0;   //  copy of column_byte_index 
+  
+  unsigned int char_width, char_height, bytes_per_row; 
+  if (fontsize == REGULAR) {
+    char_width = FONT_REGULAR_CHARACTER_WIDTH;
+    char_height = FONT_REGULAR_CHARACTER_HEIGHT;
+    bytes_per_row = FONT_REGULAR_BYTES_PER_ROW;
+  } else if (fontsize == SMALL) {
+    char_width = FONT_SMALL_CHARACTER_WIDTH;
+    char_height = FONT_SMALL_CHARACTER_HEIGHT;
+    bytes_per_row = FONT_SMALL_BYTES_PER_ROW;
+  } else if (fontsize == RANGE) {
+    char_width = FONT_RANGE_CHARACTER_WIDTH;
+    char_height = FONT_RANGE_CHARACTER_HEIGHT;
+    bytes_per_row = FONT_RANGE_BYTES_PER_ROW;
+  }
+  unsigned int lookup  = digit * char_width * bytes_per_row; 
+  while (row < char_width) {
+    column_byte_bit = 0;
+    column_pixel    = 0;
+    while (column_pixel < char_height) {
+      work_column_byte  = (unsigned int) (*bitmap)[lookup++];
+      column_byte_bit = 0;
+      while ((column_byte_bit < 8) && (column_pixel < (char_height + 1))) {
+        if (work_column_byte & 0x80) {
+            display_write_data16(foreground_color);
+        } else {
+            display_write_data16(background_color);
+        }
+        work_column_byte = work_column_byte << 1;
+        column_byte_bit++;
+        column_pixel++;
+      }
+    }
+  row++;
+  } 
+}
+
+void print_blank_columns(unsigned int blank_columns, enum u_fontsize fontsize) {
+  unsigned int char_height;
+  if(fontsize == REGULAR){
+    char_height = FONT_REGULAR_CHARACTER_HEIGHT;
+  } else if (fontsize == SMALL) {
+    char_height = FONT_SMALL_CHARACTER_HEIGHT;
+  } else if(fontsize  == RANGE) {
+    char_height = FONT_RANGE_CHARACTER_HEIGHT;
+  }
+  unsigned int work_counter = blank_columns * (char_height + 1);
+  while(work_counter>0) {
+    display_write_data16(background_color);
+    work_counter--;    
+  }
+}
+
+void print_decimal_point(void) {
+  unsigned int  row=0;          //  0 -> (character_width-1)
+  unsigned int  column_pixel=0;     //  0 -> (character_height-1)
+  unsigned int  column_byte_bit=0;    //  0 -> 7 which pixel in column_byte_index
+  unsigned int  work_column_byte;   //  copy of column_byte_index (need to play with to get past unused bits in font table)
+
+  unsigned int  lookup  = 0;      //  how for into font table our byte is
+
+    while (row < FONT_REGULAR_DECIMAL_POINT_WIDTH){  
+      column_byte_bit =   0;
+      column_pixel  = 0;
+      while (column_pixel<FONT_REGULAR_CHARACTER_HEIGHT){
+        work_column_byte  = fontDecimalPoint[lookup++];
+        column_byte_bit = 0;
+        while ((column_byte_bit<8)&&(column_pixel<(FONT_REGULAR_CHARACTER_HEIGHT+1))){
+          if (work_column_byte & 0x80) {
+              display_write_data16(foreground_color);
+          } else {
+              display_write_data16(background_color);
+          }
+          work_column_byte = work_column_byte<<1;
+          column_byte_bit++;
+          column_pixel++;
+        }
+      }
+      row++;
+    } 
+  }
+  
 
 void display_setup(void){
   DISPLAY_RESET = 1;

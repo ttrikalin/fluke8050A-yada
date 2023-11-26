@@ -4,10 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/main.c</file>
-            <file>file:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_display.c</file>
+            <file>file:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_pic18f4420.c</file>
             <file>file:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/fonts/fonts.h</file>
+            <file>file:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/display_functions.c</file>
             <file>file:/Users/tom/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_ili9341.h</file>
-            <file>file:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/setup_pic18f4420.h</file>
+            <file>file:/Users/tom/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/config_color_scheme.h</file>
+            <file>file:/Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/fluke8050a.X/functions.c</file>
         </group>
     </open-files>
 </project-private>
