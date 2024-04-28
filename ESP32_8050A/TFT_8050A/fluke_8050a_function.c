@@ -1,4 +1,4 @@
-#include "fluke_8050a_function.h"
+#include "TFT_8050A.h"
 
 void function_monitor_initialize(void) {
   function_monitor.state = FUNCTION_MONITOR_STATE_INIT; 

@@ -1,8 +1,7 @@
-#include "fluke_8050a_values.h"
-
+#include "TFT_8050A.h"
 
 void values_monitor_initialize(void) {
-  values_monitor.state = RANGE_MONITOR_STATE_INIT; 
+  values_monitor.state = VALUES_MONITOR_STATE_INIT; 
   values_monitor.read_flag = 0; 
   values_monitor.st0_value0 = 0x00;
   values_monitor.st0_value1 = 0x00; 

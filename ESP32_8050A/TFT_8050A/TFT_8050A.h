@@ -5,7 +5,13 @@
 #include <TFT_eSPI.h> 
 #include <SPI.h>
 #include "ESP32_WROOM32_config_pins.h"
-#include "display_constants_176by220.h"
+#include "fluke_8050a_function.h"
+#include "fluke_8050a_values.h"
+#include "fluke_8050a_range.h"
+//#include "NotoSansBold15.h"
+//#include "NotoSansBold36.h"
+
+//#include "display_constants_176by220.h"
 
 
 // bit clear/set/invert/test
@@ -25,6 +31,9 @@
 #define ST3 3
 #define ST4 4
 
+
+//#define AA_FONT_SMALL NotoSansBold15
+//#define AA_FONT_LARGE NotoSansBold36
 
 
 void IRAM_ATTR strobe0_ISR(void);

@@ -1,5 +1,4 @@
-#include "fluke_8050a_range.h"
-
+#include "TFT_8050A.h"
 
 void range_monitor_initialize(void) {
   range_monitor.state = RANGE_MONITOR_STATE_INIT; 
