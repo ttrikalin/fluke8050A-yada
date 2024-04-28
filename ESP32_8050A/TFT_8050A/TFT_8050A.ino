@@ -17,189 +17,15 @@ Hamburg, Germany
 
 static const uint8_t version[] = { 2,0,1,5,0,8,0,7 };
 
-#include "TFT_8050A/Modified_Adafruit_ILI9340/Modified_Adafruit_ILI9340.h" // Hardware-specific library
+
+#include <TFT_eSPI.h> // Hardware-specific library
 #include <SPI.h>
-#include <avr/io.h>
-#include <avr/pgmspace.h>
-
-// character and symbol bitmaps
-#include "digit_lg.h"
-#include "digit_sm.h"
-#include "digit_tiny.h"
-#include "symbolSign.h"
-#include "symbolUnit.h"
-#include "symbolMode.h"
-#include "symbolSplash.h"
-
-// bit clear/set/invert/test
-#define clear_bit(b,bit) (b &= ~_BV(bit))
-#define set_bit(b,bit) (b |= _BV(bit))
-#define invert_bit(b,bit) (b ^= _BV(bit))
-#define test_bit(b,bit) ((b & _BV(bit)) != 0)
-
-/*
-PIN ASSIGNMENTS
-*/
-
-// TFT display communication pins
-#define PIN_RST     5   //PINC6
-#define PIN_DC      13  //PINC7
-// Hardware SPI pins are specific to the Arduino board type and
-// cannot be remapped to alternate pins.  For Arduino Leonardo (ATmega32u4),
-// pin 16 = MOSI, pin 14 = MISO, pin 15 = SCK.
-
-// 8050A strobe lines
-#define BIT_ST0         PIND3 // (INT.3)
-#define BIT_ST1         PIND2 // (INT.2)
-#define BIT_ST2         PIND1 // (INT.1)
-#define BIT_ST3         PIND0 // (INT.0)
-#define BIT_ST4         PINE6 // (INT.6)
-
-// 8050A scancode lines
-#define BIT_HV          PINF0
-#define BIT_DP          PINF1
-#define BIT_Z           PINF4
-#define BIT_Y           PINF5
-#define BIT_X           PINF6
-#define BIT_W           PINF7
-#define BIT_1           BIT_Z
-#define BIT_PLUS        BIT_X
-#define BIT_MINUS       BIT_W
-
-// 8050A range and function switches
-// rng (PORTB)
-#define BIT_8050_RNGc   PINB4
-#define BIT_8050_RNGb   PINB5
-#define BIT_8050_RNGa   PINB6
-#define BIT_8050_BT     PINB7
-// func (PORTD)
-#define BIT_8050_Fb     PIND4
-#define BIT_8050_Fd     PIND5
-#define BIT_8050_Fa     PIND6
-#define BIT_8050_Fc     PIND7
-
-/*
-DISPLAY
-*/
-
-// colors
-#define BG_COLOR        0x0200
-#define FG_COLOR        0xFFFF
-#define HV_COLOR        0xFBCF
-#define BT_COLOR        0x0
-// the base unit (as a color)
-#define BASEUNIT_V      0x97EF    // Voltage, green
-#define BASEUNIT_A      0xFC71    // Current, red
-#define BASEUNIT_R      0xA50A    // Resistance, yellow
-#define BASEUNIT_S      0x8410    // Conductance, grey
-#define BASEUNIT_dB     0x8C71    // Decibel, blue
-#define BASEUNIT_Z      0x3A99    // Impedance, blue
-#define BASEUNIT_undef  0x0       // undefined, black
-
-// display x,y coords
-#define X_MAIN          8
-#define Y_MAIN          30
-
-#define X_UNIT          256
-#define Y_UNIT          Y_MAIN+OFFSET_UNIT_LG
-
-#define X_MODE          X_UNIT-8
-#define Y_MODE          Y_MAIN+OFFSET_MODE_LG
-
-#define X_Z             166
-#define Y_Z             128
-
-#define X_REL           98
-#define Y_REL           176
-
-#define X_LOBATT        X_MAIN
-#define Y_LOBATT        Y_REL+16
-
-// space between REL and digits
-#define W_SPACE         12
-
-// main digits underline
-#define X_UNDERLINE     X_MAIN+W_SIGN_LG
-#define Y_UNDERLINE     Y_MAIN+H_DIGIT_LG+8
-#define W_UNDERLINE     5*W_DIGIT_LG+W_DP_LG
-#define H_UNDERLINE     2
-
-/*
-DATA CONSTANTS
-*/
-
-// dp position for no display
-#define DP_NONE 4
-
-// bcd space char
-#define DIGIT_SPACE 0x0F
-
-#define NUM_DIGITS 5
-
-// strobe lines
-#define NUM_STROBES 5
-#define ST0 0
-#define ST1 1
-#define ST2 2
-#define ST3 3
-#define ST4 4
+#include "ESP32_WROOM32_pins.h"
+#include "display_constants_176by220.h"
 
 
-/*
-GLOBALS
-*/
-
-// 8050A scancode buffer (ISR)
-volatile uint8_t scanCodes[ NUM_STROBES ];
-
-// strobe timing (ISR)
-volatile boolean strobeCycle = false;
-
-// digit data
-uint8_t digits[ NUM_DIGITS ] = {
-  DIGIT_SPACE,
-  DIGIT_SPACE,
-  DIGIT_SPACE,
-  DIGIT_SPACE,
-  DIGIT_SPACE
-};
-uint8_t relDigits[ NUM_DIGITS ] = {
-  DIGIT_SPACE,
-  DIGIT_SPACE,
-  DIGIT_SPACE,
-  DIGIT_SPACE,
-  DIGIT_SPACE
-};
-uint8_t zDigits[ NUM_DIGITS ] = {
-  DIGIT_SPACE,
-  DIGIT_SPACE,
-  6, 0, 0 // this needs to reflect the hardware setting
-};
-
-uint8_t sign = SIGN_NONE;
-uint8_t rSign = SIGN_NONE;
-
-uint8_t mode = MODE_NONE;
-uint8_t rMode = MODE_NONE;
-
-uint8_t unit = UNIT_NONE;
-uint8_t rUnit = UNIT_NONE;
-
-uint16_t baseUnit = BASEUNIT_undef;
-uint16_t rBaseUnit = BASEUNIT_undef;
-
-// operation flags
-boolean rel = false;
-boolean relValid = false;
-boolean hv = false;
-
-// decimal point position
-uint8_t dp = DP_NONE;
-uint8_t dpr = DP_NONE;
-
-// Arduino 1480 TFT display/SD card breakout
-Modified_Adafruit_ILI9340 tft = 
-    Modified_Adafruit_ILI9340(PIN_DC, PIN_RST);
+// TFT object 
+TFT_eSPI tft = TFT_eSPI();   
 
 /*
 function and range switch settings
@@ -310,9 +136,9 @@ void readFRNG() {
   // read function and range switches (and BT)
   // in both ports, only the upper four bits are of interest,
   // shift them into the lower four
-  uint8_t func = (PIND >> 4);
-  uint8_t rng = (PINB >> 4);
-  
+  uint8_t func = (digitalRead(BIT_8050_Fc) << 3) | (digitalRead(BIT_8050_Fa)   << 2) | (digitalRead(BIT_8050_Fd)   << 1) | digitalRead(BIT_8050_Fb); 
+  uint8_t rng  = (digitalRead(BIT_BT)      << 3) | (digitalRead(BIT_8050_RNGc) << 2) | (digitalRead(BIT_8050_RNGb) << 1) | digitalRead(BIT_8050_RNGa); 
+
   // set AC flag    
   boolean fAC = test_bit(func,BIT_Fa);
   // set REL flag
@@ -460,7 +286,6 @@ void readFRNG() {
 
   // always display battery status
   displayLoBatt( fBT );
-      
 }
 
 void formatDigits() {
@@ -552,15 +377,7 @@ void displayMain() {
   uint16_t x = X_MAIN;
   // sign
 //   uint8_t s = baseUnit == BASEUNIT_Z ? UNIT_NONE : sign;
-  tft.bmpDraw(
-//     SIGN_LG(s),
-    SIGN_LG(sign),
-    x,
-    Y_MAIN + OFFSET_SIGN_LG,
-    W_SIGN_LG,
-    H_SIGN_LG,
-    FG_COLOR,
-    BG_COLOR );
+  tft.bmpDraw(SIGN_LG(sign), x, Y_MAIN + OFFSET_SIGN_LG, W_SIGN_LG, H_SIGN_LG, FG_COLOR, BG_COLOR );
   x += W_SIGN_LG;
   // digits
   uint8_t * d = (uint8_t*) (baseUnit == BASEUNIT_Z ? &zDigits : &digits);
@@ -881,46 +698,49 @@ ISR(INT6_vect) {
 }
 
 
+
+
 // the setup and loop
 
 void setup(void) {
+  Serial.begin(115200);  
+  // 
+  pinMode(BIT_8050_RNGc, INPUT);
+  pinMode(BIT_8050_RNGb, INPUT);
+  pinMode(BIT_8050_RNGa, INPUT);
+  pinMode(BIT_8050_BT, INPUT);
 
-  // disable ADC (to reduce power)
-  ADCSRA = 0;
+  // func 
+  pinMode(BIT_8050_Fb, INPUT);
+  pinMode(BIT_8050_Fd, INPUT);
+  pinMode(BIT_8050_Fa, INPUT);
+  pinMode(BIT_8050_Fc, INPUT);
 
-  // make sure pull-ups are not disabled
-  clear_bit(MCUCR,PUD);
+  // 8050A strobe lines
+  pinMode(BIT_ST0, INPUT);
+  pinMode(BIT_ST1, INPUT);
+  pinMode(BIT_ST2, INPUT);
+  pinMode(BIT_ST3, INPUT);
+  pinMode(BIT_ST4, INPUT);
 
-  // initialize pins
+  // 8050A scancode lines
+  pinMode(BIT_HV, INPUT);
+  pinMode(BIT_DP, INPUT);
+  pinMode(BIT_Z, INPUT);
+  pinMode(BIT_Y, INPUT);
+  pinMode(BIT_X, INPUT);
+  pinMode(BIT_W, INPUT);
 
-//   set_bit(DDRB,PB0); // set SS (PB0) as output (also done in SPI.begin())
-//   clear_bit(PORTB,PB0); // set SS (PB0) low
-  
-  // scancodes
-  DDRF = B00000000; // set all as inputs
-//   set_bit(PORTF,PORTF1); // pull-up on dp
-
-  // frng
-  DDRB &= B00001111; // set PB4-7 as inputs
-  DDRD &= B00001111; // set PD4-7 as inputs
-//   set_bit(PORTD,PORTD7); // pull-up on bt
-  
-  // strobes
-  DDRD &= B11110000; // set INT.0-3 (PD0-3) as inputs
-  clear_bit(DDRE,DDE6); // set INT.6 (PE6) as input
-//   set_bit(PORTE,PORTE6); // pull-up on PE6
-  EICRA = B10101010; // set INT.0-3 to FALLING
-  EICRB = B00100000; // set INT.6 to FALLING
-  
-  // enable interrupts
-  EIMSK = B01001111; // enable INT.0-3,6
+  pinMode(TFT_SCLK, OUTPUT);
+  pinMode(TFT_MOSI, OUTPUT);
+  pinMode(TFT_DC, OUTPUT);
+  pinMode(TFT_RST, OUTPUT);
+  pinMode(TFT_CS, OUTPUT);
 
   // initialize display
-  tft.begin();
-  tft.setRotation( 3 );
-  // display splash screen
-  splash();
-  
+  tft.init();
+  tft.setRotation(3);
+  tft.fillScreen(TFT_BLACK);
 }
 
 void loop(void) {

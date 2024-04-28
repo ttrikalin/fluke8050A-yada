@@ -61,7 +61,7 @@ void display_clear_screen(void){
 }
 
 
-void print_character(unsigned int digit, enum u_fontsize fontsize, unsigned char __rom * const bitmap[]) {
+void print_character(unsigned int digit, enum u_fontsize fontsize, const unsigned char * bitmap) {
   unsigned int row = 0;                //  0 -> (character_width-1)
   unsigned int column_pixel = 0;       //  0 -> (character_height-1)
   unsigned int column_byte_bit = 0;    //  0 -> 7 which pixel in column_byte_index
@@ -86,7 +86,8 @@ void print_character(unsigned int digit, enum u_fontsize fontsize, unsigned char
     column_byte_bit = 0;
     column_pixel    = 0;
     while (column_pixel < char_height) {
-      work_column_byte  = (unsigned int) (*bitmap)[lookup++];
+      work_column_byte  = (unsigned int) (*(bitmap + lookup));
+      lookup ++; 
       column_byte_bit = 0;
       while ((column_byte_bit < 8) && (column_pixel < (char_height + 1))) {
         if (work_column_byte & 0x80) {
@@ -103,7 +104,20 @@ void print_character(unsigned int digit, enum u_fontsize fontsize, unsigned char
   } 
 }
 
-void print_blank_columns(unsigned int blank_columns, enum u_fontsize fontsize) {
+void print_regular_character(unsigned int digit) {
+  print_character(digit, REGULAR, &FONT_REGULAR_BITMAP[0]);
+}
+
+void print_small_character(unsigned int digit) {
+  print_character(digit, SMALL, &FONT_SMALL_BITMAP[0]);
+}
+
+void print_range_character(unsigned int digit) {
+  print_character(digit, RANGE, &FONT_RANGE_BITMAP[0]);
+}
+
+
+void print_blank_columns(unsigned int columns_in_pixels, enum u_fontsize fontsize) {
   unsigned int char_height;
   if(fontsize == REGULAR){
     char_height = FONT_REGULAR_CHARACTER_HEIGHT;
@@ -112,11 +126,19 @@ void print_blank_columns(unsigned int blank_columns, enum u_fontsize fontsize) {
   } else if(fontsize  == RANGE) {
     char_height = FONT_RANGE_CHARACTER_HEIGHT;
   }
-  unsigned int work_counter = blank_columns * (char_height + 1);
+  unsigned int work_counter = columns_in_pixels * (char_height + 1);
   while(work_counter>0) {
     display_write_data16(background_color);
     work_counter--;    
   }
+}
+
+void print_regular_blank_columns(unsigned int columns_in_pixels) {
+  print_blank_columns(columns_in_pixels, REGULAR);
+}
+
+void print_small_blank_columns(unsigned int columns_in_pixels) {
+  print_blank_columns(columns_in_pixels, SMALL);
 }
 
 void print_decimal_point(void) {

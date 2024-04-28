@@ -61,13 +61,16 @@ void display_write_command (unsigned int data);
 void display_write_data (unsigned int data);
 void display_write_data16 (unsigned int data);
 void display_clear_screen(void);
-void print_character(unsigned int digit, enum u_fontsize fontsize);
-void print_blank_columns(unsigned int blank_columns, enum u_fontsize fontsize);
+void print_character(unsigned int digit, enum u_fontsize fontsize, const unsigned char * bitmap);
+void print_regular_character(unsigned int digit);
+void print_small_character(unsigned int digit);
+void print_range_character(unsigned int digit);
+void print_blank_columns(unsigned int columns_in_pixels, enum u_fontsize fontsize);
+void print_regular_blank_columns(unsigned int columns_in_pixels);
+void print_small_blank_columns(unsigned int columns_in_pixels);
 void print_decimal_point(void); 
 void display_setup(void); 
 void delay_10ms_steps(unsigned int steps); 
-
-
 
 
 #endif	

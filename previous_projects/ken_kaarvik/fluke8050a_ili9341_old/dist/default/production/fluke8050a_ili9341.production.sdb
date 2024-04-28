@@ -1,0 +1,510 @@
+[p GLOBOPT AUTOSTATIC IEEE_FLT IEEE_DBL LFSROK EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F46K22 ]
+[d frameptr 4065 ]
+"7 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+"4 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/fleq.c
+[v ___fleq __fleq `(b  1 e 0 0 ]
+"62 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/float.c
+[v ___ftpack __ftpack `(f  1 e 4 0 ]
+"86 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/ftadd.c
+[v ___ftadd __ftadd `(f  1 e 4 0 ]
+"54 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 4 0 ]
+"62 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/ftmul.c
+[v ___ftmul __ftmul `(f  1 e 4 0 ]
+"19 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/ftsub.c
+[v ___ftsub __ftsub `(f  1 e 4 0 ]
+"7 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+"7 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+"10 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"245
+[v ___flsub __flsub `(d  1 e 4 0 ]
+"11 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+"8 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+"15 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+"15 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"91 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/Umul64.c
+[v ___omul __omul `(uo  1 e 8 0 ]
+"1255 /Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/previous_projects/ken_kaarvik/fluke8050a_ili9341/fluke8050a_ili9341_pic18f46k22.c
+[v _ili9341_write_command ili9341_write_command `(v  1 e 1 0 ]
+"1270
+[v _ili9341_write_data ili9341_write_data `(v  1 e 1 0 ]
+"1285
+[v _ili9341_write_data16 ili9341_write_data16 `(v  1 e 1 0 ]
+"1303
+[v _print_number print_number `(v  1 e 1 0 ]
+"1344
+[v _print_blank_columns print_blank_columns `(v  1 e 1 0 ]
+"1356
+[v _print_decimal_point print_decimal_point `(v  1 e 1 0 ]
+"1397
+[v _print_small_characters print_small_characters `(v  1 e 1 0 ]
+"1438
+[v _print_small_blank_columns print_small_blank_columns `(v  1 e 1 0 ]
+"1450
+[v _print_range_number print_range_number `(v  1 e 1 0 ]
+"1495
+[v _main main `(v  1 e 1 0 ]
+"52 /Applications/microchip/mplabx/v6.15/packs/Microchip/PIC18F-K_DFP/1.11.281/xc8/pic/include/proc/pic18f46k22.h
+[v _ANSELA ANSELA `VEuc  1 e 1 @3896 ]
+"97
+[v _ANSELB ANSELB `VEuc  1 e 1 @3897 ]
+"147
+[v _ANSELC ANSELC `VEuc  1 e 1 @3898 ]
+"198
+[v _ANSELD ANSELD `VEuc  1 e 1 @3899 ]
+"260
+[v _ANSELE ANSELE `VEuc  1 e 1 @3900 ]
+[s S278 . 1 `uc 1 RA0 1 0 :1:0 
+`uc 1 RA1 1 0 :1:1 
+`uc 1 RA2 1 0 :1:2 
+`uc 1 RA3 1 0 :1:3 
+`uc 1 RA4 1 0 :1:4 
+`uc 1 RA5 1 0 :1:5 
+`uc 1 RA6 1 0 :1:6 
+`uc 1 RA7 1 0 :1:7 
+]
+"6365
+[s S287 . 1 `uc 1 AN0 1 0 :1:0 
+`uc 1 AN1 1 0 :1:1 
+`uc 1 AN2 1 0 :1:2 
+`uc 1 AN3 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 AN4 1 0 :1:5 
+]
+[s S294 . 1 `uc 1 C12IN0M 1 0 :1:0 
+`uc 1 C12IN1M 1 0 :1:1 
+`uc 1 C2INP 1 0 :1:2 
+`uc 1 C1INP 1 0 :1:3 
+`uc 1 C1OUT 1 0 :1:4 
+`uc 1 C2OUT 1 0 :1:5 
+]
+[s S301 . 1 `uc 1 C12IN0N 1 0 :1:0 
+`uc 1 C12IN1N 1 0 :1:1 
+`uc 1 VREFM 1 0 :1:2 
+`uc 1 VREFP 1 0 :1:3 
+`uc 1 T0CKI 1 0 :1:4 
+`uc 1 SS 1 0 :1:5 
+]
+[s S308 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 NOT_SS 1 0 :1:5 
+]
+[s S311 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 VREFN 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 SRQ 1 0 :1:4 
+`uc 1 nSS 1 0 :1:5 
+]
+[s S317 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 CVREF 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 LVDIN 1 0 :1:5 
+]
+[s S322 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 DACOUT 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 HLVDIN 1 0 :1:5 
+]
+[s S327 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 SS1 1 0 :1:5 
+]
+[s S330 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 NOT_SS1 1 0 :1:5 
+]
+[s S333 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 nSS1 1 0 :1:5 
+]
+[s S336 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 SRNQ 1 0 :1:5 
+]
+[s S339 . 1 `uc 1 ULPWUIN 1 0 :1:0 
+`uc 1 . 1 0 :6:1 
+`uc 1 RJPU 1 0 :1:7 
+]
+[u S343 . 1 `S278 1 . 1 0 `S287 1 . 1 0 `S294 1 . 1 0 `S301 1 . 1 0 `S308 1 . 1 0 `S311 1 . 1 0 `S317 1 . 1 0 `S322 1 . 1 0 `S327 1 . 1 0 `S330 1 . 1 0 `S333 1 . 1 0 `S336 1 . 1 0 `S339 1 . 1 0 ]
+[v _PORTAbits PORTAbits `VES343  1 e 1 @3968 ]
+[s S423 . 1 `uc 1 RB0 1 0 :1:0 
+`uc 1 RB1 1 0 :1:1 
+`uc 1 RB2 1 0 :1:2 
+`uc 1 RB3 1 0 :1:3 
+`uc 1 RB4 1 0 :1:4 
+`uc 1 RB5 1 0 :1:5 
+`uc 1 RB6 1 0 :1:6 
+`uc 1 RB7 1 0 :1:7 
+]
+"6635
+[s S432 . 1 `uc 1 INT0 1 0 :1:0 
+`uc 1 INT1 1 0 :1:1 
+`uc 1 INT2 1 0 :1:2 
+`uc 1 CCP2 1 0 :1:3 
+`uc 1 KBI0 1 0 :1:4 
+`uc 1 KBI1 1 0 :1:5 
+`uc 1 KBI2 1 0 :1:6 
+`uc 1 KBI3 1 0 :1:7 
+]
+[s S441 . 1 `uc 1 AN12 1 0 :1:0 
+`uc 1 AN10 1 0 :1:1 
+`uc 1 AN8 1 0 :1:2 
+`uc 1 AN9 1 0 :1:3 
+`uc 1 AN11 1 0 :1:4 
+`uc 1 AN13 1 0 :1:5 
+`uc 1 PGC 1 0 :1:6 
+`uc 1 PGD 1 0 :1:7 
+]
+[s S450 . 1 `uc 1 FLT0 1 0 :1:0 
+`uc 1 C12IN3M 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 C12IN2M 1 0 :1:3 
+`uc 1 T5G 1 0 :1:4 
+`uc 1 T1G 1 0 :1:5 
+]
+[s S457 . 1 `uc 1 SRI 1 0 :1:0 
+`uc 1 C12IN3N 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 C12IN2N 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 CCP3 1 0 :1:5 
+]
+[s S464 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 CTED1 1 0 :1:2 
+`uc 1 CTED2 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 T3CKI 1 0 :1:5 
+]
+[s S470 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 P2A 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 P3A 1 0 :1:5 
+]
+[s S475 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 CCP2_PA2 1 0 :1:3 
+]
+[u S478 . 1 `S423 1 . 1 0 `S432 1 . 1 0 `S441 1 . 1 0 `S450 1 . 1 0 `S457 1 . 1 0 `S464 1 . 1 0 `S470 1 . 1 0 `S475 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES478  1 e 1 @3969 ]
+[s S131 . 1 `uc 1 RC0 1 0 :1:0 
+`uc 1 RC1 1 0 :1:1 
+`uc 1 RC2 1 0 :1:2 
+`uc 1 RC3 1 0 :1:3 
+`uc 1 RC4 1 0 :1:4 
+`uc 1 RC5 1 0 :1:5 
+`uc 1 RC6 1 0 :1:6 
+`uc 1 RC7 1 0 :1:7 
+]
+"6907
+[s S140 . 1 `uc 1 T1OSO 1 0 :1:0 
+`uc 1 T1OSI 1 0 :1:1 
+`uc 1 T5CKI 1 0 :1:2 
+`uc 1 SCK 1 0 :1:3 
+`uc 1 SDI 1 0 :1:4 
+`uc 1 SDO 1 0 :1:5 
+`uc 1 TX 1 0 :1:6 
+`uc 1 RX 1 0 :1:7 
+]
+[s S149 . 1 `uc 1 P2B 1 0 :1:0 
+`uc 1 P2A 1 0 :1:1 
+`uc 1 P1A 1 0 :1:2 
+`uc 1 SCL 1 0 :1:3 
+`uc 1 SDA 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 CK 1 0 :1:6 
+`uc 1 DT 1 0 :1:7 
+]
+[s S158 . 1 `uc 1 T1CKI 1 0 :1:0 
+`uc 1 CCP2 1 0 :1:1 
+`uc 1 CCP1 1 0 :1:2 
+`uc 1 SCK1 1 0 :1:3 
+`uc 1 SDI1 1 0 :1:4 
+`uc 1 SDO1 1 0 :1:5 
+`uc 1 TX1 1 0 :1:6 
+`uc 1 RX1 1 0 :1:7 
+]
+[s S167 . 1 `uc 1 T3CKI 1 0 :1:0 
+`uc 1 . 1 0 :1:1 
+`uc 1 CTPLS 1 0 :1:2 
+`uc 1 SCL1 1 0 :1:3 
+`uc 1 SDA1 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 CK1 1 0 :1:6 
+`uc 1 DT1 1 0 :1:7 
+]
+[s S176 . 1 `uc 1 T3G 1 0 :1:0 
+`uc 1 . 1 0 :1:1 
+`uc 1 AN14 1 0 :1:2 
+`uc 1 AN15 1 0 :1:3 
+`uc 1 AN16 1 0 :1:4 
+`uc 1 AN17 1 0 :1:5 
+`uc 1 AN18 1 0 :1:6 
+`uc 1 AN19 1 0 :1:7 
+]
+[s S185 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 PA2 1 0 :1:1 
+`uc 1 PA1 1 0 :1:2 
+]
+[u S189 . 1 `S131 1 . 1 0 `S140 1 . 1 0 `S149 1 . 1 0 `S158 1 . 1 0 `S167 1 . 1 0 `S176 1 . 1 0 `S185 1 . 1 0 ]
+[v _PORTCbits PORTCbits `VES189  1 e 1 @3970 ]
+[s S24 . 1 `uc 1 RD0 1 0 :1:0 
+`uc 1 RD1 1 0 :1:1 
+`uc 1 RD2 1 0 :1:2 
+`uc 1 RD3 1 0 :1:3 
+`uc 1 RD4 1 0 :1:4 
+`uc 1 RD5 1 0 :1:5 
+`uc 1 RD6 1 0 :1:6 
+`uc 1 RD7 1 0 :1:7 
+]
+"7205
+[s S33 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 P2B 1 0 :1:2 
+`uc 1 P2C 1 0 :1:3 
+`uc 1 P2D 1 0 :1:4 
+`uc 1 P1B 1 0 :1:5 
+`uc 1 P1C 1 0 :1:6 
+`uc 1 P1D 1 0 :1:7 
+]
+[s S41 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 CCP4 1 0 :1:1 
+`uc 1 . 1 0 :4:2 
+`uc 1 TX2 1 0 :1:6 
+`uc 1 RX2 1 0 :1:7 
+]
+[s S47 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 NOT_SS2 1 0 :1:3 
+]
+[s S50 . 1 `uc 1 SCK2 1 0 :1:0 
+`uc 1 SDI2 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 nSS2 1 0 :1:3 
+`uc 1 SDO2 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 CK2 1 0 :1:6 
+`uc 1 DT2 1 0 :1:7 
+]
+[s S59 . 1 `uc 1 SCL2 1 0 :1:0 
+`uc 1 SDA2 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 SS2 1 0 :1:3 
+]
+[s S64 . 1 `uc 1 AN20 1 0 :1:0 
+`uc 1 AN21 1 0 :1:1 
+`uc 1 AN22 1 0 :1:2 
+`uc 1 AN23 1 0 :1:3 
+`uc 1 AN24 1 0 :1:4 
+`uc 1 AN25 1 0 :1:5 
+`uc 1 AN26 1 0 :1:6 
+`uc 1 AN27 1 0 :1:7 
+]
+[u S73 . 1 `S24 1 . 1 0 `S33 1 . 1 0 `S41 1 . 1 0 `S47 1 . 1 0 `S50 1 . 1 0 `S59 1 . 1 0 `S64 1 . 1 0 ]
+[v _PORTDbits PORTDbits `VES73  1 e 1 @3971 ]
+[s S543 . 1 `uc 1 RE0 1 0 :1:0 
+`uc 1 RE1 1 0 :1:1 
+`uc 1 RE2 1 0 :1:2 
+`uc 1 RE3 1 0 :1:3 
+]
+"7435
+[s S548 . 1 `uc 1 AN5 1 0 :1:0 
+`uc 1 AN6 1 0 :1:1 
+`uc 1 AN7 1 0 :1:2 
+`uc 1 MCLR 1 0 :1:3 
+]
+[s S553 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 NOT_MCLR 1 0 :1:3 
+]
+[s S556 . 1 `uc 1 P3A 1 0 :1:0 
+`uc 1 P3B 1 0 :1:1 
+`uc 1 CCP5 1 0 :1:2 
+`uc 1 nMCLR 1 0 :1:3 
+]
+[s S561 . 1 `uc 1 CCP3 1 0 :1:0 
+`uc 1 . 1 0 :2:1 
+`uc 1 VPP 1 0 :1:3 
+]
+[s S565 . 1 `uc 1 PD2 1 0 :1:0 
+`uc 1 PC2 1 0 :1:1 
+`uc 1 CCP10 1 0 :1:2 
+`uc 1 CCP9E 1 0 :1:3 
+]
+[s S570 . 1 `uc 1 RDE 1 0 :1:0 
+`uc 1 WRE 1 0 :1:1 
+`uc 1 CS 1 0 :1:2 
+`uc 1 PC3E 1 0 :1:3 
+]
+[s S575 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 PB2 1 0 :1:2 
+]
+[u S578 . 1 `S543 1 . 1 0 `S548 1 . 1 0 `S553 1 . 1 0 `S556 1 . 1 0 `S561 1 . 1 0 `S565 1 . 1 0 `S570 1 . 1 0 `S575 1 . 1 0 ]
+[v _PORTEbits PORTEbits `VES578  1 e 1 @3972 ]
+"8060
+[v _TRISA TRISA `VEuc  1 e 1 @3986 ]
+"8282
+[v _TRISB TRISB `VEuc  1 e 1 @3987 ]
+"8504
+[v _TRISC TRISC `VEuc  1 e 1 @3988 ]
+"8726
+[v _TRISD TRISD `VEuc  1 e 1 @3989 ]
+"8948
+[v _TRISE TRISE `VEuc  1 e 1 @3990 ]
+"9064
+[v _OSCTUNE OSCTUNE `VEuc  1 e 1 @3995 ]
+"14137
+[v _SSP1CON1 SSP1CON1 `VEuc  1 e 1 @4038 ]
+"14375
+[v _SSP1STAT SSP1STAT `VEuc  1 e 1 @4039 ]
+"15264
+[v _SSPBUF SSPBUF `VEuc  1 e 1 @4041 ]
+"16046
+[v _OSCCON OSCCON `VEuc  1 e 1 @4051 ]
+"19866
+[v _SSPIF SSPIF `VEb  1 e 0 @31987 ]
+"120 /Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/previous_projects/ken_kaarvik/fluke8050a_ili9341/fluke8050a_ili9341_pic18f46k22.c
+[v _counter counter `ul  1 e 4 0 ]
+"122
+[v _number_display_x number_display_x `ui  1 e 2 0 ]
+"123
+[v _number_display_foreground number_display_foreground `ui  1 e 2 0 ]
+[v _number_display_background number_display_background `ui  1 e 2 0 ]
+"126
+[v _ten_thousands ten_thousands `ui  1 e 2 0 ]
+[v _thousands thousands `ui  1 e 2 0 ]
+[v _hundreds hundreds `ui  1 e 2 0 ]
+[v _tens tens `ui  1 e 2 0 ]
+[v _ones ones `ui  1 e 2 0 ]
+"127
+[v _range range `ui  1 e 2 0 ]
+[v _range_old range_old `ui  1 e 2 0 ]
+[v _function function `ui  1 e 2 0 ]
+[v _hv hv `ui  1 e 2 0 ]
+[v _db_scanning_mode db_scanning_mode `ui  1 e 2 0 ]
+"131
+[v _fontBitmaps fontBitmaps `C[4860]uc  1 e 4860 0 ]
+"745
+[v _fontDecimalPoint fontDecimalPoint `C[153]uc  1 e 153 0 ]
+"770
+[v _fontSmallBitmaps fontSmallBitmaps `C[1365]uc  1 e 1365 0 ]
+"1077
+[v _fontRange fontRange `C[384]uc  1 e 384 0 ]
+"1495
+[v _main main `(v  1 e 1 0 ]
+{
+"2130
+} 0
+"1397
+[v _print_small_characters print_small_characters `(v  1 e 1 0 ]
+{
+"1400
+[v print_small_characters@column_pixel column_pixel `ui  1 a 2 16 ]
+"1402
+[v print_small_characters@column_byte_bit column_byte_bit `ui  1 a 2 14 ]
+"1403
+[v print_small_characters@work_column_byte work_column_byte `ui  1 a 2 12 ]
+"1405
+[v print_small_characters@lookup lookup `ui  1 a 2 10 ]
+"1399
+[v print_small_characters@row row `ui  1 a 2 8 ]
+"1397
+[v print_small_characters@digit digit `ui  1 p 2 6 ]
+"1436
+} 0
+"1438
+[v _print_small_blank_columns print_small_blank_columns `(v  1 e 1 0 ]
+{
+"1440
+[v print_small_blank_columns@work_counter work_counter `ui  1 a 2 8 ]
+"1438
+[v print_small_blank_columns@blank_columns blank_columns `ui  1 p 2 6 ]
+"1448
+} 0
+"1450
+[v _print_range_number print_range_number `(v  1 e 1 0 ]
+{
+"1453
+[v print_range_number@column_pixel column_pixel `ui  1 a 2 18 ]
+"1455
+[v print_range_number@column_byte_bit column_byte_bit `ui  1 a 2 16 ]
+"1456
+[v print_range_number@work_column_byte work_column_byte `ui  1 a 2 14 ]
+"1458
+[v print_range_number@lookup lookup `ui  1 a 2 12 ]
+"1452
+[v print_range_number@row row `ui  1 a 2 10 ]
+"1450
+[v print_range_number@digit digit `ui  1 p 2 6 ]
+"1489
+} 0
+"1303
+[v _print_number print_number `(v  1 e 1 0 ]
+{
+"1306
+[v print_number@column_pixel column_pixel `ui  1 a 2 16 ]
+"1308
+[v print_number@column_byte_bit column_byte_bit `ui  1 a 2 14 ]
+"1309
+[v print_number@work_column_byte work_column_byte `ui  1 a 2 12 ]
+"1311
+[v print_number@lookup lookup `ui  1 a 2 10 ]
+"1305
+[v print_number@row row `ui  1 a 2 8 ]
+"1303
+[v print_number@digit digit `ui  1 p 2 6 ]
+"1342
+} 0
+"1356
+[v _print_decimal_point print_decimal_point `(v  1 e 1 0 ]
+{
+"1359
+[v print_decimal_point@column_pixel column_pixel `ui  1 a 2 10 ]
+"1361
+[v print_decimal_point@column_byte_bit column_byte_bit `ui  1 a 2 8 ]
+"1362
+[v print_decimal_point@work_column_byte work_column_byte `ui  1 a 2 6 ]
+"1364
+[v print_decimal_point@lookup lookup `ui  1 a 2 4 ]
+"1358
+[v print_decimal_point@row row `ui  1 a 2 2 ]
+"1395
+} 0
+"1344
+[v _print_blank_columns print_blank_columns `(v  1 e 1 0 ]
+{
+"1346
+[v print_blank_columns@work_counter work_counter `ui  1 a 2 8 ]
+"1344
+[v print_blank_columns@blank_columns blank_columns `ui  1 p 2 6 ]
+"1354
+} 0
+"1285
+[v _ili9341_write_data16 ili9341_write_data16 `(v  1 e 1 0 ]
+{
+[v ili9341_write_data16@data data `ui  1 p 2 0 ]
+"1300
+} 0
+"15 /Applications/microchip/xc8/v2.45/pic/sources/c99/common/Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+{
+"17
+[v ___wmul@product product `ui  1 a 2 4 ]
+"15
+[v ___wmul@multiplier multiplier `ui  1 p 2 0 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 2 ]
+"53
+} 0
+"1270 /Users/tom/Library/CloudStorage/Dropbox/_home/Projects/fluke8050A-yada/previous_projects/ken_kaarvik/fluke8050a_ili9341/fluke8050a_ili9341_pic18f46k22.c
+[v _ili9341_write_data ili9341_write_data `(v  1 e 1 0 ]
+{
+[v ili9341_write_data@data data `ui  1 p 2 0 ]
+"1281
+} 0
+"1255
+[v _ili9341_write_command ili9341_write_command `(v  1 e 1 0 ]
+{
+[v ili9341_write_command@data data `ui  1 p 2 0 ]
+"1265
+} 0

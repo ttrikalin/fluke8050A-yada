@@ -63,3 +63,5 @@ dkms.conf
 /src/8050A_TFT.X/dist/
 /src/8050A_TFT.X/build/
 /fluke8050a.X/dist/
+/src/ken_new.X/dist/
+/src/ken_new.X/build/

@@ -18,10 +18,10 @@ enum u_fontsize {REGULAR, SMALL, RANGE} fontsize;
 #define FONT_RANGE_BLANK_WIDTH            2
 
 
-#define FONT_REGULAR               fontBitmaps
-#define FONT_SMALL                 fontSmallBitmaps
-#define FONT_REGULAR_DECIMAL_POINT fontDecimalPoint
-#define FONT_RANGE                 fontRange
+#define FONT_REGULAR_BITMAP               fontBitmaps
+#define FONT_SMALL_BITMAP                 fontSmallBitmaps
+#define FONT_REGULAR_DECIMAL_POINT_BITMAP fontDecimalPoint
+#define FONT_RANGE_BITMAP                 fontRange
 
 //  font created using dot factory
 //  http://www.pavius.net/2009/07/the-dot-factory-an-lcd-font-and-image-generator/
