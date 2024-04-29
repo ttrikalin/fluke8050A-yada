@@ -7,6 +7,7 @@ void display_monitor_initialize(void) {
   display_monitor.active_text_color = TFT_WHITE;
 
   display_monitor.relative_reference = 0.0;
+  display_monitor.digits_str = "-.0000";
   display_monitor.impedance_reference_str = fluke8050a_HARDWARE_IMPEDANCE_REFERENCE_STR;
 
   display_monitor.non_high_voltage_theme.splash_background_color      = TFT_DARKGREEN;
@@ -115,8 +116,8 @@ void use_colors(unsigned int background_color,
   if(display_monitor.active_text_color != text_color) {
     display_monitor.active_text_color = text_color; 
     tft.setTextColor(display_monitor.active_text_color, 
-                   display_monitor.active_background_color, 
-                   true);  
+                     display_monitor.active_background_color, 
+                     true);  
   }
 }
 
@@ -166,36 +167,78 @@ void show_splash_screen(void) {
   tft.loadFont(AA_FONT_MEDIUM);
   tft.setCursor(50, 50);
   tft.println("SPLASH!");
-  //tft.unloadFont();
+  tft.unloadFont();
 
   delay(TFT_SPLASH_SCREEN_DURATION);   
   tft.fillScreen(display_monitor.active_background_color);
 } 
 
 void format_digits(void){
+  if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_ZERO){
+    display_monitor.digits_str = "." + digits_monitor.st0_value0; 
+  } 
+  else {
+    display_monitor.digits_str = digits_monitor.st0_value0;   
+  }
+  if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_ONE){
+    display_monitor.digits_str += "."; 
+  }
+  display_monitor.digits_str += digits_monitor.st1_value;
+  if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_TWO){
+    display_monitor.digits_str += "."; 
+  }
+  display_monitor.digits_str += digits_monitor.st2_value;
+  if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_THREE){
+    display_monitor.digits_str += "."; 
+  }
+  display_monitor.digits_str += digits_monitor.st3_value;
 
+  if (contents_monitor.sign == POSITIVE_SIGN) 
+  {
+    display_monitor.digits_str = "+" + display_monitor.digits_str;
+  } 
+  else if (contents_monitor.sign == NEGATIVE_SIGN) 
+  {
+    display_monitor.digits_str = "-" + display_monitor.digits_str;
+  }
+  else {
+    display_monitor.digits_str = " " + display_monitor.digits_str;
+  }
 }
 
 void show_high_voltage(void){
-
+  update_colors();
+  tft.setCursor(0, 0);
+  tft.println("HV!");
 }
 
 void show_digits(void){
   update_colors();
-  tft.setCursor(50, 90);
-  tft.println("DIGITS!");
+  tft.loadFont(AA_FONT_MEDIUM);
+  tft.setCursor(50, 50);
+  format_digits();
+  tft.println(display_monitor.digits_str);
 }
 void show_reference_value(void){
-
+  update_colors();
+  tft.loadFont(AA_FONT_SMALL);
+  tft.setCursor(125, 100);
+  tft.println("9999");
 } 
 
 void show_unit(void) {
-
+  update_colors();
+  tft.loadFont(AA_FONT_MEDIUM);
+  tft.setCursor(170, 50);
+  tft.println("U");
 }
 
 
 void show_battery(void) {
-
+  update_colors();
+  tft.loadFont(AA_FONT_SMALL);
+  tft.setCursor(125, 150);
+  tft.println("BT");
 } 
 
 void show_diode(void){

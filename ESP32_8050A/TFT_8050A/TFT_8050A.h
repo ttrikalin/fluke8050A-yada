@@ -325,6 +325,7 @@ typedef struct {
   unsigned int active_background_color; 
   unsigned int active_text_color; 
 
+  String digits_str; 
   float relative_reference;
   String impedance_reference_str;  
 } displayMonitorData; 
@@ -340,8 +341,6 @@ void show_digits(void);
 void show_reference_value(void); 
 void show_unit(void); 
 void show_high_voltage(void);
-//void use_high_voltage_theme(void); 
-//void use_non_high_voltage_theme(void); 
 void show_battery(void); 
 void show_diode(void); 
 void show_impedances(void); 
