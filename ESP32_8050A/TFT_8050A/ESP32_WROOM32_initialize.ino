@@ -1,7 +1,6 @@
 #include "TFT_8050A.h"
 
-
-void initialize_ESP32_WROOM32(void) {
+void ESP32_WROOM32_initialize(void) {
   Serial.begin(115200);  
   // 
   pinMode(fluke8050a_RNG_C, INPUT);
@@ -17,15 +16,15 @@ void initialize_ESP32_WROOM32(void) {
 
   // 8050A strobe lines, set as interrupts 
   pinMode(fluke8050a_ST0, INPUT);
-  attachInterrupt(fluke8050a_ST0, strobe0_ISR, FALLING)
+  attachInterrupt(fluke8050a_ST0, strobe0_ISR, FALLING);
   pinMode(fluke8050a_ST1, INPUT);
-  attachInterrupt(fluke8050a_ST1, strobe1_ISR, FALLING)
+  attachInterrupt(fluke8050a_ST1, strobe1_ISR, FALLING);
   pinMode(fluke8050a_ST2, INPUT);
-  attachInterrupt(fluke8050a_ST2, strobe2_ISR, FALLING)
+  attachInterrupt(fluke8050a_ST2, strobe2_ISR, FALLING);
   pinMode(fluke8050a_ST3, INPUT);
-  attachInterrupt(fluke8050a_ST3, strobe3_ISR, FALLING)
+  attachInterrupt(fluke8050a_ST3, strobe3_ISR, FALLING);
   pinMode(fluke8050a_ST4, INPUT);
-  attachInterrupt(fluke8050a_ST4, strobe4_ISR, FALLING)
+  attachInterrupt(fluke8050a_ST4, strobe4_ISR, FALLING);
 
   // 8050A scancode lines
   pinMode(fluke8050a_HV, INPUT);
@@ -41,11 +40,4 @@ void initialize_ESP32_WROOM32(void) {
   // pinMode(TFT_DC, OUTPUT);
   // pinMode(TFT_RST, OUTPUT);
   // pinMode(TFT_CS, OUTPUT);
-}
-
-
-void initialize_display(void) {
-  tft.init();
-  tft.setRotation(3);
-  tft.fillScreen(TFT_BLACK);
 }
