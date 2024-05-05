@@ -1,4 +1,18 @@
 # fluke8050A-yada
+
+
+
+
+Install https://github.com/takkaO/OpenFontRender.git -- clone in the library folder.  
+
+
+
+
+
+
+
+
+
 Fluke 8050A - Yet Another Display (A)Upgrade
 
 PIC: A minor modification of the approach used in:

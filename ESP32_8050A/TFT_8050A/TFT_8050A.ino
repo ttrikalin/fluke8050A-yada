@@ -8,14 +8,8 @@ Based in part on work by Michael Damkier, Hamburg, Germany (michael@vondervottei
 provided the decoding of the strobe lines and the function and range truth tables for the Fluke 8050A
 */
 
-#include "NotoSansBold15.h"
-#include "NotoSansBold36.h"
-
 
 #include "TFT_8050A.h"
-
-
-
 
 TFT_eSPI tft = TFT_eSPI();   
 functionMonitorData function_monitor; 

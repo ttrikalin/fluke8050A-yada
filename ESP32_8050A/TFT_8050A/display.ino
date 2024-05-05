@@ -62,9 +62,7 @@ void display_monitor_tasks(void) {
 
     case DISPLAY_MONITOR_STATE_SHOW_HIGH_VOLTAGE:
       display_monitor.state = DISPLAY_MONITOR_STATE_SHOW_VALUE;
-      if(contents_monitor.high_voltage) {
-        show_high_voltage();         
-      } 
+      show_high_voltage();         
       break;
 
     case DISPLAY_MONITOR_STATE_SHOW_VALUE:
@@ -164,12 +162,60 @@ void update_colors(void) {
 
 void show_splash_screen(void) {
   update_colors();
+  unsigned char x = (TFT_WIDTH - W_SPLASH_FLUKE)>>1; 
+  unsigned char y = (TFT_HEIGHT - H_SPLASH_FLUKE)>>2;
+
+
+  // First Splash Screen 
+
+  tft.drawBitmap(x, y, splashFluke, W_SPLASH_FLUKE, H_SPLASH_FLUKE, display_monitor.active_text_color, display_monitor.active_background_color);
+  
   tft.loadFont(AA_FONT_MEDIUM);
-  tft.setCursor(50, 50);
-  tft.println("SPLASH!");
-  tft.unloadFont();
+
+  tft.setCursor(
+    (TFT_WIDTH - tft.textWidth(firmware_information.hardware))>>1, 
+    y += H_SPLASH_FLUKE + tft.fontHeight() +3
+  );
+  tft.println(firmware_information.hardware);
+  
 
   delay(TFT_SPLASH_SCREEN_DURATION);   
+  tft.fillScreen(display_monitor.active_background_color);
+
+
+  // Second Splash Screen 
+  y = ((TFT_HEIGHT - H_SPLASH_FLUKE)>>2) + 10;
+  tft.setCursor(
+    (TFT_WIDTH - tft.textWidth(firmware_information.author))>>1, 
+    y
+  );
+  tft.println(firmware_information.author);
+  y += tft.fontHeight() + 10; 
+
+  tft.unloadFont();
+  tft.loadFont(AA_FONT_SMALL);
+  
+  tft.setCursor(
+    (TFT_WIDTH - tft.textWidth(firmware_information.version))>>1, 
+    y
+  );
+  tft.println(firmware_information.version);
+
+
+  tft.setCursor(
+    (TFT_WIDTH - tft.textWidth(firmware_information.github1))>>1, 
+    y += tft.fontHeight() + 5 
+  );
+  tft.println(firmware_information.github1);
+  tft.setCursor(
+    (TFT_WIDTH - tft.textWidth(firmware_information.github2))>>1, 
+    y += tft.fontHeight() 
+  );
+  tft.println(firmware_information.github2);
+
+
+  tft.unloadFont();
+  delay(TFT_SPLASH_SCREEN_DURATION<<1);   
   tft.fillScreen(display_monitor.active_background_color);
 } 
 
@@ -209,14 +255,23 @@ void format_digits(void){
 void show_high_voltage(void){
   update_colors();
   tft.setCursor(0, 0);
-  tft.println("HV!");
+  tft.setTextPadding(tft.textWidth("HV!"));
+  if(contents_monitor.high_voltage) {
+    tft.println("HV!");
+  } else {
+    tft.println("");
+  }
 }
 
 void show_digits(void){
   update_colors();
   tft.loadFont(AA_FONT_MEDIUM);
-  tft.setCursor(50, 50);
   format_digits();
+  unsigned char x = (TFT_WIDTH - tft.textWidth(display_monitor.digits_str))>>2;
+  unsigned char y = tft.fontHeight();
+
+  tft.setCursor(x, y);
+  
   tft.println(display_monitor.digits_str);
 }
 void show_reference_value(void){
@@ -237,12 +292,31 @@ void show_unit(void) {
 void show_battery(void) {
   update_colors();
   tft.loadFont(AA_FONT_SMALL);
-  tft.setCursor(125, 150);
-  tft.println("BT");
+
+  
+  int w = tft.textWidth("BAT LOW"); 
+  int h = tft.fontHeight();
+  int y = 0;
+  int x = TFT_WIDTH - w;
+  
+  //tft.drawRect(x, y, w, h, display_monitor.active_background_color);
+  tft.setTextPadding(w+10);
+  tft.setCursor(x, y);
+  if(contents_monitor.battery == NORMAL_BATTERY)
+  {
+    tft.println("BAT OK");
+  } 
+  else if (contents_monitor.battery == LOW_BATTERY) 
+  {
+    tft.println("BAT LOW");
+  }
 } 
 
 void show_diode(void){
-
+  update_colors();
+  tft.loadFont(AA_FONT_SMALL);
+  tft.setCursor(125, 150);
+  tft.println("D");
 }
 
 void show_impedances(void){
