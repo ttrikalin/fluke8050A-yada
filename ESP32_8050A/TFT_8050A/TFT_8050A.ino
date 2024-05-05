@@ -12,11 +12,17 @@ provided the decoding of the strobe lines and the function and range truth table
 #include "TFT_8050A.h"
 
 TFT_eSPI tft = TFT_eSPI();   
+
+TFT_eSprite img = TFT_eSprite(&tft);
+
 functionMonitorData function_monitor; 
 rangeMonitorData range_monitor; 
 digitsMonitorData digits_monitor; 
 contentsMonitorData contents_monitor; 
 displayMonitorData display_monitor; 
+
+
+
 
 
 // the setup and loop

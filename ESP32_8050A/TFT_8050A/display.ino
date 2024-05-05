@@ -92,6 +92,7 @@ void display_monitor_tasks(void) {
       if (contents_monitor.diode_style != NO_DIODE) {
         show_diode(); 
       }
+      show_diode(); 
       break;
 
     case DISPLAY_MONITOR_STATE_SHOW_IMPEDANCES:
@@ -219,104 +220,147 @@ void show_splash_screen(void) {
   tft.fillScreen(display_monitor.active_background_color);
 } 
 
-void format_digits(void){
-  if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_ZERO){
-    display_monitor.digits_str = "." + digits_monitor.st0_value0; 
-  } 
-  else {
-    display_monitor.digits_str = digits_monitor.st0_value0;   
-  }
-  if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_ONE){
-    display_monitor.digits_str += "."; 
-  }
-  display_monitor.digits_str += digits_monitor.st1_value;
-  if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_TWO){
-    display_monitor.digits_str += "."; 
-  }
-  display_monitor.digits_str += digits_monitor.st2_value;
-  if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_THREE){
-    display_monitor.digits_str += "."; 
-  }
-  display_monitor.digits_str += digits_monitor.st3_value;
 
-  if (contents_monitor.sign == POSITIVE_SIGN) 
-  {
-    display_monitor.digits_str = "+" + display_monitor.digits_str;
-  } 
-  else if (contents_monitor.sign == NEGATIVE_SIGN) 
-  {
-    display_monitor.digits_str = "-" + display_monitor.digits_str;
+void draw_large_sign(signs sign, unsigned char &x, unsigned char &y) {
+  if(sign != NO_SIGN) {
+    img.drawBitmap(
+      x, 
+      y + OFFSET_SIGN_LG, 
+      symbolSign_lg[contents_monitor.sign], 
+      W_SIGN_LG, 
+      H_SIGN_LG, 
+      display_monitor.active_text_color, 
+      TFT_TRANSPARENT
+      );  
   }
-  else {
-    display_monitor.digits_str = " " + display_monitor.digits_str;
-  }
+  x += W_SIGN_LG;
 }
+
+
+void draw_large_decimal_point(unsigned char &x, unsigned char &y){
+  img.drawBitmap(
+    x, 
+    y, 
+    &dp_lg[0], 
+    W_DP_LG, 
+    H_DP_LG, 
+    display_monitor.active_text_color, 
+    TFT_TRANSPARENT
+  );
+  x += W_DP_LG;
+}
+
+void draw_large_digit(unsigned char d, unsigned char &x, unsigned char &y){
+  img.drawBitmap(
+    x, 
+    y, 
+    digit_lg[d], 
+    W_DIGIT_LG, 
+    H_DIGIT_LG, 
+    display_monitor.active_text_color, 
+    TFT_TRANSPARENT
+  );
+  x += W_DIGIT_LG;
+}
+
+
+void draw_low_battery(unsigned char &x, unsigned char &y){
+  tft.drawBitmap(
+    x, 
+    y, 
+    &symbolLoBatt[0], 
+    W_LOBATT, 
+    H_LOBATT, 
+    TFT_RED, //display_monitor.active_text_color, 
+    display_monitor.active_background_color
+  );
+  x += W_LOBATT;
+}
+
+void format_large_digits(void){
+  img.setColorDepth(8);
+  img.createSprite(W_IMG_MAIN, H_IMG_MAIN);
+
+  img.fillSprite(TFT_TRANSPARENT);
+
+  unsigned char x = 0;
+  unsigned char y = 0;
+
+  draw_large_sign(contents_monitor.sign, x, y);
+  if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_ZERO){
+    draw_large_decimal_point(x, y);
+  } 
+  draw_large_digit(digits_monitor.st0_value0, x, y);
+  if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_ONE){
+    draw_large_decimal_point(x, y);
+  } 
+  draw_large_digit(digits_monitor.st1_value+1, x, y);
+  if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_TWO){
+    draw_large_decimal_point(x, y);
+  } 
+  draw_large_digit(digits_monitor.st2_value+2, x, y);
+  if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_THREE){
+    draw_large_decimal_point(x, y);
+  } 
+  draw_large_digit(digits_monitor.st3_value+3, x, y);
+
+
+  img.pushSprite(X_DIGITS, Y_DIGITS, TFT_TRANSPARENT);
+  img.deleteSprite();
+}
+
+
+
 
 void show_high_voltage(void){
   update_colors();
-  tft.setCursor(0, 0);
+  tft.setCursor(X_HIGH_VOLTAGE, Y_HIGH_VOLTAGE);
   tft.setTextPadding(tft.textWidth("HV!"));
   if(contents_monitor.high_voltage) {
     tft.println("HV!");
   } else {
-    tft.println("");
+    tft.fillRect(X_HIGH_VOLTAGE, Y_HIGH_VOLTAGE, 25, 15, display_monitor.active_background_color);
   }
 }
 
 void show_digits(void){
   update_colors();
-  tft.loadFont(AA_FONT_MEDIUM);
-  format_digits();
-  unsigned char x = (TFT_WIDTH - tft.textWidth(display_monitor.digits_str))>>2;
-  unsigned char y = tft.fontHeight();
-
-  tft.setCursor(x, y);
-  
-  tft.println(display_monitor.digits_str);
+  tft.fillRect(X_DIGITS, Y_DIGITS, W_IMG_MAIN, H_IMG_MAIN, display_monitor.active_background_color);
+  format_large_digits();
 }
 void show_reference_value(void){
   update_colors();
   tft.loadFont(AA_FONT_SMALL);
-  tft.setCursor(125, 100);
+  tft.setCursor(X_REL, Y_REL);
   tft.println("9999");
 } 
 
 void show_unit(void) {
   update_colors();
   tft.loadFont(AA_FONT_MEDIUM);
-  tft.setCursor(170, 50);
+  tft.setCursor(X_UNIT, Y_UNIT);
   tft.println("U");
 }
 
 
 void show_battery(void) {
-  update_colors();
-  tft.loadFont(AA_FONT_SMALL);
-
-  
-  int w = tft.textWidth("BAT LOW"); 
-  int h = tft.fontHeight();
-  int y = 0;
-  int x = TFT_WIDTH - w;
-  
-  //tft.drawRect(x, y, w, h, display_monitor.active_background_color);
-  tft.setTextPadding(w+10);
-  tft.setCursor(x, y);
-  if(contents_monitor.battery == NORMAL_BATTERY)
+  if (contents_monitor.battery == LOW_BATTERY) 
   {
-    tft.println("BAT OK");
+    unsigned char y = Y_BATTERY;
+    unsigned char x = X_BATTERY;
+    draw_low_battery(x, y);
   } 
-  else if (contents_monitor.battery == LOW_BATTERY) 
+  else 
   {
-    tft.println("BAT LOW");
+    tft.fillRect(X_BATTERY, Y_BATTERY, W_LOBATT, H_LOBATT, display_monitor.active_background_color);
   }
 } 
 
 void show_diode(void){
   update_colors();
   tft.loadFont(AA_FONT_SMALL);
-  tft.setCursor(125, 150);
-  tft.println("D");
+  tft.setCursor(X_DIODE, Y_DIODE);
+  tft.println("DIODE");
 }
 
 void show_impedances(void){

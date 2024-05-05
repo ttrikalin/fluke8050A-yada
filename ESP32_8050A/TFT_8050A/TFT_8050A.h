@@ -253,9 +253,9 @@ typedef enum {
 } decimal_point_positions;
 
 typedef enum {
-  NO_SIGN       = 0, 
-  POSITIVE_SIGN = 1,
-  NEGATIVE_SIGN = 2
+  POSITIVE_SIGN = 0,
+  NEGATIVE_SIGN = 1,
+  NO_SIGN       = 2 
 } signs;
 
 typedef enum {
@@ -290,13 +290,46 @@ void infer_sign(void);
 void infer_decimal_point_position(void); 
 /***************** Contents monitor end ***********************/
 
-/***************** Display monitor start **********************/
 
-#define TFT_WIDTH 220
-#define TFT_HEIGHT 176
-#define TFT_SCREEN_ROTATION 3
+#define TFT_WIDTH           220
+#define TFT_HEIGHT          176
+#define TFT_SCREEN_ROTATION   3
 
 #define TFT_SPLASH_SCREEN_DURATION 2000
+
+
+// TOP ZONE 
+#define X_HIGH_VOLTAGE  0
+#define Y_HIGH_VOLTAGE  0
+
+#define X_DIODE  80
+#define Y_DIODE  0
+
+#define X_BATTERY (TFT_WIDTH-W_LOBATT)
+#define Y_BATTERY 0
+
+// SECOND ZONE 
+#define X_UNIT    10
+#define Y_UNIT    (H_LOBATT+3)
+
+// MAIN MEASUREMENT ZONE 
+
+#define X_DIGITS  5
+#define Y_DIGITS  70
+
+#define X_ACDC    (X_UNIT-8)
+#define Y_ACDC    (Y_DIGITS+OFFSET_MODE_LG)
+
+#define X_Z       166
+#define Y_Z       128
+
+#define X_REL     0
+#define Y_REL     160
+
+
+
+#define W_IMG_MAIN (W_SIGN_LG+W_DP_LG+4*W_DIGIT_LG)
+#define H_IMG_MAIN (H_SIGN_LG+H_DP_LG+4*H_DIGIT_LG)
 
 
 
@@ -369,7 +402,7 @@ typedef struct {
 
   String digits_str; 
   float relative_reference;
-  String impedance_reference_str;  
+  String impedance_reference_str;
 } displayMonitorData; 
 
 void display_monitor_initialize(void);
@@ -378,7 +411,13 @@ void use_colors(unsigned int background_color,
                 unsigned int text_color);
 void update_colors(void);
 void show_splash_screen(void); 
-void format_digits(void); 
+void format_large_digits(void); 
+//void format_main(void);
+
+void draw_large_sign(signs sign, unsigned char &x, unsigned char &y);
+void draw_large_decimal_point(unsigned char &x, unsigned char &y);
+void draw_large_digit(unsigned char d, unsigned char &x, unsigned char &y);
+void draw_low_battery(unsigned char &x, unsigned char &y);
 void show_digits(void); 
 void show_reference_value(void); 
 void show_unit(void); 
