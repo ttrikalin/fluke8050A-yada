@@ -13,7 +13,13 @@ provided the decoding of the strobe lines and the function and range truth table
 
 TFT_eSPI tft = TFT_eSPI();   
 
-TFT_eSprite img = TFT_eSprite(&tft);
+
+TFT_eSprite canvas = TFT_eSprite(&tft);
+TFT_eSprite high_voltage = TFT_eSprite(&tft);
+TFT_eSprite battery = TFT_eSprite(&tft);
+TFT_eSprite diode = TFT_eSprite(&tft);
+TFT_eSprite zone_one = TFT_eSprite(&tft);
+
 
 functionMonitorData function_monitor; 
 rangeMonitorData range_monitor; 

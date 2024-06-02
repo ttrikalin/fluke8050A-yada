@@ -14,20 +14,23 @@ const struct {
 
 #include "NotoSansBold36.h"
 #include "NotoSansBold15.h"
+#include "PTSansNarrow75.h"
 
 
 #define AA_FONT_SMALL  NotoSansBold15
 #define AA_FONT_MEDIUM NotoSansBold36
-#define AA_FONT_LARGE  NotoSansBold36
+#define AA_FONT_LARGE  PTSansNarrow36
 
-#include "digit_lg.h"
-#include "digit_sm.h"
-#include "digit_tiny.h"
+//#include "digit_lg.h"
+//#include "digit_sm.h"
+//#include "digit_tiny.h"
 #include "symbolMode.h"
 #include "symbolUnit.h"
 #include "symbolSign.h"
 #include "symbolSplash.h"
-
+#include "01_diode_27_19.h"
+#include "02_battery_41_16.h"
+#include "03_HV_42_36.h"
 
 
 #include <TFT_eSPI.h> 
@@ -302,23 +305,26 @@ void infer_decimal_point_position(void);
 #define X_HIGH_VOLTAGE  0
 #define Y_HIGH_VOLTAGE  0
 
-#define X_DIODE  80
+#define X_DIODE  ((TFT_WIDTH-DIODE_WIDTH)>>1)
 #define Y_DIODE  0
 
-#define X_BATTERY (TFT_WIDTH-W_LOBATT)
+#define X_BATTERY (TFT_WIDTH-BATTERY_WIDTH)
 #define Y_BATTERY 0
 
 // SECOND ZONE 
 #define X_UNIT    10
-#define Y_UNIT    (H_LOBATT+3)
+#define Y_UNIT    (BATTERY_HEIGHT+3)
 
 // MAIN MEASUREMENT ZONE 
 
-#define X_DIGITS  5
-#define Y_DIGITS  70
+#define X_ZONE_ONE  0
+#define Y_ZONE_ONE  44
+#define ZONE_ONE_HEIGHT  180
+#define ZONE_ONE_WIDTH  180
+
 
 #define X_ACDC    (X_UNIT-8)
-#define Y_ACDC    (Y_DIGITS+OFFSET_MODE_LG)
+#define Y_ACDC    (Y_ZONE_ONE+OFFSET_MODE_LG)
 
 #define X_Z       166
 #define Y_Z       128
@@ -417,7 +423,6 @@ void format_large_digits(void);
 void draw_large_sign(signs sign, unsigned char &x, unsigned char &y);
 void draw_large_decimal_point(unsigned char &x, unsigned char &y);
 void draw_large_digit(unsigned char d, unsigned char &x, unsigned char &y);
-void draw_low_battery(unsigned char &x, unsigned char &y);
 void show_digits(void); 
 void show_reference_value(void); 
 void show_unit(void); 
