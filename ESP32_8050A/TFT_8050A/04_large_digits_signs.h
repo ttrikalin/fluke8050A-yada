@@ -1,31 +1,19 @@
-#ifndef _FONT_PTSANSNARROW75_H
-#define _FONT_PTSANSNARROW75_H
+#ifndef _DIGIT_LARGE_H
+#define _DIGIT_LARGE_H
 
-/* The font vlw file can be converted to a byte array using:
-
-   https://tomeko.net/online_tools/file_to_hex.php?lang=en
-
-   Paste the byte array into a sketch tab and add two lines
-   at the start with a unique font name and }; at the end:
-
-                const uint8_t  fontName[] PROGMEM = {
-
-             Insert byte array here
-
-        };
-
-   See example below. Include the tab in the main sketch, e.g.:
-
-        #include "fontName.h"
-*/
-
-
+// digit width & height
 #define H_DIGIT_LG 49
 #define W_DIGIT_LG 29
+
+#define H_SIGN_LG 49
+#define W_SIGN_LG 29
 
 // dp width & height
 #define W_DP_LG 12
 #define H_DP_LG 49
+
+
+
 
 #define DIGIT_LG(n) (n<10?(uint8_t*)pgm_read_word(&(digit_lg[n])):0)
 
@@ -707,7 +695,7 @@ const uint8_t digit_lg_9[] PROGMEM =
 ,0xfe,0x7f,0xff,0xf8
 }; 
 
-const uint8_t * const digit_lg[10] PROGMEM = {
+const uint8_t *  digit_lg[10] PROGMEM = {
   digit_lg_0,
   digit_lg_1,
   digit_lg_2,
@@ -720,7 +708,7 @@ const uint8_t * const digit_lg[10] PROGMEM = {
   digit_lg_9
 };
 
-const uint8_t * const sign_lg[2] PROGMEM = {
+const uint8_t *  sign_lg[2] PROGMEM = {
   sign_lg_plus,
   sign_lg_minus
 };
@@ -780,4 +768,5 @@ const uint8_t dp_lg[] PROGMEM = {
 
 
 
-#endif 
+#endif // _DIGIT_LARGE_H
+

@@ -19,6 +19,7 @@ TFT_eSprite high_voltage = TFT_eSprite(&tft);
 TFT_eSprite battery = TFT_eSprite(&tft);
 TFT_eSprite diode = TFT_eSprite(&tft);
 TFT_eSprite zone_one = TFT_eSprite(&tft);
+TFT_eSprite zone_two = TFT_eSprite(&tft);
 
 
 functionMonitorData function_monitor; 
@@ -26,6 +27,17 @@ rangeMonitorData range_monitor;
 digitsMonitorData digits_monitor; 
 contentsMonitorData contents_monitor; 
 displayMonitorData display_monitor; 
+
+oneSymbol large_decimal_point; 
+oneSymbol small_decimal_point; 
+
+
+arrayOfSymbols large_sign; 
+arrayOfSymbols small_sign; 
+arrayOfSymbols large_digit; 
+arrayOfSymbols small_digit; 
+
+
 
 
 

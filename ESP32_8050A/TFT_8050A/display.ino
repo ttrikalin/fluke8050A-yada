@@ -40,6 +40,39 @@ void display_monitor_initialize(void) {
   display_monitor.high_voltage_theme.invalid_background_color     = TFT_RED;
   display_monitor.high_voltage_theme.invalid_text_color           = TFT_WHITE;
 
+  large_decimal_point.width = W_DP_LG; 
+  large_decimal_point.height = H_DP_LG; 
+  large_decimal_point.y_offset = 0; 
+  large_decimal_point.symbol = dp_lg; 
+
+  small_decimal_point.width = W_DP_SM; 
+  small_decimal_point.height = H_DP_SM; 
+  small_decimal_point.y_offset = 0; 
+  small_decimal_point.symbol = dp_sm; 
+
+  large_digit.width = W_DIGIT_LG;
+  large_digit.height = H_DIGIT_LG;
+  large_digit.y_offset = 0; 
+  large_digit.symbols = digit_lg; 
+
+  small_digit.width = W_DIGIT_SM;
+  small_digit.height = H_DIGIT_SM;
+  small_digit.y_offset = 0; 
+  small_digit.symbols = digit_sm; 
+
+  large_sign.width = W_SIGN_LG; 
+  large_sign.height = H_SIGN_LG; 
+  large_sign.y_offset = 0; 
+  large_sign.symbols = sign_lg; 
+
+  small_sign.width = W_SIGN_SM; 
+  small_sign.height = H_SIGN_SM; 
+  small_sign.y_offset = Y_OFFSET_SIGN_SM; 
+  small_sign.symbols = sign_sm; 
+
+
+
+
   tft.init();
   tft.setRotation(TFT_SCREEN_ROTATION);
   tft.fillScreen(display_monitor.active_background_color);
@@ -225,61 +258,74 @@ void show_splash_screen(void) {
 } 
 
 
-void draw_large_sign(signs sign, unsigned char &x, unsigned char &y) {
-  if(sign != NO_SIGN) {
-    zone_one.drawBitmap(x, y + OFFSET_SIGN_LG, sign_lg[contents_monitor.sign], 
-      W_SIGN_LG, H_SIGN_LG, 
-      display_monitor.active_background_color, 
-      display_monitor.active_text_color
-      );  
+
+
+
+// void draw_large_sign(signs sign, unsigned char &x, unsigned char &y) {
+//   if(sign != NO_SIGN) {
+//     zone_one.drawBitmap(x, y, sign_lg[contents_monitor.sign], 
+//       W_SIGN_LG, H_SIGN_LG, 
+//       display_monitor.active_background_color, 
+//       display_monitor.active_text_color
+//       );  
+//   }
+//   x += W_SIGN_LG;
+// }
+
+
+void draw_using_one_symbol(TFT_eSprite &sprite, oneSymbol &one_symbol, bool invert_colors, unsigned char &x, unsigned char &y){
+  unsigned int fg = display_monitor.active_text_color;
+  unsigned int bg = display_monitor.active_background_color;
+  if(invert_colors){
+    fg = display_monitor.active_background_color;
+    bg = display_monitor.active_text_color;
   }
-  x += W_SIGN_LG;
+  sprite.drawBitmap(x, y+one_symbol.y_offset, one_symbol.symbol, one_symbol.width, one_symbol.height, fg, bg);
+  x += one_symbol.width;
 }
 
-void draw_large_decimal_point(unsigned char &x, unsigned char &y){
-  zone_one.drawBitmap(x, y, &dp_lg[0], W_DP_LG, H_DP_LG, 
-    display_monitor.active_background_color, 
-    display_monitor.active_text_color
-  );
-  x += W_DP_LG;
-}
 
-void draw_large_digit(unsigned char d, unsigned char &x, unsigned char &y){
-  zone_one.drawBitmap(x, y, digit_lg[d], W_DIGIT_LG, H_DIGIT_LG,  
-    display_monitor.active_background_color,
-    display_monitor.active_text_color
-  );
-  x += W_DIGIT_LG;
+void draw_using_array_of_symbols(TFT_eSprite &sprite, arrayOfSymbols &array_of_symbols, unsigned char d, bool invert_colors, unsigned char &x, unsigned char &y){
+  unsigned int fg = display_monitor.active_text_color;
+  unsigned int bg = display_monitor.active_background_color;
+  if(invert_colors){
+    fg = display_monitor.active_background_color;
+    bg = display_monitor.active_text_color;
+  }
+  sprite.drawBitmap(x, y+array_of_symbols.y_offset, array_of_symbols.symbols [d], array_of_symbols.width, array_of_symbols.height, fg, bg);
+  x += array_of_symbols.width;
 }
 
 
 
 void format_large_digits(void){
-  //canvas.setColorDepth(8);
-  //canvas.createSprite(W_IMG_MAIN, H_IMG_MAIN);
 
-  //canvas.fillSprite(TFT_TRANSPARENT);
   unsigned char x = 0;
   unsigned char y = 0;
 
-  draw_large_sign(contents_monitor.sign, x, y);
+  if(contents_monitor.sign != NO_SIGN) {
+    draw_using_array_of_symbols(zone_one, large_sign, contents_monitor.sign, true, x, y);
+  } else {
+    x += large_sign.width;
+    //draw_using_array_of_symbols(zone_one, large_sign, 0, x, y);
+  }
+  //draw_large_sign(contents_monitor.sign, x, y);
   if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_ZERO){
-    draw_large_decimal_point(x, y);
+    draw_using_one_symbol(zone_one, large_decimal_point, true, x, y);
   } 
-  draw_large_digit(digits_monitor.st0_value0, x, y);
+  draw_using_array_of_symbols(zone_one, large_digit, digits_monitor.st0_value0, true, x, y);
   if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_ONE){
-    draw_large_decimal_point(x, y);
+    draw_using_one_symbol(zone_one, large_decimal_point, true, x, y);
   } 
-  draw_large_digit(digits_monitor.st1_value, x, y);
+  draw_using_array_of_symbols(zone_one, large_digit, digits_monitor.st1_value, true, x, y);
   if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_TWO){
-    draw_large_decimal_point(x, y);
+    draw_using_one_symbol(zone_one, large_decimal_point, true, x, y);
   } 
-  draw_large_digit(digits_monitor.st2_value, x, y);
+  draw_using_array_of_symbols(zone_one, large_digit, digits_monitor.st2_value, true, x, y);
   if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_THREE){
-    draw_large_decimal_point(x, y);
+    draw_using_one_symbol(zone_one, large_decimal_point, true, x, y);
   } 
-  draw_large_digit(digits_monitor.st3_value, x, y);
-  //canvas.pushSprite(X_DIGITS, Y_DIGITS, TFT_TRANSPARENT);
+  draw_using_array_of_symbols(zone_one, large_digit, digits_monitor.st3_value, true, x, y);
 }
 
 void show_zone_one(void){

@@ -14,7 +14,7 @@ const struct {
 
 #include "NotoSansBold36.h"
 #include "NotoSansBold15.h"
-#include "PTSansNarrow75.h"
+\
 
 
 #define AA_FONT_SMALL  NotoSansBold15
@@ -26,11 +26,13 @@ const struct {
 //#include "digit_tiny.h"
 #include "symbolMode.h"
 #include "symbolUnit.h"
-#include "symbolSign.h"
+//#include "symbolSign.h"
 #include "symbolSplash.h"
 #include "01_diode_27_19.h"
 #include "02_battery_41_16.h"
 #include "03_HV_42_36.h"
+#include "04_large_digits_signs.h"
+#include "05_small_digits_signs.h"
 
 
 #include <TFT_eSPI.h> 
@@ -411,6 +413,24 @@ typedef struct {
   String impedance_reference_str;
 } displayMonitorData; 
 
+
+typedef struct {
+  unsigned char width; 
+  unsigned char height;
+  unsigned char y_offset;
+  const uint8_t * symbol; 
+} oneSymbol; 
+
+
+typedef struct {
+  unsigned char width; 
+  unsigned char height;
+  unsigned char y_offset;
+  const uint8_t * * symbols; 
+} arrayOfSymbols; 
+
+
+
 void display_monitor_initialize(void);
 void display_monitor_tasks(void);
 void use_colors(unsigned int background_color, 
@@ -420,10 +440,10 @@ void show_splash_screen(void);
 void format_large_digits(void); 
 //void format_main(void);
 
-void draw_large_sign(signs sign, unsigned char &x, unsigned char &y);
-void draw_large_decimal_point(unsigned char &x, unsigned char &y);
-void draw_large_digit(unsigned char d, unsigned char &x, unsigned char &y);
-void show_digits(void); 
+//void draw_large_sign(signs sign, unsigned char &x, unsigned char &y);
+void draw_using_one_symbol(TFT_eSprite &sprite, oneSymbol &one_symbol, bool invert_colors, unsigned char &x, unsigned char &y);
+void draw_using_array_of_symbols(TFT_eSprite &sprite, arrayOfSymbols &array_of_symbols, unsigned char d, bool invert_colors, unsigned char &x, unsigned char &y);
+//void show_digits(void); 
 void show_reference_value(void); 
 void show_unit(void); 
 void show_high_voltage(void);
