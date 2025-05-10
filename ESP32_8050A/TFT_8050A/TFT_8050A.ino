@@ -15,13 +15,13 @@ TFT_eSPI tft = TFT_eSPI();
 
 
 TFT_eSprite canvas = TFT_eSprite(&tft);
-TFT_eSprite high_voltage = TFT_eSprite(&tft);
-TFT_eSprite battery = TFT_eSprite(&tft);
-TFT_eSprite diode = TFT_eSprite(&tft);
-TFT_eSprite zone_zero = TFT_eSprite(&tft);
-TFT_eSprite zone_one = TFT_eSprite(&tft);
-TFT_eSprite zone_two = TFT_eSprite(&tft);
-TFT_eSprite zone_three = TFT_eSprite(&tft);
+//TFT_eSprite high_voltage = TFT_eSprite(&tft);
+//TFT_eSprite battery = TFT_eSprite(&tft);
+//TFT_eSprite diode = TFT_eSprite(&tft);
+TFT_eSprite zone_0 = TFT_eSprite(&tft);
+TFT_eSprite zone_1 = TFT_eSprite(&tft);
+TFT_eSprite zone_2 = TFT_eSprite(&tft);
+TFT_eSprite zone_3 = TFT_eSprite(&tft);
 
 
 functionMonitorData function_monitor; 
@@ -40,6 +40,8 @@ arrayOfSymbols large_digit;
 arrayOfSymbols small_digit; 
 arrayOfSymbols large_unit_symbol; 
 arrayOfSymbols small_unit_symbol; 
+arrayOfSymbols large_mode_symbol; 
+arrayOfSymbols small_mode_symbol; 
 
 
 
