@@ -7,9 +7,9 @@
 #define W_UNIT_SM 24
 #define H_UNIT_SM 21
 // y offset from Y_DIGIT_LG
-#define OFFSET_UNIT_LG 0
+#define OFFSET_UNIT_LG H_DIGIT_LG
 // y offset from Y_DIGIT_SM
-#define OFFSET_UNIT_SM 0
+#define OFFSET_UNIT_SM H_DIGIT_SM
 
 // #define UNIT_NONE   0
 // #define UNIT_V      1

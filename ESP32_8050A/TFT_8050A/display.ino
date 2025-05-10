@@ -261,21 +261,6 @@ void show_splash_screen(void) {
 } 
 
 
-
-
-
-// void draw_large_sign(signs sign, unsigned char &x, unsigned char &y) {
-//   if(sign != NO_SIGN) {
-//     zone_one.drawBitmap(x, y, sign_lg[contents_monitor.sign], 
-//       W_SIGN_LG, H_SIGN_LG, 
-//       display_monitor.active_background_color, 
-//       display_monitor.active_text_color
-//       );  
-//   }
-//   x += W_SIGN_LG;
-// }
-
-
 void draw_using_one_symbol(TFT_eSprite &sprite, oneSymbol &one_symbol, bool invert_colors, unsigned char &x, unsigned char &y){
   unsigned int fg = display_monitor.active_text_color;
   unsigned int bg = display_monitor.active_background_color;
@@ -287,7 +272,6 @@ void draw_using_one_symbol(TFT_eSprite &sprite, oneSymbol &one_symbol, bool inve
   x += one_symbol.width;
 }
 
-
 void draw_using_array_of_symbols(TFT_eSprite &sprite, arrayOfSymbols &array_of_symbols, unsigned char d, bool invert_colors, unsigned char &x, unsigned char &y){
   unsigned int fg = display_monitor.active_text_color;
   unsigned int bg = display_monitor.active_background_color;
@@ -298,8 +282,6 @@ void draw_using_array_of_symbols(TFT_eSprite &sprite, arrayOfSymbols &array_of_s
   sprite.drawBitmap(x, y+array_of_symbols.y_offset, array_of_symbols.symbols [d], array_of_symbols.width, array_of_symbols.height, fg, bg);
   x += array_of_symbols.width;
 }
-
-
 
 void format_large_digits(void){
 
@@ -331,6 +313,7 @@ void format_large_digits(void){
   } 
   draw_using_array_of_symbols(zone_one, large_digit, digits_monitor.st3_value, true, x, y);
 
+  // add the unit symbol colors are reversed here
   draw_using_array_of_symbols(zone_one, large_unit_symbol, contents_monitor.unit, false, x, y);
 }
 
@@ -340,7 +323,7 @@ void show_zone_one(void){
   zone_one.pushToSprite(&canvas, X_ZONE_ONE, Y_ZONE_ONE);
 }
 void show_reference_value(void){
-  update_colors();
+  //update_colors();
   tft.loadFont(AA_FONT_SMALL);
   tft.setCursor(X_REL, Y_REL);
   tft.println("9999");
