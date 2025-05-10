@@ -215,14 +215,22 @@ void update_colors(void) {
 
 void show_splash_screen(void) {
   update_colors();
+
+  unsigned int fg = display_monitor.active_text_color;
+  unsigned int bg = display_monitor.active_background_color;
+  if(INVERT_COLORS_SPLASH){
+    fg = display_monitor.active_background_color;
+    bg = display_monitor.active_text_color;
+  }
+
   unsigned char x = (TFT_WIDTH - W_SPLASH_FLUKE)>>1; 
   unsigned char y = (TFT_HEIGHT - H_SPLASH_FLUKE)>>2;
 
 
   // First Splash Screen 
   //tft.drawBitmap(x, y, splashFluke, W_SPLASH_FLUKE, H_SPLASH_FLUKE, display_monitor.active_text_color, display_monitor.active_background_color);
-  canvas.fillSprite(display_monitor.active_background_color);
-  canvas.drawBitmap(x, y, splashFluke, W_SPLASH_FLUKE, H_SPLASH_FLUKE, display_monitor.active_text_color, display_monitor.active_background_color);
+  canvas.fillSprite(bg);
+  canvas.drawBitmap(x, y, splashFluke, W_SPLASH_FLUKE, H_SPLASH_FLUKE, fg, bg);
 
   canvas.loadFont(AA_FONT_MEDIUM);
 
@@ -235,7 +243,7 @@ void show_splash_screen(void) {
   canvas.pushSprite(0,0); 
 
   delay(TFT_SPLASH_SCREEN_DURATION);   
-  canvas.fillSprite(display_monitor.active_background_color);
+  canvas.fillSprite(bg);
 
 
   // Second Splash Screen 
@@ -256,7 +264,7 @@ void show_splash_screen(void) {
 
   canvas.unloadFont();
   delay(TFT_SPLASH_SCREEN_DURATION<<1);   
-  canvas.fillSprite(display_monitor.active_background_color);
+  canvas.fillSprite(bg);
   canvas.pushSprite(0,0);
 } 
 
