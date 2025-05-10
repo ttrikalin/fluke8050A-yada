@@ -25,7 +25,7 @@ const struct {
 #include "01_diode_27_19.h"
 #include "02_battery_41_16.h"
 #include "03_HV_42_36.h"
-#include "04_large_digits_signs.h"
+#include "04_large_digits_signs_220x176.h"
 #include "05_small_digits_signs.h"
 #include "06_symbol_unit.h"
 #include "07_symbol_mode.h"
@@ -299,7 +299,20 @@ void infer_decimal_point_position(void);
 #define TFT_SPLASH_SCREEN_DURATION 2000
 
 
-// TOP ZONE 
+// FOUR ZONES 
+#define X_ZONE_ZERO  0
+#define Y_ZONE_ZERO  0
+#define ZONE_ZERO_WIDTH  TFT_WIDTH
+#define ZONE_ZERO_HEIGHT  (TFT_HEIGHT>200 ? 50 : 44)
+
+#define X_ZONE_ONE  0
+#define Y_ZONE_ONE  ZONE_ZERO_HEIGHT
+#define ZONE_ONE_WIDTH  TFT_WIDTH
+#define ZONE_ONE_HEIGHT  (TFT_HEIGHT>200 ? 180 : 144)
+
+
+
+
 #define X_HIGH_VOLTAGE  0
 #define Y_HIGH_VOLTAGE  0
 
@@ -318,7 +331,7 @@ void infer_decimal_point_position(void);
 #define X_ZONE_ONE  0
 #define Y_ZONE_ONE  44
 #define ZONE_ONE_HEIGHT  180
-#define ZONE_ONE_WIDTH  220
+#define ZONE_ONE_WIDTH  TFT_WIDTH
 
 
 #define X_ACDC    (X_UNIT-8)
@@ -331,8 +344,8 @@ void infer_decimal_point_position(void);
 #define Y_REL     160
 
 
-#define W_IMG_MAIN (W_SIGN_LG+W_DP_LG+4*W_DIGIT_LG)
-#define H_IMG_MAIN (H_SIGN_LG+H_DP_LG+4*H_DIGIT_LG)
+//#define W_IMG_MAIN (W_SIGN_LG+W_DP_LG+4*W_DIGIT_LG)
+//#define H_IMG_MAIN (H_SIGN_LG+H_DP_LG+4*H_DIGIT_LG)
 
 
 

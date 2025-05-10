@@ -1,5 +1,5 @@
-#ifndef _DIGIT_LARGE_H
-#define _DIGIT_LARGE_H
+#ifndef DIGIT_LARGE_H
+#define DIGIT_LARGE_H
 
 // digit width & height
 #define H_DIGIT_LG 49
@@ -769,5 +769,5 @@ const uint8_t dp_lg[] PROGMEM = {
 
 
 
-#endif // _DIGIT_LARGE_H
+#endif // DIGIT_LARGE_H
 
