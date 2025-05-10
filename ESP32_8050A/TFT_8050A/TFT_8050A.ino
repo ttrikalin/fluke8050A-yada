@@ -36,7 +36,8 @@ arrayOfSymbols large_sign;
 arrayOfSymbols small_sign; 
 arrayOfSymbols large_digit; 
 arrayOfSymbols small_digit; 
-
+arrayOfSymbols large_unit_symbol; 
+arrayOfSymbols small_unit_symbol; 
 
 
 

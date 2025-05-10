@@ -2,14 +2,14 @@
 #define SYMBOLUNIT_H
 
 // bmp width & height
-#define W_UNIT 56
-#define H_UNIT 41
+#define W_UNIT_LG 56
+#define H_UNIT_LG 41
 #define W_UNIT_SM 24
 #define H_UNIT_SM 21
 // y offset from Y_DIGIT_LG
-#define OFFSET_UNIT_LG 46
+#define OFFSET_UNIT_LG 0
 // y offset from Y_DIGIT_SM
-#define OFFSET_UNIT_SM 16
+#define OFFSET_UNIT_SM 0
 
 #define UNIT_NONE   0
 #define UNIT_V      1
@@ -501,7 +501,7 @@ const uint8_t symbolUnit_10[] PROGMEM =
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
-const uint8_t * const symbolUnit[11] PROGMEM = {
+const uint8_t * symbolUnit[11] PROGMEM = {
   symbolUnit_0,
   symbolUnit_1,
   symbolUnit_2,
@@ -769,7 +769,7 @@ const uint8_t symbolUnit_sm_10[] PROGMEM =
     0x00, 0x00, 0x00,
     0x00, 0x00, 0x00 };
 
-const uint8_t * const symbolUnit_sm[11] PROGMEM = {
+const uint8_t * symbolUnit_sm[11] PROGMEM = {
   symbolUnit_sm_0,
   symbolUnit_sm_1,
   symbolUnit_sm_2,

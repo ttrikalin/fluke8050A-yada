@@ -14,7 +14,7 @@ const struct {
 
 #include "NotoSansBold36.h"
 #include "NotoSansBold15.h"
-\
+
 
 
 #define AA_FONT_SMALL  NotoSansBold15
@@ -25,7 +25,6 @@ const struct {
 //#include "digit_sm.h"
 //#include "digit_tiny.h"
 #include "symbolMode.h"
-#include "symbolUnit.h"
 //#include "symbolSign.h"
 #include "symbolSplash.h"
 #include "01_diode_27_19.h"
@@ -33,6 +32,7 @@ const struct {
 #include "03_HV_42_36.h"
 #include "04_large_digits_signs.h"
 #include "05_small_digits_signs.h"
+#include "06_symbol_unit.h"
 
 
 #include <TFT_eSPI.h> 
@@ -250,7 +250,7 @@ typedef enum {
 } quantities;
 
 typedef enum {
-  DECIMAL_POINT_AT_ZERO = 0, 
+  DECIMAL_POINT_AT_ZERO  = 0, 
   DECIMAL_POINT_AT_ONE   = 1, 
   DECIMAL_POINT_AT_TWO   = 2, 
   DECIMAL_POINT_AT_THREE = 3, 
@@ -322,7 +322,7 @@ void infer_decimal_point_position(void);
 #define X_ZONE_ONE  0
 #define Y_ZONE_ONE  44
 #define ZONE_ONE_HEIGHT  180
-#define ZONE_ONE_WIDTH  180
+#define ZONE_ONE_WIDTH  220
 
 
 #define X_ACDC    (X_UNIT-8)
@@ -333,7 +333,6 @@ void infer_decimal_point_position(void);
 
 #define X_REL     0
 #define Y_REL     160
-
 
 
 #define W_IMG_MAIN (W_SIGN_LG+W_DP_LG+4*W_DIGIT_LG)
@@ -376,11 +375,10 @@ typedef enum  {
   DISPLAY_MONITOR_STATE_WAIT                 = 1, 
   DISPLAY_MONITOR_STATE_SHOW_VALUE           = 2, 
   DISPLAY_MONITOR_STATE_SHOW_REFERENCE_VALUE = 3, 
-  DISPLAY_MONITOR_STATE_SHOW_UNIT            = 4, 
-  DISPLAY_MONITOR_STATE_SHOW_HIGH_VOLTAGE    = 5, 
-  DISPLAY_MONITOR_STATE_SHOW_LOW_BATTERY     = 6,
-  DISPLAY_MONITOR_STATE_SHOW_DIODE           = 7,
-  DISPLAY_MONITOR_STATE_SHOW_IMPEDANCES      = 8
+  DISPLAY_MONITOR_STATE_SHOW_HIGH_VOLTAGE    = 4, 
+  DISPLAY_MONITOR_STATE_SHOW_LOW_BATTERY     = 5,
+  DISPLAY_MONITOR_STATE_SHOW_DIODE           = 6,
+  DISPLAY_MONITOR_STATE_SHOW_IMPEDANCES      = 7
 } display_monitor_states; 
 
 typedef struct {
@@ -445,7 +443,7 @@ void draw_using_one_symbol(TFT_eSprite &sprite, oneSymbol &one_symbol, bool inve
 void draw_using_array_of_symbols(TFT_eSprite &sprite, arrayOfSymbols &array_of_symbols, unsigned char d, bool invert_colors, unsigned char &x, unsigned char &y);
 //void show_digits(void); 
 void show_reference_value(void); 
-void show_unit(void); 
+//void show_unit(void); 
 void show_high_voltage(void);
 void show_battery(void); 
 void show_diode(void); 

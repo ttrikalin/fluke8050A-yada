@@ -70,7 +70,15 @@ void display_monitor_initialize(void) {
   small_sign.y_offset = Y_OFFSET_SIGN_SM; 
   small_sign.symbols = sign_sm; 
 
+  large_unit_symbol.width = W_UNIT_LG;
+  large_unit_symbol.height = H_UNIT_LG;
+  large_unit_symbol.y_offset = 0;
+  large_unit_symbol.symbols = symbolUnit;
 
+  small_unit_symbol.width = W_UNIT_SM;
+  small_unit_symbol.height = H_UNIT_SM;
+  small_unit_symbol.y_offset = 0;
+  small_unit_symbol.symbols = symbolUnit_sm;
 
 
   tft.init();
@@ -123,13 +131,8 @@ void display_monitor_tasks(void) {
       break; 
 
     case DISPLAY_MONITOR_STATE_SHOW_REFERENCE_VALUE: 
-      display_monitor.state = DISPLAY_MONITOR_STATE_SHOW_UNIT;
-      //show_reference_value(); 
-      break;
-
-    case DISPLAY_MONITOR_STATE_SHOW_UNIT:
       display_monitor.state = DISPLAY_MONITOR_STATE_SHOW_LOW_BATTERY;
-      //show_unit(); 
+      //show_reference_value(); 
       break;
 
     case DISPLAY_MONITOR_STATE_SHOW_LOW_BATTERY: 
@@ -313,6 +316,7 @@ void format_large_digits(void){
   if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_ZERO){
     draw_using_one_symbol(zone_one, large_decimal_point, true, x, y);
   } 
+  //draw_using_array_of_symbols(zone_one, large_unit_symbol, contents_monitor.unit, false, x, y);
   draw_using_array_of_symbols(zone_one, large_digit, digits_monitor.st0_value0, true, x, y);
   if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_ONE){
     draw_using_one_symbol(zone_one, large_decimal_point, true, x, y);
@@ -326,6 +330,8 @@ void format_large_digits(void){
     draw_using_one_symbol(zone_one, large_decimal_point, true, x, y);
   } 
   draw_using_array_of_symbols(zone_one, large_digit, digits_monitor.st3_value, true, x, y);
+
+  draw_using_array_of_symbols(zone_one, large_unit_symbol, contents_monitor.unit, false, x, y);
 }
 
 void show_zone_one(void){
@@ -340,12 +346,12 @@ void show_reference_value(void){
   tft.println("9999");
 } 
 
-void show_unit(void) {
-  update_colors();
-  tft.loadFont(AA_FONT_MEDIUM);
-  tft.setCursor(X_UNIT, Y_UNIT);
-  tft.println("U");
-}
+// void show_unit(void) {
+//   //unsigned char x = 0;
+//   //unsigned char y = 0;
+  
+//   //draw_using_array_of_symbols(zone_one, large_unit_symbol, contents_monitor.unit, false, x, y);
+// }
 
 void show_battery(void) {
   battery.setBitmapColor(display_monitor.active_text_color, display_monitor.active_background_color);
