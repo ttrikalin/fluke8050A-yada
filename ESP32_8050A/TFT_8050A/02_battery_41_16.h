@@ -4,6 +4,7 @@
 #define BATTERY_WIDTH  41 
 #define BATTERY_HEIGHT 16
 
+#define INVERT_COLORS_BATTERY false
 
 const uint8_t battery_full_symbol[] PROGMEM = {
 0xff,0xff,0xff,0xff,0xff,0x80

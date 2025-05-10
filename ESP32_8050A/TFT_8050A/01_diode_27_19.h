@@ -4,9 +4,7 @@
 #define DIODE_WIDTH  27 
 #define DIODE_HEIGHT 19
 
-
-
-
+#define INVERT_COLORS_DIODE false
 
 const uint8_t diode_symbol[] PROGMEM = {
 0xf3,0xff,0x8f,0xe0

@@ -289,32 +289,32 @@ void format_large_digits(void){
   unsigned char y = 0;
 
   if(contents_monitor.sign != NO_SIGN) {
-    draw_using_array_of_symbols(zone_one, large_sign, contents_monitor.sign, true, x, y);
+    draw_using_array_of_symbols(zone_one, large_sign, contents_monitor.sign, INVERT_COLORS_SIGN_LG, x, y);
   } else {
     x += large_sign.width;
     //draw_using_array_of_symbols(zone_one, large_sign, 0, x, y);
   }
   //draw_large_sign(contents_monitor.sign, x, y);
   if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_ZERO){
-    draw_using_one_symbol(zone_one, large_decimal_point, true, x, y);
+    draw_using_one_symbol(zone_one, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
   } 
   //draw_using_array_of_symbols(zone_one, large_unit_symbol, contents_monitor.unit, false, x, y);
-  draw_using_array_of_symbols(zone_one, large_digit, digits_monitor.st0_value0, true, x, y);
+  draw_using_array_of_symbols(zone_one, large_digit, digits_monitor.st0_value0, INVERT_COLORS_DIGIT_LG, x, y);
   if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_ONE){
-    draw_using_one_symbol(zone_one, large_decimal_point, true, x, y);
+    draw_using_one_symbol(zone_one, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
   } 
-  draw_using_array_of_symbols(zone_one, large_digit, digits_monitor.st1_value, true, x, y);
+  draw_using_array_of_symbols(zone_one, large_digit, digits_monitor.st1_value, INVERT_COLORS_DIGIT_LG, x, y);
   if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_TWO){
-    draw_using_one_symbol(zone_one, large_decimal_point, true, x, y);
+    draw_using_one_symbol(zone_one, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
   } 
-  draw_using_array_of_symbols(zone_one, large_digit, digits_monitor.st2_value, true, x, y);
+  draw_using_array_of_symbols(zone_one, large_digit, digits_monitor.st2_value, INVERT_COLORS_DIGIT_LG, x, y);
   if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_THREE){
-    draw_using_one_symbol(zone_one, large_decimal_point, true, x, y);
+    draw_using_one_symbol(zone_one, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
   } 
-  draw_using_array_of_symbols(zone_one, large_digit, digits_monitor.st3_value, true, x, y);
+  draw_using_array_of_symbols(zone_one, large_digit, digits_monitor.st3_value, INVERT_COLORS_DIGIT_LG, x, y);
 
   // add the unit symbol colors are reversed here
-  draw_using_array_of_symbols(zone_one, large_unit_symbol, contents_monitor.unit, false, x, y);
+  draw_using_array_of_symbols(zone_one, large_unit_symbol, contents_monitor.unit, INVERT_COLORS_UNIT_LG, x, y);
 }
 
 void show_zone_one(void){
@@ -337,23 +337,36 @@ void show_reference_value(void){
 // }
 
 void show_battery(void) {
-  battery.setBitmapColor(display_monitor.active_text_color, display_monitor.active_background_color);
-  battery.fillSprite(display_monitor.active_background_color);
+  update_colors();
+  unsigned int fg = display_monitor.active_text_color;
+  unsigned int bg = display_monitor.active_background_color;
+  if(INVERT_COLORS_BATTERY){
+    fg = display_monitor.active_background_color;
+    bg = display_monitor.active_text_color;
+  } 
+  battery.fillSprite(bg);
   if (contents_monitor.battery == LOW_BATTERY) 
   {
-    battery.drawBitmap(0,0,battery_low_symbol, BATTERY_WIDTH, BATTERY_HEIGHT, display_monitor.active_background_color, display_monitor.active_text_color);  
+    battery.drawBitmap(0,0,battery_low_symbol, BATTERY_WIDTH, BATTERY_HEIGHT, fg, bg);  
   } 
   else if  (contents_monitor.battery == NORMAL_BATTERY) 
   {
-    battery.drawBitmap(0,0,battery_full_symbol, BATTERY_WIDTH, BATTERY_HEIGHT, display_monitor.active_background_color, display_monitor.active_text_color);  
+    battery.drawBitmap(0,0,battery_full_symbol, BATTERY_WIDTH, BATTERY_HEIGHT, fg, bg);  
   }
   battery.pushToSprite(&canvas, X_BATTERY, Y_BATTERY);
 } 
 
 void show_diode(void){
-  diode.fillSprite(display_monitor.active_background_color);
+  update_colors();
+  unsigned int fg = display_monitor.active_text_color;
+  unsigned int bg = display_monitor.active_background_color;
+  if(INVERT_COLORS_DIODE){
+    fg = display_monitor.active_background_color;
+    bg = display_monitor.active_text_color;
+  }
+  diode.fillSprite(bg);
   if (contents_monitor.diode_style != NO_DIODE) {
-    diode.drawBitmap(0,0, diode_symbol, DIODE_WIDTH, DIODE_HEIGHT, display_monitor.active_background_color, display_monitor.active_text_color);  
+    diode.drawBitmap(0,0, diode_symbol, DIODE_WIDTH, DIODE_HEIGHT, fg, bg);  
   }
   diode.pushToSprite(&canvas, X_DIODE, Y_DIODE);
 }
@@ -361,9 +374,15 @@ void show_diode(void){
 
 void show_high_voltage(void){
   update_colors();
-  high_voltage.fillSprite(display_monitor.active_background_color);
+  unsigned int fg = display_monitor.active_text_color;
+  unsigned int bg = display_monitor.active_background_color;
+  if(INVERT_COLORS_HV){
+    fg = display_monitor.active_background_color;
+    bg = display_monitor.active_text_color;
+  }
+  high_voltage.fillSprite(bg);
   if(contents_monitor.high_voltage) {
-    high_voltage.drawBitmap(0,0,high_voltage_symbol, HV_WIDTH, HV_HEIGHT,  display_monitor.active_background_color, display_monitor.active_text_color);
+    high_voltage.drawBitmap(0,0,high_voltage_symbol, HV_WIDTH, HV_HEIGHT, fg, bg);
   }
   high_voltage.pushToSprite(&canvas, 0, 0);
 }

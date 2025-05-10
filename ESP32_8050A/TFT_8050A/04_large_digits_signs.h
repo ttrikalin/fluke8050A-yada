@@ -12,7 +12,8 @@
 #define W_DP_LG 12
 #define H_DP_LG 49
 
-
+#define INVERT_COLORS_DIGIT_LG true
+#define INVERT_COLORS_SIGN_LG true
 
 
 #define DIGIT_LG(n) (n<10?(uint8_t*)pgm_read_word(&(digit_lg[n])):0)

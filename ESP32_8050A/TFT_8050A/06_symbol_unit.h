@@ -11,18 +11,8 @@
 // y offset from Y_DIGIT_SM
 #define OFFSET_UNIT_SM H_DIGIT_SM
 
-// #define UNIT_NONE   0
-// #define UNIT_V      1
-// #define UNIT_mV     2
-// #define UNIT_microA 3
-// #define UNIT_mA     4
-// #define UNIT_Ohm    5
-// #define UNIT_kOhm   6
-// #define UNIT_MOhm   7
-// #define UNIT_dB     8
-// #define UNIT_mS     9
-// #define UNIT_nS     10
-// #define UNIT_Z      11
+#define INVERT_COLORS_UNIT_LG false
+#define INVERT_COLORS_UNIT_SM false
 
 #define UNIT_LG(n)  (n?(uint8_t*)pgm_read_word(&(unit_lg[n-1])):0)
 #define UNIT_SM(n)  (n?(uint8_t*)pgm_read_word(&(unit_sm[n-1])):0)

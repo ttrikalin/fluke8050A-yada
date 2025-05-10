@@ -21,19 +21,14 @@ const struct {
 #define AA_FONT_MEDIUM NotoSansBold36
 #define AA_FONT_LARGE  PTSansNarrow36
 
-//#include "digit_lg.h"
-//#include "digit_sm.h"
-//#include "digit_tiny.h"
-#include "symbolMode.h"
-//#include "symbolSign.h"
-#include "symbolSplash.h"
+#include "00_symbol_splash.h"
 #include "01_diode_27_19.h"
 #include "02_battery_41_16.h"
 #include "03_HV_42_36.h"
 #include "04_large_digits_signs.h"
 #include "05_small_digits_signs.h"
 #include "06_symbol_unit.h"
-
+#include "07_symbol_mode.h"
 
 #include <TFT_eSPI.h> 
 #include <SPI.h>

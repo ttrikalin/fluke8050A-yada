@@ -13,6 +13,9 @@
 #define Y_OFFSET_SIGN_SM 10
 
 
+#define INVERT_COLORS_DIGIT_SM true
+#define INVERT_COLORS_SIGN_SM true
+
 #define DIGIT_SM(n) (n<10?(uint8_t*)pgm_read_word(&(digit_sm[n])):0)
 
 
