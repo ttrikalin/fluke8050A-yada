@@ -73,12 +73,12 @@ void display_monitor_initialize(void) {
   large_unit_symbol.width = W_UNIT_LG;
   large_unit_symbol.height = H_UNIT_LG;
   large_unit_symbol.y_offset = 0;
-  large_unit_symbol.symbols = symbolUnit;
+  large_unit_symbol.symbols = unit_lg;
 
   small_unit_symbol.width = W_UNIT_SM;
   small_unit_symbol.height = H_UNIT_SM;
   small_unit_symbol.y_offset = 0;
-  small_unit_symbol.symbols = symbolUnit_sm;
+  small_unit_symbol.symbols = unit_sm;
 
 
   tft.init();

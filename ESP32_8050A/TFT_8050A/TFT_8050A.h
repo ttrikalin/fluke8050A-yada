@@ -222,16 +222,17 @@ typedef enum  {
 /* Contents data */
 typedef enum  {
   NO_UNIT       =  0, 
-  DECIBEL       =  1, 
-  OHM           =  2,
-  KILO_OHM      =  3,
-  MEGA_OHM      =  4,
-  NANO_SIEMENS  =  5, 
-  MILLI_SIEMENS =  6, 
-  MILLI_VOLT    =  7, 
-  VOLT          =  8, 
-  MICRO_AMPERE  =  9, 
-  MILLI_AMPERE  = 10 
+  VOLT          =  1, 
+  MILLI_VOLT    =  2, 
+  MICRO_AMPERE  =  3, 
+  MILLI_AMPERE  =  4, 
+  OHM           =  5,
+  KILO_OHM      =  6,
+  MEGA_OHM      =  7,
+  DECIBEL       =  8, 
+  MILLI_SIEMENS =  9, 
+  NANO_SIEMENS  = 10, 
+  IMPENDANCE_Z  = 11
 } units; 
 
 typedef enum {
