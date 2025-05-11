@@ -72,12 +72,12 @@ void display_monitor_initialize(void) {
 
   large_unit_symbol.width = W_UNIT_LG;
   large_unit_symbol.height = H_UNIT_LG;
-  large_unit_symbol.y_offset = 0;
+  large_unit_symbol.y_offset = H_MODE_LG + WITHIN_ZONE_BUFFER_HEIGHT;
   large_unit_symbol.symbols = unit_lg;
 
   small_unit_symbol.width = W_UNIT_SM;
   small_unit_symbol.height = H_UNIT_SM;
-  small_unit_symbol.y_offset = 0;
+  small_unit_symbol.y_offset = H_MODE_SM + WITHIN_ZONE_BUFFER_HEIGHT;
   small_unit_symbol.symbols = unit_sm;
 
   large_mode_symbol.width = W_MODE_LG;
@@ -321,13 +321,13 @@ void format_zone_1(void){
   } 
   draw_using_array_of_symbols(zone_1, large_digit, digits_monitor.st3_value, INVERT_COLORS_DIGIT_LG, x, y);
 
-  // add the unit symbol colors are reversed here
+  // add the unit symbol and mode symbol
   x +=  REL_IN_ZONE_X_UNITS;
   y +=  REL_IN_ZONE_Y_UNITS;
-  draw_using_array_of_symbols(zone_1, large_unit_symbol, contents_monitor.unit, INVERT_COLORS_UNIT_LG, x, y);
-  x +=  REL_IN_ZONE_X_MODE;
-  y +=  REL_IN_ZONE_Y_MODE;
-  draw_using_array_of_symbols(zone_1, large_mode_symbol, contents_monitor.unit, INVERT_COLORS_MODE_LG, x, y);
+  draw_using_array_of_symbols(zone_1, small_unit_symbol, contents_monitor.unit, INVERT_COLORS_UNIT, x, y);
+  x +=  REL_IN_ZONE_X_MODE - REL_IN_ZONE_X_UNITS - W_UNIT_SM;
+  y +=  REL_IN_ZONE_Y_MODE - REL_IN_ZONE_Y_UNITS;
+  draw_using_array_of_symbols(zone_1, small_mode_symbol, contents_monitor.unit, INVERT_COLORS_MODE, x, y);
 }
 
 void show_zone_1(){
@@ -337,18 +337,19 @@ void show_zone_1(){
 }
 
 
-void show_zone_0(void){
-  zone_0.fillSprite(display_monitor.active_background_color);
-  format_zone_0();
-  zone_0.pushToSprite(&canvas, X_ZONE_0, Y_ZONE_0);
-} 
-
 void format_zone_2(void){}
 void format_zone_3(void){}
 
 void show_zone_2(void){}
 void show_zone_3(void){}
 
+
+
+void show_zone_0(void){
+  zone_0.fillSprite(display_monitor.active_background_color);
+  format_zone_0();
+  zone_0.pushToSprite(&canvas, X_ZONE_0, Y_ZONE_0);
+} 
 
 void format_zone_0(void){
   unsigned char x = 0;
@@ -367,8 +368,6 @@ void format_zone_0(void){
   }
   zone_0.pushToSprite(&canvas, X_ZONE_0, Y_ZONE_0);
 }
-
-
 
 void show_battery(void) {
   unsigned int fg = display_monitor.active_text_color;

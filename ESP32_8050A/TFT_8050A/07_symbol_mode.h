@@ -9,8 +9,9 @@
 #define W_MODE_SM 19
 #define H_MODE_SM 14
 
-#define INVERT_COLORS_MODE_LG false
-#define INVERT_COLORS_MODE_SM false
+#define INVERT_COLORS_MODE false  
+#define INVERT_COLORS_MODE_LG INVERT_COLORS_MODE
+#define INVERT_COLORS_MODE_SM INVERT_COLORS_MODE
 
 #define MODE_LG(n) (n?(uint8_t*)pgm_read_word(&(mode_lg[n-1])):0)
 #define MODE_SM(n) (n?(uint8_t*)pgm_read_word(&(mode_sm[n-1])):0)

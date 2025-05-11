@@ -6,13 +6,11 @@
 #define H_UNIT_LG 41
 #define W_UNIT_SM 24
 #define H_UNIT_SM 21
-// y offset from Y_DIGIT_LG
-#define OFFSET_UNIT_LG H_DIGIT_LG
-// y offset from Y_DIGIT_SM
-#define OFFSET_UNIT_SM H_DIGIT_SM
 
-#define INVERT_COLORS_UNIT_LG false
-#define INVERT_COLORS_UNIT_SM false
+
+#define INVERT_COLORS_UNIT false
+#define INVERT_COLORS_UNIT_LG INVERT_COLORS_UNIT
+#define INVERT_COLORS_UNIT_SM INVERT_COLORS_UNIT
 
 #define UNIT_LG(n)  (n?(uint8_t*)pgm_read_word(&(unit_lg[n-1])):0)
 #define UNIT_SM(n)  (n?(uint8_t*)pgm_read_word(&(unit_sm[n-1])):0)
