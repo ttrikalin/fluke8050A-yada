@@ -94,7 +94,7 @@ void display_monitor_initialize(void) {
   tft.setRotation(TFT_SCREEN_ROTATION);
   tft.fillScreen(display_monitor.active_background_color);
 
-  canvas.createSprite(TFT_WIDTH, TFT_HEIGHT);
+  canvas.createSprite(CANVAS_WIDTH, CANVAS_HEIGHT);
   canvas.fillSprite(display_monitor.active_background_color);
   
   //high_voltage.createSprite(HV_WIDTH, HV_HEIGHT);
@@ -226,8 +226,8 @@ void show_splash_screen(void) {
     bg = display_monitor.active_text_color;
   }
 
-  unsigned char x = (TFT_WIDTH - W_SPLASH_FLUKE)>>1; 
-  unsigned char y = (TFT_HEIGHT - H_SPLASH_FLUKE)>>2;
+  unsigned char x = (CANVAS_WIDTH - W_SPLASH_FLUKE)>>1; 
+  unsigned char y = (CANVAS_HEIGHT - H_SPLASH_FLUKE)>>2;
 
 
   // First Splash Screen 
@@ -238,7 +238,7 @@ void show_splash_screen(void) {
   canvas.loadFont(AA_FONT_MEDIUM);
 
   canvas.setCursor(
-    (TFT_WIDTH - canvas.textWidth(firmware_information.hardware))>>1, 
+    (CANVAS_WIDTH - canvas.textWidth(firmware_information.hardware))>>1, 
     y += H_SPLASH_FLUKE + canvas.fontHeight() +3
   );
   canvas.println(firmware_information.hardware);
@@ -250,18 +250,18 @@ void show_splash_screen(void) {
 
 
   // Second Splash Screen 
-  y = ((TFT_HEIGHT - H_SPLASH_FLUKE)>>2) + 10;
-  canvas.setCursor((TFT_WIDTH - canvas.textWidth(firmware_information.author))>>1, y);
+  y = ((CANVAS_HEIGHT - H_SPLASH_FLUKE)>>2) + 10;
+  canvas.setCursor((CANVAS_WIDTH - canvas.textWidth(firmware_information.author))>>1, y);
   canvas.println(firmware_information.author);
   y += canvas.fontHeight() + 10; 
   canvas.unloadFont();
   canvas.loadFont(AA_FONT_SMALL);
-  canvas.setCursor((TFT_WIDTH - canvas.textWidth(firmware_information.version))>>1, y);
+  canvas.setCursor((CANVAS_WIDTH - canvas.textWidth(firmware_information.version))>>1, y);
   canvas.println(firmware_information.version);
 
-  canvas.setCursor((TFT_WIDTH - canvas.textWidth(firmware_information.github1))>>1, y += canvas.fontHeight() + 5);
+  canvas.setCursor((CANVAS_WIDTH - canvas.textWidth(firmware_information.github1))>>1, y += canvas.fontHeight() + 5);
   canvas.println(firmware_information.github1);
-  canvas.setCursor((TFT_WIDTH - canvas.textWidth(firmware_information.github2))>>1, y += canvas.fontHeight());
+  canvas.setCursor((CANVAS_WIDTH - canvas.textWidth(firmware_information.github2))>>1, y += canvas.fontHeight());
   canvas.println(firmware_information.github2);
   canvas.pushSprite(0,0);
 

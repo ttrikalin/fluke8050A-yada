@@ -1,7 +1,7 @@
 #ifndef TFT_8050A_H
 #define TFT_8050A_H
 
-
+#define IS_ODD(x) ((x) & 0x01)
 
 const struct {
   const String version  = "Firmware v0.1";
