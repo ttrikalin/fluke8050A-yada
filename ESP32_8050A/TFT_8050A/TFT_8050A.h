@@ -19,7 +19,6 @@ const struct {
 
 #define AA_FONT_SMALL  NotoSansBold15
 #define AA_FONT_MEDIUM NotoSansBold36
-#define AA_FONT_LARGE  PTSansNarrow36
 
 #include "00_symbol_splash.h"
 #include "01_diode_27_19.h"
@@ -232,6 +231,19 @@ typedef enum  {
 } units; 
 
 typedef enum {
+  NO_VOLTAGE_LEVEL = 0,
+  LOW_VOLTAGE = 1, 
+  HIGH_VOLTAGE = 2
+} voltage_levels; 
+
+typedef enum {
+  NO_ACDC = 0,
+  DC = 1,
+  AC = 2 
+} acdc_modes; 
+
+
+typedef enum {
   NO_DIODE    = 0, 
   DIODE       = 1, 
   SMALL_DIODE = 2
@@ -266,6 +278,11 @@ typedef enum {
   NO_BATTERY = 2 
 } battery_styles;
 
+typedef enum {
+  ABSOLUTE_MEASUREMENT = 0, 
+  RELATIVE_MEASUREMENT = 1
+} relative_measurement_styles; 
+
 typedef struct { 
   contents_monitor_states state; 
   units unit; 
@@ -274,9 +291,9 @@ typedef struct {
   decimal_point_positions decimal_point_position;
   signs sign; 
   battery_styles battery;
-  unsigned char alternating_current;
-  unsigned char high_voltage; 
-  unsigned char relative_measurement;
+  acdc_modes acdc_mode;
+  voltage_levels voltage_level;
+  relative_measurement_styles relative_measurement;
 } contentsMonitorData; 
 
 void contents_monitor_initialize(void); 
@@ -360,24 +377,22 @@ void display_monitor_tasks(void);
 void use_colors(unsigned int background_color, 
                 unsigned int text_color);
 void update_colors(void);
-void show_splash_screen(void); 
+void draw_splash_screen(void); 
 void format_zone_0(void);
 void format_zone_1(void);
 void format_zone_2(void);
 void format_zone_3(void);
-//void format_main(void);
 
-//void draw_large_sign(signs sign, unsigned char &x, unsigned char &y);
 void draw_using_one_symbol(TFT_eSprite &sprite, oneSymbol &one_symbol, bool invert_colors, unsigned char &x, unsigned char &y);
 void draw_using_array_of_symbols(TFT_eSprite &sprite, arrayOfSymbols &array_of_symbols, unsigned char d, bool invert_colors, unsigned char &x, unsigned char &y);
-//void show_digits(void); 
-//void show_reference_value(void); 
-//void show_unit(void); 
-void show_zone_0(void);
-void show_zone_1(void);
-void show_zone_2(void);
-void show_zone_3(void);
+void draw_zone_0(void);
+void draw_zone_1(void);
+void draw_zone_2(void);
+void draw_zone_3(void);
 
+void draw_battery(void);
+void draw_high_voltage(void);
+void draw_diode(void);
 
 
 /***************** Display monitor end ************************/

@@ -97,18 +97,6 @@ void display_monitor_initialize(void) {
   canvas.createSprite(CANVAS_WIDTH, CANVAS_HEIGHT);
   canvas.fillSprite(display_monitor.active_background_color);
   
-  //high_voltage.createSprite(HV_WIDTH, HV_HEIGHT);
-  //high_voltage.fillSprite(display_monitor.active_background_color);
-  //high_voltage.setSwapBytes(true);
-  
-  //battery.createSprite(BATTERY_WIDTH, BATTERY_HEIGHT);
-  //battery.fillSprite(display_monitor.active_background_color);
-  //battery.setSwapBytes(true); 
-  
-  //diode.createSprite(DIODE_WIDTH, DIODE_HEIGHT);
-  //diode.fillSprite(display_monitor.active_background_color);
-  //diode.setSwapBytes(false); 
-
   zone_0.createSprite(ZONE_0_WIDTH, ZONE_0_HEIGHT);
   zone_0.fillSprite(display_monitor.active_background_color);
   zone_1.createSprite(ZONE_1_WIDTH, ZONE_1_HEIGHT);
@@ -125,7 +113,7 @@ void display_monitor_tasks(void) {
 
     case DISPLAY_MONITOR_STATE_INIT: 
       display_monitor.state = DISPLAY_MONITOR_STATE_WAIT;
-      show_splash_screen(); 
+      draw_splash_screen(); 
       break;
 
     case DISPLAY_MONITOR_STATE_WAIT:
@@ -137,29 +125,28 @@ void display_monitor_tasks(void) {
 
     case DISPLAY_MONITOR_STATE_SHOW_ZONE_0:
       display_monitor.state = DISPLAY_MONITOR_STATE_SHOW_MEASUREMENT_ZONE_1;
-      show_zone_0();         
+      draw_zone_0();         
       break;
 
     case DISPLAY_MONITOR_STATE_SHOW_MEASUREMENT_ZONE_1:
       display_monitor.state = DISPLAY_MONITOR_STATE_SHOW_ZONE_2;
-      show_zone_1(); 
+      draw_zone_1(); 
       break; 
 
     case DISPLAY_MONITOR_STATE_SHOW_ZONE_2: 
       display_monitor.state = DISPLAY_MONITOR_STATE_SHOW_ZONE_3;
-      show_zone_2(); 
+      draw_zone_2(); 
       break;
 
     case DISPLAY_MONITOR_STATE_SHOW_ZONE_3: 
       display_monitor.state = DISPLAY_MONITOR_STATE_WAIT;
-      show_zone_3();
+      draw_zone_3();
       break;
 
     default:
       break; 
   }
 }
-
 
 void use_colors(unsigned int background_color, 
                 unsigned int text_color) {
@@ -178,7 +165,7 @@ void use_colors(unsigned int background_color,
 
 void update_colors(void) {
   color_themes * theme; 
-  if(contents_monitor.high_voltage) {
+  if(contents_monitor.voltage_level == HIGH_VOLTAGE) {
     theme = &display_monitor.high_voltage_theme;
   } else {
     theme = &display_monitor.non_high_voltage_theme;
@@ -216,7 +203,7 @@ void update_colors(void) {
   }
 }
 
-void show_splash_screen(void) {
+void draw_splash_screen(void) {
   update_colors();
 
   unsigned int fg = display_monitor.active_text_color;
@@ -231,7 +218,6 @@ void show_splash_screen(void) {
 
 
   // First Splash Screen 
-  //tft.drawBitmap(x, y, splashFluke, W_SPLASH_FLUKE, H_SPLASH_FLUKE, display_monitor.active_text_color, display_monitor.active_background_color);
   canvas.fillSprite(bg);
   canvas.drawBitmap(x, y, splashFluke, W_SPLASH_FLUKE, H_SPLASH_FLUKE, fg, bg);
 
@@ -294,6 +280,81 @@ void draw_using_array_of_symbols(TFT_eSprite &sprite, arrayOfSymbols &array_of_s
   x += array_of_symbols.width;
 }
 
+
+
+void draw_battery(void) {
+  unsigned int fg = display_monitor.active_text_color;
+  unsigned int bg = display_monitor.active_background_color;
+  unsigned char x = REL_IN_ZONE_X_BATTERY;
+  unsigned char y = REL_IN_ZONE_Y_BATTERY;
+
+  if(INVERT_COLORS_BATTERY){
+    fg = display_monitor.active_background_color;
+    bg = display_monitor.active_text_color;
+  }
+  if (contents_monitor.battery == LOW_BATTERY) 
+  {
+    zone_0.drawBitmap(x,y,battery_low_symbol, BATTERY_WIDTH, BATTERY_HEIGHT, fg, bg);  
+  } 
+  else if  (contents_monitor.battery == NORMAL_BATTERY) 
+  {
+    zone_0.drawBitmap(x,y,battery_full_symbol, BATTERY_WIDTH, BATTERY_HEIGHT, fg, bg);  
+  }
+} 
+
+void draw_diode(void){
+  unsigned int fg = display_monitor.active_text_color;
+  unsigned int bg = display_monitor.active_background_color;
+  unsigned char x = REL_IN_ZONE_X_DIODE;
+  unsigned char y = REL_IN_ZONE_Y_DIODE;
+  if(INVERT_COLORS_DIODE){
+    fg = display_monitor.active_background_color;
+    bg = display_monitor.active_text_color;
+  }
+  if (contents_monitor.diode_style != NO_DIODE) {
+    zone_0.drawBitmap(x,y, diode_symbol, DIODE_WIDTH, DIODE_HEIGHT, fg, bg);  
+  }
+}
+
+
+void draw_high_voltage(void){
+  unsigned int fg = display_monitor.active_text_color;
+  unsigned int bg = display_monitor.active_background_color;
+  unsigned char x = REL_IN_ZONE_X_HIGH_VOLTAGE;
+  unsigned char y = REL_IN_ZONE_Y_HIGH_VOLTAGE;
+  if(INVERT_COLORS_HV){
+    fg = display_monitor.active_background_color;
+    bg = display_monitor.active_text_color;
+  }
+  if(contents_monitor.voltage_level == HIGH_VOLTAGE) {
+    zone_0.drawBitmap(x,y,high_voltage_symbol, HV_WIDTH, HV_HEIGHT, fg, bg);
+  }
+}
+
+void format_zone_0(void){
+  unsigned char x = 0;
+  unsigned char y = 0;
+
+  zone_0.fillSprite(display_monitor.active_background_color);
+
+  if(contents_monitor.battery != NO_BATTERY){
+    draw_battery();   
+  }
+  if(contents_monitor.voltage_level == HIGH_VOLTAGE){
+    draw_high_voltage();
+  }
+  if(contents_monitor.diode_style != NO_DIODE){
+    draw_diode();
+  }
+  zone_0.pushToSprite(&canvas, X_ZONE_0, Y_ZONE_0);
+}
+
+void draw_zone_0(void){
+  zone_0.fillSprite(display_monitor.active_background_color);
+  format_zone_0();
+  zone_0.pushToSprite(&canvas, X_ZONE_0, Y_ZONE_0);
+} 
+
 void format_zone_1(void){
 
   unsigned char x = 0;
@@ -324,13 +385,13 @@ void format_zone_1(void){
   // add the unit symbol and mode symbol
   x +=  REL_IN_ZONE_X_UNITS;
   y +=  REL_IN_ZONE_Y_UNITS;
-  draw_using_array_of_symbols(zone_1, small_unit_symbol, contents_monitor.unit, INVERT_COLORS_UNIT, x, y);
+  draw_using_array_of_symbols(zone_1, large_unit_symbol, contents_monitor.unit, INVERT_COLORS_UNIT, x, y);
   x +=  REL_IN_ZONE_X_MODE - REL_IN_ZONE_X_UNITS - W_UNIT_SM;
   y +=  REL_IN_ZONE_Y_MODE - REL_IN_ZONE_Y_UNITS;
-  draw_using_array_of_symbols(zone_1, small_mode_symbol, contents_monitor.unit, INVERT_COLORS_MODE, x, y);
+  draw_using_array_of_symbols(zone_1, small_mode_symbol, contents_monitor.acdc_mode, INVERT_COLORS_MODE, x, y);
 }
 
-void show_zone_1(){
+void draw_zone_1(){
   zone_1.fillSprite(display_monitor.active_background_color);
   format_zone_1();
   zone_1.pushToSprite(&canvas, X_ZONE_1, Y_ZONE_1);
@@ -338,89 +399,8 @@ void show_zone_1(){
 
 
 void format_zone_2(void){}
+void draw_zone_2(void){}
+
 void format_zone_3(void){}
-
-void show_zone_2(void){}
-void show_zone_3(void){}
-
-
-
-void show_zone_0(void){
-  zone_0.fillSprite(display_monitor.active_background_color);
-  format_zone_0();
-  zone_0.pushToSprite(&canvas, X_ZONE_0, Y_ZONE_0);
-} 
-
-void format_zone_0(void){
-  unsigned char x = 0;
-  unsigned char y = 0;
-
-  zone_0.fillSprite(display_monitor.active_background_color);
-
-  if(contents_monitor.battery != NO_BATTERY){
-    show_battery();   
-  }
-  if(contents_monitor.high_voltage){
-    show_high_voltage();
-  }
-  if(contents_monitor.diode_style != NO_DIODE){
-    show_diode();
-  }
-  zone_0.pushToSprite(&canvas, X_ZONE_0, Y_ZONE_0);
-}
-
-void show_battery(void) {
-  unsigned int fg = display_monitor.active_text_color;
-  unsigned int bg = display_monitor.active_background_color;
-  unsigned char x = REL_IN_ZONE_X_BATTERY;
-  unsigned char y = REL_IN_ZONE_Y_BATTERY;
-
-  if(INVERT_COLORS_BATTERY){
-    fg = display_monitor.active_background_color;
-    bg = display_monitor.active_text_color;
-  }
-  if (contents_monitor.battery == LOW_BATTERY) 
-  {
-    zone_0.drawBitmap(x,y,battery_low_symbol, BATTERY_WIDTH, BATTERY_HEIGHT, fg, bg);  
-  } 
-  else if  (contents_monitor.battery == NORMAL_BATTERY) 
-  {
-    zone_0.drawBitmap(x,y,battery_full_symbol, BATTERY_WIDTH, BATTERY_HEIGHT, fg, bg);  
-  }
-} 
-
-void show_diode(void){
-  unsigned int fg = display_monitor.active_text_color;
-  unsigned int bg = display_monitor.active_background_color;
-  unsigned char x = REL_IN_ZONE_X_DIODE;
-  unsigned char y = REL_IN_ZONE_Y_DIODE;
-  if(INVERT_COLORS_DIODE){
-    fg = display_monitor.active_background_color;
-    bg = display_monitor.active_text_color;
-  }
-  if (contents_monitor.diode_style != NO_DIODE) {
-    zone_0.drawBitmap(x,y, diode_symbol, DIODE_WIDTH, DIODE_HEIGHT, fg, bg);  
-  }
-}
-
-
-void show_high_voltage(void){
-  unsigned int fg = display_monitor.active_text_color;
-  unsigned int bg = display_monitor.active_background_color;
-  unsigned char x = REL_IN_ZONE_X_HIGH_VOLTAGE;
-  unsigned char y = REL_IN_ZONE_Y_HIGH_VOLTAGE;
-  if(INVERT_COLORS_HV){
-    fg = display_monitor.active_background_color;
-    bg = display_monitor.active_text_color;
-  }
-  if(contents_monitor.high_voltage) {
-    zone_0.drawBitmap(x,y,high_voltage_symbol, HV_WIDTH, HV_HEIGHT, fg, bg);
-  }
-}
-
-
-void show_impedances(void){
-
-}
-
+void draw_zone_3(void){}
 

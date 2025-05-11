@@ -7,14 +7,14 @@ void contents_monitor_initialize(void) {
   contents_monitor.diode_style = NO_DIODE;
   contents_monitor.decimal_point_position = NO_DECIMAL_POINT;
   contents_monitor.sign = NO_SIGN;
-  contents_monitor.alternating_current = 0;
-  contents_monitor.high_voltage = 0; 
+  contents_monitor.acdc_mode = AC;
+  contents_monitor.relative_measurement = ABSOLUTE_MEASUREMENT;
+  contents_monitor.voltage_level = LOW_VOLTAGE; 
   if(fluke8050a_WITH_BATTERY) {
     contents_monitor.battery = NORMAL_BATTERY;   
   } else {
     contents_monitor.battery = NO_BATTERY;   
   }
-  contents_monitor.relative_measurement = 0;
 }
 
 void contents_monitor_tasks(void) {
@@ -54,18 +54,20 @@ void contents_monitor_tasks(void) {
 
 void infer_alternating_current(void) {
   // fluke8050a_FUNC_A = 0 vs 1 <==> DC vs AC 
-  contents_monitor.alternating_current = 
-    test_bit(function_monitor.active_function, 0); 
+  contents_monitor.acdc_mode = 
+    test_bit(function_monitor.active_function, 0) ? AC : DC; 
 } 
 
 void infer_relative_measurement(void) {
   // fluke8050a_FUNC_D = 0 vs 1 <==> REL vs NOREL 
   contents_monitor.relative_measurement = 
-    !test_bit(function_monitor.active_function, 3); 
+    test_bit(function_monitor.active_function, 3) ? 
+      ABSOLUTE_MEASUREMENT : RELATIVE_MEASUREMENT; 
 } 
 
 void infer_high_voltage(void) {
-  contents_monitor.high_voltage = digitalRead(fluke8050a_HV);
+  contents_monitor.voltage_level = digitalRead(fluke8050a_HV) ? 
+    HIGH_VOLTAGE : LOW_VOLTAGE; 
 } 
 
 void infer_low_battery(void) {
@@ -73,13 +75,8 @@ void infer_low_battery(void) {
   switch(contents_monitor.battery) {
     case NORMAL_BATTERY:  
     case LOW_BATTERY: 
-      // this longer code is fine because it allows 
-      // changing the enum level order 
-      if(digitalRead(fluke8050a_BT)) {
-        contents_monitor.battery = LOW_BATTERY;
-      } else {
-        contents_monitor.battery = NORMAL_BATTERY;
-      }
+      contents_monitor.battery = digitalRead(fluke8050a_BT) ? 
+        LOW_BATTERY : NORMAL_BATTERY; 
       break;
     
     case NO_BATTERY:
