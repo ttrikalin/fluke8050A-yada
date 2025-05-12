@@ -72,7 +72,8 @@ void display_monitor_initialize(void) {
 
   large_unit_symbol.width = W_UNIT_LG;
   large_unit_symbol.height = H_UNIT_LG;
-  large_unit_symbol.y_offset = H_MODE_LG + WITHIN_ZONE_BUFFER_HEIGHT;
+  //large_unit_symbol.y_offset = H_MODE_LG + WITHIN_ZONE_BUFFER_HEIGHT;
+  large_unit_symbol.y_offset = H_MODE_SM + WITHIN_ZONE_BUFFER_HEIGHT;
   large_unit_symbol.symbols = unit_lg;
 
   small_unit_symbol.width = W_UNIT_SM;
@@ -386,7 +387,7 @@ void format_zone_1(void){
   x +=  REL_IN_ZONE_X_UNITS;
   y +=  REL_IN_ZONE_Y_UNITS;
   draw_using_array_of_symbols(zone_1, large_unit_symbol, contents_monitor.unit, INVERT_COLORS_UNIT, x, y);
-  x +=  REL_IN_ZONE_X_MODE - REL_IN_ZONE_X_UNITS - W_UNIT_SM;
+  x +=  REL_IN_ZONE_X_MODE - REL_IN_ZONE_X_UNITS - W_UNIT_LG;
   y +=  REL_IN_ZONE_Y_MODE - REL_IN_ZONE_Y_UNITS;
   draw_using_array_of_symbols(zone_1, small_mode_symbol, contents_monitor.acdc_mode, INVERT_COLORS_MODE, x, y);
 }
