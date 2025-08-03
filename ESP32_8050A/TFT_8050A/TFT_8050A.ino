@@ -1,3 +1,5 @@
+#include <TFT_eSPI.h>
+
 /*
 TFT_8050A.ino for an ESP32_WROOM32 devkit 
 

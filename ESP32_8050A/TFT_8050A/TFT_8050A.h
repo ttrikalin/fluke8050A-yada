@@ -28,8 +28,9 @@ const struct {
 #include "05_small_digits_signs.h"
 #include "06_symbol_unit.h"
 #include "07_symbol_mode.h"
-#include "10_TFT_220x176.h"
-
+// #include "10_TFT_220x176.h"
+#include "11_TFT_320x240.h"
+//#include <User_Setup.h>
 #include <TFT_eSPI.h> 
 #include <SPI.h>
 
