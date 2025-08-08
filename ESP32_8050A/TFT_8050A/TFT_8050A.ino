@@ -52,12 +52,14 @@ arrayOfSymbols small_mode_symbol;
 
 // the setup and loop
 void setup(void) {
+  
   ESP32_WROOM32_initialize();
   range_monitor_initialize(); 
   function_monitor_initialize();
   digits_monitor_initialize();
   contents_monitor_initialize();
-  display_monitor_initialize(); 
+  display_monitor_initialize();
+  
 }
 
 void loop(void) {
