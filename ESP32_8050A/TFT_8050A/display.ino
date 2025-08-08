@@ -214,8 +214,8 @@ void draw_splash_screen(void) {
     bg = display_monitor.active_text_color;
   }
 
-  unsigned char x = (CANVAS_WIDTH - W_SPLASH_FLUKE)>>1; 
-  unsigned char y = (CANVAS_HEIGHT - H_SPLASH_FLUKE)>>2;
+  unsigned int x = (CANVAS_WIDTH - W_SPLASH_FLUKE)>>1;
+  unsigned int y = (CANVAS_HEIGHT - H_SPLASH_FLUKE)>>2;
 
 
   // First Splash Screen 
@@ -259,7 +259,7 @@ void draw_splash_screen(void) {
 } 
 
 
-void draw_using_one_symbol(TFT_eSprite &sprite, oneSymbol &one_symbol, bool invert_colors, unsigned char &x, unsigned char &y){
+void draw_using_one_symbol(TFT_eSprite &sprite, oneSymbol &one_symbol, bool invert_colors, unsigned int &x, unsigned int &y){
   unsigned int fg = display_monitor.active_text_color;
   unsigned int bg = display_monitor.active_background_color;
   if(invert_colors){
@@ -270,7 +270,7 @@ void draw_using_one_symbol(TFT_eSprite &sprite, oneSymbol &one_symbol, bool inve
   x += one_symbol.width;
 }
 
-void draw_using_array_of_symbols(TFT_eSprite &sprite, arrayOfSymbols &array_of_symbols, unsigned char d, bool invert_colors, unsigned char &x, unsigned char &y){
+void draw_using_array_of_symbols(TFT_eSprite &sprite, arrayOfSymbols &array_of_symbols, unsigned int d, bool invert_colors, unsigned int &x, unsigned int &y){
   unsigned int fg = display_monitor.active_text_color;
   unsigned int bg = display_monitor.active_background_color;
   if(invert_colors){
@@ -286,8 +286,8 @@ void draw_using_array_of_symbols(TFT_eSprite &sprite, arrayOfSymbols &array_of_s
 void draw_battery(void) {
   unsigned int fg = display_monitor.active_text_color;
   unsigned int bg = display_monitor.active_background_color;
-  unsigned char x = REL_IN_ZONE_X_BATTERY;
-  unsigned char y = REL_IN_ZONE_Y_BATTERY;
+  unsigned int x = REL_IN_ZONE_X_BATTERY;
+  unsigned int y = REL_IN_ZONE_Y_BATTERY;
 
   if(INVERT_COLORS_BATTERY){
     fg = display_monitor.active_background_color;
@@ -306,8 +306,8 @@ void draw_battery(void) {
 void draw_diode(void){
   unsigned int fg = display_monitor.active_text_color;
   unsigned int bg = display_monitor.active_background_color;
-  unsigned char x = REL_IN_ZONE_X_DIODE;
-  unsigned char y = REL_IN_ZONE_Y_DIODE;
+  unsigned int x = REL_IN_ZONE_X_DIODE;
+  unsigned int y = REL_IN_ZONE_Y_DIODE;
   if(INVERT_COLORS_DIODE){
     fg = display_monitor.active_background_color;
     bg = display_monitor.active_text_color;
@@ -321,8 +321,8 @@ void draw_diode(void){
 void draw_high_voltage(void){
   unsigned int fg = display_monitor.active_text_color;
   unsigned int bg = display_monitor.active_background_color;
-  unsigned char x = REL_IN_ZONE_X_HIGH_VOLTAGE;
-  unsigned char y = REL_IN_ZONE_Y_HIGH_VOLTAGE;
+  unsigned int x = REL_IN_ZONE_X_HIGH_VOLTAGE;
+  unsigned int y = REL_IN_ZONE_Y_HIGH_VOLTAGE;
   if(INVERT_COLORS_HV){
     fg = display_monitor.active_background_color;
     bg = display_monitor.active_text_color;
@@ -333,8 +333,8 @@ void draw_high_voltage(void){
 }
 
 void format_zone_0(void){
-  unsigned char x = 0;
-  unsigned char y = 0;
+  unsigned int x = 0;
+  unsigned int y = 0;
 
   zone_0.fillSprite(display_monitor.active_background_color);
 
@@ -358,8 +358,8 @@ void draw_zone_0(void){
 
 void format_zone_1(void){
 
-  unsigned char x = 0;
-  unsigned char y = 0;
+  unsigned int x = 0;
+  unsigned int y = 0;
 
   if(contents_monitor.sign != NO_SIGN) {
     draw_using_array_of_symbols(zone_1, large_sign, contents_monitor.sign, INVERT_COLORS_SIGN_LG, x, y);

@@ -33,7 +33,7 @@ typedef enum {
 
 typedef struct {
     function_monitor_states state; 
-    unsigned char read_flag; 
+    unsigned int read_flag; 
     measurement_function active_function; 
 } functionMonitorData; 
 

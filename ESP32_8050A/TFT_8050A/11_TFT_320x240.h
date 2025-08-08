@@ -3,14 +3,16 @@
 
 
 
-#define TFT_WIDTH   320
-#define TFT_HEIGHT  240
-#define TFT_SCREEN_ROTATION   1
+//#define TFT_WIDTH   220
+//#define TFT_HEIGHT  176
+#define TFT_SCREEN_ROTATION   3
 
 // THE ILI9341 is 320x240 and it selects the WIDTH and HEIGHT by the rotation 
-#define CANVAS_WIDTH TFT_WIDTH // (IS_ODD(TFT_SCREEN_ROTATION) ? TFT_HEIGHT : TFT_WIDTH)
-#define CANVAS_HEIGHT TFT_HEIGHT // (IS_ODD(TFT_SCREEN_ROTATION) ? TFT_WIDTH : TFT_HEIGHT)
+//#define CANVAS_WIDTH TFT_WIDTH // (IS_ODD(TFT_SCREEN_ROTATION) ? TFT_HEIGHT : TFT_WIDTH)
+//#define CANVAS_HEIGHT TFT_HEIGHT // (IS_ODD(TFT_SCREEN_ROTATION) ? TFT_WIDTH : TFT_HEIGHT)
 
+#define CANVAS_WIDTH 314
+#define CANVAS_HEIGHT 176
 
 #define TFT_SPLASH_SCREEN_DURATION 2000
 
@@ -41,10 +43,10 @@
 #define REL_IN_ZONE_X_HIGH_VOLTAGE  0
 #define REL_IN_ZONE_Y_HIGH_VOLTAGE  0
 
-#define REL_IN_ZONE_X_DIODE  ((CANVAS_WIDTH-DIODE_WIDTH)>>1)
+#define REL_IN_ZONE_X_DIODE  ((ZONE_0_WIDTH-DIODE_WIDTH)>>1)
 #define REL_IN_ZONE_Y_DIODE  0
 
-#define REL_IN_ZONE_X_BATTERY (CANVAS_WIDTH-BATTERY_WIDTH)
+#define REL_IN_ZONE_X_BATTERY (ZONE_0_WIDTH-BATTERY_WIDTH)
 #define REL_IN_ZONE_Y_BATTERY 0
 
 
@@ -55,36 +57,6 @@
 
 #define REL_IN_ZONE_X_UNITS   7
 #define REL_IN_ZONE_Y_UNITS   (WITHIN_ZONE_BUFFER_HEIGHT+H_MODE_SM)
-
-
-
-// INCLUDED IN tft_espi
-// #define TFT_BLACK       0x0000      /*   0,   0,   0 */
-// #define TFT_NAVY        0x000F      /*   0,   0, 128 */
-// #define TFT_DARKGREEN   0x03E0      /*   0, 128,   0 */
-// #define TFT_DARKCYAN    0x03EF      /*   0, 128, 128 */
-// #define TFT_MAROON      0x7800      /* 128,   0,   0 */
-// #define TFT_PURPLE      0x780F      /* 128,   0, 128 */
-// #define TFT_OLIVE       0x7BE0      /* 128, 128,   0 */
-// #define TFT_LIGHTGREY   0xD69A      /* 211, 211, 211 */
-// #define TFT_DARKGREY    0x7BEF      /* 128, 128, 128 */
-// #define TFT_BLUE        0x001F      /*   0,   0, 255 */
-// #define TFT_GREEN       0x07E0      /*   0, 255,   0 */
-// #define TFT_CYAN        0x07FF      /*   0, 255, 255 */
-// #define TFT_RED         0xF800      /* 255,   0,   0 */
-// #define TFT_MAGENTA     0xF81F      /* 255,   0, 255 */
-// #define TFT_YELLOW      0xFFE0      /* 255, 255,   0 */
-// #define TFT_WHITE       0xFFFF      /* 255, 255, 255 */
-// #define TFT_ORANGE      0xFDA0      /* 255, 180,   0 */
-// #define TFT_GREENYELLOW 0xB7E0      /* 180, 255,   0 */
-// #define TFT_PINK        0xFE19      /* 255, 192, 203 */ //Lighter pink, was 0xFC9F
-// #define TFT_BROWN       0x9A60      /* 150,  75,   0 */
-// #define TFT_GOLD        0xFEA0      /* 255, 215,   0 */
-// #define TFT_SILVER      0xC618      /* 192, 192, 192 */
-// #define TFT_SKYBLUE     0x867D      /* 135, 206, 235 */
-// #define TFT_VIOLET      0x915C      /* 180,  46, 226 */
-// #define TFT_TRANSPARENT 0x0120 // This is actually a dark green
-
 
 
 #endif // TFT_320x240_H

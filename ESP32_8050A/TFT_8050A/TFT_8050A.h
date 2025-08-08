@@ -191,8 +191,8 @@ typedef enum {
 typedef struct {
   digits_monitor_states state; 
   strobe_number read_strobe;
-  unsigned char in_strobe_phase;
-  unsigned char read_flag; 
+  unsigned int in_strobe_phase;
+  unsigned int read_flag; 
   unsigned int st0_value0;
   unsigned int st0_value1;
   unsigned int st0_value2; 
@@ -357,17 +357,17 @@ typedef struct {
 
 
 typedef struct {
-  unsigned char width; 
-  unsigned char height;
-  unsigned char y_offset;
+  unsigned int width; 
+  unsigned int height;
+  unsigned int y_offset;
   const uint8_t * symbol; 
 } oneSymbol; 
 
 
 typedef struct {
-  unsigned char width; 
-  unsigned char height;
-  unsigned char y_offset;
+  unsigned int width; 
+  unsigned int height;
+  unsigned int y_offset;
   const uint8_t * * symbols; 
 } arrayOfSymbols; 
 
@@ -384,8 +384,8 @@ void format_zone_1(void);
 void format_zone_2(void);
 void format_zone_3(void);
 
-void draw_using_one_symbol(TFT_eSprite &sprite, oneSymbol &one_symbol, bool invert_colors, unsigned char &x, unsigned char &y);
-void draw_using_array_of_symbols(TFT_eSprite &sprite, arrayOfSymbols &array_of_symbols, unsigned char d, bool invert_colors, unsigned char &x, unsigned char &y);
+void draw_using_one_symbol(TFT_eSprite &sprite, oneSymbol &one_symbol, bool invert_colors, unsigned int &x, unsigned int &y);
+void draw_using_array_of_symbols(TFT_eSprite &sprite, arrayOfSymbols &array_of_symbols, unsigned int d, bool invert_colors, unsigned int &x, unsigned int &y);
 void draw_zone_0(void);
 void draw_zone_1(void);
 void draw_zone_2(void);
