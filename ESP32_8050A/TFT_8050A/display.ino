@@ -98,14 +98,14 @@ void display_monitor_initialize(void) {
   canvas.createSprite(CANVAS_WIDTH, CANVAS_HEIGHT);
   canvas.fillSprite(display_monitor.active_background_color);
   
-  zone_0.createSprite(ZONE_0_WIDTH, ZONE_0_HEIGHT);
-  zone_0.fillSprite(display_monitor.active_background_color);
-  zone_1.createSprite(ZONE_1_WIDTH, ZONE_1_HEIGHT);
-  zone_1.fillSprite(display_monitor.active_background_color);
-  zone_2.createSprite(ZONE_2_WIDTH, ZONE_2_HEIGHT);
-  zone_2.fillSprite(display_monitor.active_background_color);
-  zone_3.createSprite(ZONE_3_WIDTH, ZONE_3_HEIGHT);
-  zone_3.fillSprite(display_monitor.active_background_color);
+  // zone_0.createSprite(ZONE_0_WIDTH, ZONE_0_HEIGHT);
+  // zone_0.fillSprite(display_monitor.active_background_color);
+  // zone_1.createSprite(ZONE_1_WIDTH, ZONE_1_HEIGHT);
+  // zone_1.fillSprite(display_monitor.active_background_color);
+  // zone_2.createSprite(ZONE_2_WIDTH, ZONE_2_HEIGHT);
+  // zone_2.fillSprite(display_monitor.active_background_color);
+  // zone_3.createSprite(ZONE_3_WIDTH, ZONE_3_HEIGHT);
+  // zone_3.fillSprite(display_monitor.active_background_color);
 }
 
 
@@ -286,8 +286,8 @@ void draw_using_array_of_symbols(TFT_eSprite &sprite, arrayOfSymbols &array_of_s
 void draw_battery(void) {
   unsigned int fg = display_monitor.active_text_color;
   unsigned int bg = display_monitor.active_background_color;
-  unsigned int x = REL_IN_ZONE_X_BATTERY;
-  unsigned int y = REL_IN_ZONE_Y_BATTERY;
+  unsigned int x = X_BATTERY;
+  unsigned int y = Y_BATTERY;
 
   if(INVERT_COLORS_BATTERY){
     fg = display_monitor.active_background_color;
@@ -295,25 +295,25 @@ void draw_battery(void) {
   }
   if (contents_monitor.battery == LOW_BATTERY) 
   {
-    zone_0.drawBitmap(x,y,battery_low_symbol, BATTERY_WIDTH, BATTERY_HEIGHT, fg, bg);  
+    canvas.drawBitmap(x,y,battery_low_symbol, BATTERY_WIDTH, BATTERY_HEIGHT, fg, bg);  
   } 
   else if  (contents_monitor.battery == NORMAL_BATTERY) 
   {
-    zone_0.drawBitmap(x,y,battery_full_symbol, BATTERY_WIDTH, BATTERY_HEIGHT, fg, bg);  
+    canvas.drawBitmap(x,y,battery_full_symbol, BATTERY_WIDTH, BATTERY_HEIGHT, fg, bg);  
   }
 } 
 
 void draw_diode(void){
   unsigned int fg = display_monitor.active_text_color;
   unsigned int bg = display_monitor.active_background_color;
-  unsigned int x = REL_IN_ZONE_X_DIODE;
-  unsigned int y = REL_IN_ZONE_Y_DIODE;
+  unsigned int x = X_DIODE;
+  unsigned int y = Y_DIODE;
   if(INVERT_COLORS_DIODE){
     fg = display_monitor.active_background_color;
     bg = display_monitor.active_text_color;
   }
   if (contents_monitor.diode_style != NO_DIODE) {
-    zone_0.drawBitmap(x,y, diode_symbol, DIODE_WIDTH, DIODE_HEIGHT, fg, bg);  
+    canvas.drawBitmap(x,y, diode_symbol, DIODE_WIDTH, DIODE_HEIGHT, fg, bg);  
   }
 }
 
@@ -321,14 +321,14 @@ void draw_diode(void){
 void draw_high_voltage(void){
   unsigned int fg = display_monitor.active_text_color;
   unsigned int bg = display_monitor.active_background_color;
-  unsigned int x = REL_IN_ZONE_X_HIGH_VOLTAGE;
-  unsigned int y = REL_IN_ZONE_Y_HIGH_VOLTAGE;
+  unsigned int x = X_HIGH_VOLTAGE;
+  unsigned int y = Y_HIGH_VOLTAGE;
   if(INVERT_COLORS_HV){
     fg = display_monitor.active_background_color;
     bg = display_monitor.active_text_color;
   }
   if(contents_monitor.voltage_level == HIGH_VOLTAGE) {
-    zone_0.drawBitmap(x,y,high_voltage_symbol, HV_WIDTH, HV_HEIGHT, fg, bg);
+    canvas.drawBitmap(x,y,high_voltage_symbol, HV_WIDTH, HV_HEIGHT, fg, bg);
   }
 }
 
@@ -336,7 +336,7 @@ void format_zone_0(void){
   unsigned int x = 0;
   unsigned int y = 0;
 
-  zone_0.fillSprite(display_monitor.active_background_color);
+  canvas.fillSprite(display_monitor.active_background_color);
 
   if(contents_monitor.battery != NO_BATTERY){
     draw_battery();   
@@ -347,55 +347,55 @@ void format_zone_0(void){
   if(contents_monitor.diode_style != NO_DIODE){
     draw_diode();
   }
-  zone_0.pushToSprite(&canvas, X_ZONE_0, Y_ZONE_0);
+  //canvas.pushToSprite(&canvas, X_ZONE_0, Y_ZONE_0);
 }
 
+// candidate for deletion 
 void draw_zone_0(void){
-  zone_0.fillSprite(display_monitor.active_background_color);
+  //canvas.fillSprite(display_monitor.active_background_color);
   format_zone_0();
-  zone_0.pushToSprite(&canvas, X_ZONE_0, Y_ZONE_0);
+  //canvas.pushToSprite(&canvas, X_ZONE_0, Y_ZONE_0);
 } 
 
 void format_zone_1(void){
 
-  unsigned int x = 0;
-  unsigned int y = 0;
+  unsigned int x = X_ZONE_1;
+  unsigned int y = Y_ZONE_1;
 
   if(contents_monitor.sign != NO_SIGN) {
-    draw_using_array_of_symbols(zone_1, large_sign, contents_monitor.sign, INVERT_COLORS_SIGN_LG, x, y);
+    draw_using_array_of_symbols(canvas, large_sign, contents_monitor.sign, INVERT_COLORS_SIGN_LG, x, y);
   } else {
     x += large_sign.width;
   }
   if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_ZERO){
-    draw_using_one_symbol(zone_1, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
+    draw_using_one_symbol(canvas, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
   } 
-  draw_using_array_of_symbols(zone_1, large_digit, digits_monitor.st0_value0, INVERT_COLORS_DIGIT_LG, x, y);
+  draw_using_array_of_symbols(canvas, large_digit, digits_monitor.st0_value0, INVERT_COLORS_DIGIT_LG, x, y);
   if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_ONE){
-    draw_using_one_symbol(zone_1, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
+    draw_using_one_symbol(canvas, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
   } 
-  draw_using_array_of_symbols(zone_1, large_digit, digits_monitor.st1_value, INVERT_COLORS_DIGIT_LG, x, y);
+  draw_using_array_of_symbols(canvas, large_digit, digits_monitor.st1_value, INVERT_COLORS_DIGIT_LG, x, y);
   if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_TWO){
-    draw_using_one_symbol(zone_1, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
+    draw_using_one_symbol(canvas, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
   } 
-  draw_using_array_of_symbols(zone_1, large_digit, digits_monitor.st2_value, INVERT_COLORS_DIGIT_LG, x, y);
+  draw_using_array_of_symbols(canvas, large_digit, digits_monitor.st2_value, INVERT_COLORS_DIGIT_LG, x, y);
   if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_THREE){
-    draw_using_one_symbol(zone_1, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
+    draw_using_one_symbol(canvas, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
   } 
-  draw_using_array_of_symbols(zone_1, large_digit, digits_monitor.st3_value, INVERT_COLORS_DIGIT_LG, x, y);
+  draw_using_array_of_symbols(canvas, large_digit, digits_monitor.st3_value, INVERT_COLORS_DIGIT_LG, x, y);
 
   // add the unit symbol and mode symbol
   x +=  REL_IN_ZONE_X_UNITS;
   y +=  REL_IN_ZONE_Y_UNITS;
-  draw_using_array_of_symbols(zone_1, large_unit_symbol, contents_monitor.unit, INVERT_COLORS_UNIT, x, y);
+  draw_using_array_of_symbols(canvas, large_unit_symbol, contents_monitor.unit, INVERT_COLORS_UNIT, x, y);
   x +=  REL_IN_ZONE_X_MODE - REL_IN_ZONE_X_UNITS - W_UNIT_LG;
   y +=  REL_IN_ZONE_Y_MODE - REL_IN_ZONE_Y_UNITS;
-  draw_using_array_of_symbols(zone_1, small_mode_symbol, contents_monitor.acdc_mode, INVERT_COLORS_MODE, x, y);
+  draw_using_array_of_symbols(canvas, small_mode_symbol, contents_monitor.acdc_mode, INVERT_COLORS_MODE, x, y);
 }
 
+// candidate for deletion 
 void draw_zone_1(){
-  zone_1.fillSprite(display_monitor.active_background_color);
   format_zone_1();
-  zone_1.pushToSprite(&canvas, X_ZONE_1, Y_ZONE_1);
 }
 
 

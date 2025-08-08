@@ -20,10 +20,10 @@ TFT_eSprite canvas = TFT_eSprite(&tft);
 //TFT_eSprite high_voltage = TFT_eSprite(&tft);
 //TFT_eSprite battery = TFT_eSprite(&tft);
 //TFT_eSprite diode = TFT_eSprite(&tft);
-TFT_eSprite zone_0 = TFT_eSprite(&tft);
-TFT_eSprite zone_1 = TFT_eSprite(&tft);
-TFT_eSprite zone_2 = TFT_eSprite(&tft);
-TFT_eSprite zone_3 = TFT_eSprite(&tft);
+//TFT_eSprite zone_0 = TFT_eSprite(&tft);
+//TFT_eSprite zone_1 = TFT_eSprite(&tft);
+//TFT_eSprite zone_2 = TFT_eSprite(&tft);
+//TFT_eSprite zone_3 = TFT_eSprite(&tft);
 
 
 functionMonitorData function_monitor; 
