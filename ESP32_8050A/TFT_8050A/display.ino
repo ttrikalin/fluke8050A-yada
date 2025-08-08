@@ -95,17 +95,22 @@ void display_monitor_initialize(void) {
   tft.setRotation(TFT_SCREEN_ROTATION);
   tft.fillScreen(display_monitor.active_background_color);
 
-  canvas.createSprite(CANVAS_WIDTH, CANVAS_HEIGHT);
-  canvas.fillSprite(display_monitor.active_background_color);
+  // delay(1000);
+  //  tft.fillScreen(TFT_GREEN);
+  // delay(1000);
+  // tft.fillScreen(TFT_BLUE);
+  // delay(1000);
+
+  // int j = 100; 
+  // for(int i = 0; NULL == canvas.createSprite(j + i, j + i); i++) {
+  //   canvas.deleteSprite();
+  //   j = 100 + i; 
+  // }
   
-  // zone_0.createSprite(ZONE_0_WIDTH, ZONE_0_HEIGHT);
-  // zone_0.fillSprite(display_monitor.active_background_color);
-  // zone_1.createSprite(ZONE_1_WIDTH, ZONE_1_HEIGHT);
-  // zone_1.fillSprite(display_monitor.active_background_color);
-  // zone_2.createSprite(ZONE_2_WIDTH, ZONE_2_HEIGHT);
-  // zone_2.fillSprite(display_monitor.active_background_color);
-  // zone_3.createSprite(ZONE_3_WIDTH, ZONE_3_HEIGHT);
-  // zone_3.fillSprite(display_monitor.active_background_color);
+  // tft.fillScreen(TFT_RED);
+  // canvas.createSprite(j, j);
+  // canvas.fillSprite(display_monitor.active_background_color);
+  
 }
 
 
@@ -118,7 +123,7 @@ void display_monitor_tasks(void) {
       break;
 
     case DISPLAY_MONITOR_STATE_WAIT:
-      canvas.pushSprite(0,0);
+      //canvas.pushSprite(0,0);
       if (!digits_monitor.in_strobe_phase) {
         display_monitor.state = DISPLAY_MONITOR_STATE_SHOW_ZONE_0;
       }
@@ -153,11 +158,11 @@ void use_colors(unsigned int background_color,
                 unsigned int text_color) {
   if(display_monitor.active_background_color != background_color) {
     display_monitor.active_background_color = background_color; 
-    canvas.fillSprite(background_color);
+    tft.fillScreen(background_color);
   }
   if(display_monitor.active_text_color != text_color) {
     display_monitor.active_text_color = text_color; 
-    canvas.setTextColor(display_monitor.active_text_color, 
+    tft.setTextColor(display_monitor.active_text_color, 
                      display_monitor.active_background_color, 
                      true);  
   }
@@ -219,65 +224,64 @@ void draw_splash_screen(void) {
 
 
   // First Splash Screen 
-  canvas.fillSprite(bg);
-  canvas.drawBitmap(x, y, splashFluke, W_SPLASH_FLUKE, H_SPLASH_FLUKE, fg, bg);
+  tft.fillScreen(bg);
+  tft.drawBitmap(x, y, splashFluke, W_SPLASH_FLUKE, H_SPLASH_FLUKE, fg, bg);
 
-  canvas.loadFont(AA_FONT_MEDIUM);
+  tft.loadFont(AA_FONT_MEDIUM);
 
-  canvas.setCursor(
-    (CANVAS_WIDTH - canvas.textWidth(firmware_information.hardware))>>1, 
-    y += H_SPLASH_FLUKE + canvas.fontHeight() +3
+  tft.setCursor(
+    (CANVAS_WIDTH - tft.textWidth(firmware_information.hardware))>>1, 
+    y += H_SPLASH_FLUKE + tft.fontHeight() +3
   );
-  canvas.println(firmware_information.hardware);
+  tft.println(firmware_information.hardware);
   
-  canvas.pushSprite(0,0); 
 
   delay(TFT_SPLASH_SCREEN_DURATION);   
-  canvas.fillSprite(bg);
+  tft.fillScreen(bg);
 
 
   // Second Splash Screen 
   y = ((CANVAS_HEIGHT - H_SPLASH_FLUKE)>>2) + 10;
-  canvas.setCursor((CANVAS_WIDTH - canvas.textWidth(firmware_information.author))>>1, y);
-  canvas.println(firmware_information.author);
-  y += canvas.fontHeight() + 10; 
-  canvas.unloadFont();
-  canvas.loadFont(AA_FONT_SMALL);
-  canvas.setCursor((CANVAS_WIDTH - canvas.textWidth(firmware_information.version))>>1, y);
-  canvas.println(firmware_information.version);
+  tft.setCursor((CANVAS_WIDTH - tft.textWidth(firmware_information.author))>>1, y);
+  tft.println(firmware_information.author);
+  y += tft.fontHeight() + 10; 
+  tft.unloadFont();
+  tft.loadFont(AA_FONT_SMALL);
+  tft.setCursor((CANVAS_WIDTH - tft.textWidth(firmware_information.version))>>1, y);
+  tft.println(firmware_information.version);
 
-  canvas.setCursor((CANVAS_WIDTH - canvas.textWidth(firmware_information.github1))>>1, y += canvas.fontHeight() + 5);
-  canvas.println(firmware_information.github1);
-  canvas.setCursor((CANVAS_WIDTH - canvas.textWidth(firmware_information.github2))>>1, y += canvas.fontHeight());
-  canvas.println(firmware_information.github2);
-  canvas.pushSprite(0,0);
+  tft.setCursor((CANVAS_WIDTH - tft.textWidth(firmware_information.github1))>>1, y += tft.fontHeight() + 5);
+  tft.println(firmware_information.github1);
+  tft.setCursor((CANVAS_WIDTH - tft.textWidth(firmware_information.github2))>>1, y += tft.fontHeight());
+  tft.println(firmware_information.github2);
+  //tft.pushSprite(0,0);
 
-  canvas.unloadFont();
+  tft.unloadFont();
   delay(TFT_SPLASH_SCREEN_DURATION<<1);   
-  canvas.fillSprite(bg);
-  canvas.pushSprite(0,0);
+  tft.fillScreen(bg);
+  //canvas.pushSprite(0,0);
 } 
 
 
-void draw_using_one_symbol(TFT_eSprite &sprite, oneSymbol &one_symbol, bool invert_colors, unsigned int &x, unsigned int &y){
+void draw_using_one_symbol(TFT_eSPI &tft, oneSymbol &one_symbol, bool invert_colors, unsigned int &x, unsigned int &y){
   unsigned int fg = display_monitor.active_text_color;
   unsigned int bg = display_monitor.active_background_color;
   if(invert_colors){
     fg = display_monitor.active_background_color;
     bg = display_monitor.active_text_color;
   }
-  sprite.drawBitmap(x, y+one_symbol.y_offset, one_symbol.symbol, one_symbol.width, one_symbol.height, fg, bg);
+  tft.drawBitmap(x, y+one_symbol.y_offset, one_symbol.symbol, one_symbol.width, one_symbol.height, fg, bg);
   x += one_symbol.width;
 }
 
-void draw_using_array_of_symbols(TFT_eSprite &sprite, arrayOfSymbols &array_of_symbols, unsigned int d, bool invert_colors, unsigned int &x, unsigned int &y){
+void draw_using_array_of_symbols(TFT_eSPI &tft, arrayOfSymbols &array_of_symbols, unsigned int d, bool invert_colors, unsigned int &x, unsigned int &y){
   unsigned int fg = display_monitor.active_text_color;
   unsigned int bg = display_monitor.active_background_color;
   if(invert_colors){
     fg = display_monitor.active_background_color;
     bg = display_monitor.active_text_color;
   }
-  sprite.drawBitmap(x, y+array_of_symbols.y_offset, array_of_symbols.symbols [d], array_of_symbols.width, array_of_symbols.height, fg, bg);
+  tft.drawBitmap(x, y+array_of_symbols.y_offset, array_of_symbols.symbols [d], array_of_symbols.width, array_of_symbols.height, fg, bg);
   x += array_of_symbols.width;
 }
 
@@ -295,11 +299,11 @@ void draw_battery(void) {
   }
   if (contents_monitor.battery == LOW_BATTERY) 
   {
-    canvas.drawBitmap(x,y,battery_low_symbol, BATTERY_WIDTH, BATTERY_HEIGHT, fg, bg);  
+    tft.drawBitmap(x,y,battery_low_symbol, BATTERY_WIDTH, BATTERY_HEIGHT, fg, bg);  
   } 
   else if  (contents_monitor.battery == NORMAL_BATTERY) 
   {
-    canvas.drawBitmap(x,y,battery_full_symbol, BATTERY_WIDTH, BATTERY_HEIGHT, fg, bg);  
+    tft.drawBitmap(x,y,battery_full_symbol, BATTERY_WIDTH, BATTERY_HEIGHT, fg, bg);  
   }
 } 
 
@@ -313,7 +317,7 @@ void draw_diode(void){
     bg = display_monitor.active_text_color;
   }
   if (contents_monitor.diode_style != NO_DIODE) {
-    canvas.drawBitmap(x,y, diode_symbol, DIODE_WIDTH, DIODE_HEIGHT, fg, bg);  
+    tft.drawBitmap(x,y, diode_symbol, DIODE_WIDTH, DIODE_HEIGHT, fg, bg);  
   }
 }
 
@@ -328,7 +332,7 @@ void draw_high_voltage(void){
     bg = display_monitor.active_text_color;
   }
   if(contents_monitor.voltage_level == HIGH_VOLTAGE) {
-    canvas.drawBitmap(x,y,high_voltage_symbol, HV_WIDTH, HV_HEIGHT, fg, bg);
+    tft.drawBitmap(x,y,high_voltage_symbol, HV_WIDTH, HV_HEIGHT, fg, bg);
   }
 }
 
@@ -336,7 +340,7 @@ void format_zone_0(void){
   unsigned int x = 0;
   unsigned int y = 0;
 
-  canvas.fillSprite(display_monitor.active_background_color);
+  tft.fillScreen(display_monitor.active_background_color);
 
   if(contents_monitor.battery != NO_BATTERY){
     draw_battery();   
@@ -363,34 +367,34 @@ void format_zone_1(void){
   unsigned int y = Y_ZONE_1;
 
   if(contents_monitor.sign != NO_SIGN) {
-    draw_using_array_of_symbols(canvas, large_sign, contents_monitor.sign, INVERT_COLORS_SIGN_LG, x, y);
+    draw_using_array_of_symbols(tft, large_sign, contents_monitor.sign, INVERT_COLORS_SIGN_LG, x, y);
   } else {
     x += large_sign.width;
   }
   if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_ZERO){
-    draw_using_one_symbol(canvas, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
+    draw_using_one_symbol(tft, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
   } 
-  draw_using_array_of_symbols(canvas, large_digit, digits_monitor.st0_value0, INVERT_COLORS_DIGIT_LG, x, y);
+  draw_using_array_of_symbols(tft, large_digit, digits_monitor.st0_value0, INVERT_COLORS_DIGIT_LG, x, y);
   if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_ONE){
-    draw_using_one_symbol(canvas, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
+    draw_using_one_symbol(tft, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
   } 
-  draw_using_array_of_symbols(canvas, large_digit, digits_monitor.st1_value, INVERT_COLORS_DIGIT_LG, x, y);
+  draw_using_array_of_symbols(tft, large_digit, digits_monitor.st1_value, INVERT_COLORS_DIGIT_LG, x, y);
   if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_TWO){
-    draw_using_one_symbol(canvas, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
+    draw_using_one_symbol(tft, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
   } 
-  draw_using_array_of_symbols(canvas, large_digit, digits_monitor.st2_value, INVERT_COLORS_DIGIT_LG, x, y);
+  draw_using_array_of_symbols(tft, large_digit, digits_monitor.st2_value, INVERT_COLORS_DIGIT_LG, x, y);
   if(contents_monitor.decimal_point_position == DECIMAL_POINT_AT_THREE){
-    draw_using_one_symbol(canvas, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
+    draw_using_one_symbol(tft, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
   } 
-  draw_using_array_of_symbols(canvas, large_digit, digits_monitor.st3_value, INVERT_COLORS_DIGIT_LG, x, y);
+  draw_using_array_of_symbols(tft, large_digit, digits_monitor.st3_value, INVERT_COLORS_DIGIT_LG, x, y);
 
   // add the unit symbol and mode symbol
   x +=  REL_IN_ZONE_X_UNITS;
   y +=  REL_IN_ZONE_Y_UNITS;
-  draw_using_array_of_symbols(canvas, large_unit_symbol, contents_monitor.unit, INVERT_COLORS_UNIT, x, y);
+  draw_using_array_of_symbols(tft, large_unit_symbol, contents_monitor.unit, INVERT_COLORS_UNIT, x, y);
   x +=  REL_IN_ZONE_X_MODE - REL_IN_ZONE_X_UNITS - W_UNIT_LG;
   y +=  REL_IN_ZONE_Y_MODE - REL_IN_ZONE_Y_UNITS;
-  draw_using_array_of_symbols(canvas, small_mode_symbol, contents_monitor.acdc_mode, INVERT_COLORS_MODE, x, y);
+  draw_using_array_of_symbols(tft, small_mode_symbol, contents_monitor.acdc_mode, INVERT_COLORS_MODE, x, y);
 }
 
 // candidate for deletion 
