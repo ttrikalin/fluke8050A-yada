@@ -26,11 +26,14 @@ TFT_eSprite canvas = TFT_eSprite(&tft);
 //TFT_eSprite zone_3 = TFT_eSprite(&tft);
 
 
-functionMonitorData function_monitor; 
-rangeMonitorData range_monitor; 
-digitsMonitorData digits_monitor; 
-contentsMonitorData contents_monitor; 
+//functionMonitorData function_monitor; 
+//rangeMonitorData range_monitor; 
+//digitsMonitorData digits_monitor; 
+//contentsMonitorData contents_monitor; 
+
 displayMonitorData display_monitor; 
+slowTasksMonitorData slow_tasks_monitor; 
+fastTasksMonitorData fast_tasks_monitor; 
 
 oneSymbol large_decimal_point; 
 oneSymbol small_decimal_point; 
@@ -54,20 +57,20 @@ arrayOfSymbols small_mode_symbol;
 void setup(void) {
   
   ESP32_WROOM32_initialize();
-  range_monitor_initialize(); 
-  function_monitor_initialize();
-  digits_monitor_initialize();
-  contents_monitor_initialize();
+  slow_tasks_monitor_initialize(); 
+  fast_tasks_monitor_initialize();
+  //digits_monitor_initialize();
+  //contents_monitor_initialize();
   display_monitor_initialize();
   
 }
 
 void loop(void) {
-  delay(10); 
-  digits_monitor_tasks(); 
-  range_monitor_tasks();
-  function_monitor_tasks();
-  contents_monitor_tasks();
+  delay(LOOP_DELAY_MILLISECONDS); 
+  slow_tasks_monitor_tasks(); 
+  fast_tasks_monitor_tasks();
+  //digits_monitor_tasks(); 
+  //contents_monitor_tasks();
   display_monitor_tasks(); 
 }
 

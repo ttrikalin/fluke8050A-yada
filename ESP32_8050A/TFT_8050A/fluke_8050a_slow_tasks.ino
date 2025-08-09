@@ -9,7 +9,7 @@ void slow_tasks_monitor_initialize(void) {
   slow_tasks_monitor.battery = NO_BATTERY; 
   slow_tasks_monitor.acdc_mode = NO_ACDC; 
   slow_tasks_monitor.relative_measurement = ABSOLUTE_MEASUREMENT; 
-  slow_tasks_monitor.active_function = RESISTANCE; 
+  slow_tasks_monitor.active_function = RELATIVE_RESISTANCE_0; 
   slow_tasks_monitor.active_range = RANGE_20M; 
   slow_tasks_monitor.loop_counter = UPDATE_SLOW_TASKS_EVERY_N_LOOPS; 
 }
@@ -240,7 +240,7 @@ void infer_decimal_point_position(void) {
 
 
 
-read_active_range(void) {
+void read_active_range(void) {
   slow_tasks_monitor.active_range = 
     (measurement_range) 
       ((digitalRead(fluke8050a_RNG_C)<<2)|

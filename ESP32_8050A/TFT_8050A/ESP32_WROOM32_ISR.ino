@@ -29,7 +29,7 @@ void IRAM_ATTR strobe3_ISR(void) {
 }
 
 void IRAM_ATTR strobe4_ISR(void) {
-  fast_tasks_monitor.isr_read_flag = true;
+  fast_tasks_monitor.isr_read_flag = true; 
   fast_tasks_monitor.isr_active_strobe = ST4;
 }
 

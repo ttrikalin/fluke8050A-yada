@@ -1,6 +1,8 @@
 #ifndef TFT_8050A_H
 #define TFT_8050A_H
 
+
+
 #define IS_ODD(x) ((x) & 0x01)
 
 const struct {
@@ -109,7 +111,10 @@ void display_initialize(void);
 // -- ranges and units (20M, 200nS, 2mS, Point 2, 200, 20, 2, 2000) 
 // -- diode, battery 
 
+
 #define UPDATE_SLOW_TASKS_EVERY_N_LOOPS 10
+#define LOOP_DELAY_MILLISECONDS 10
+
 
 /* slow tasks states */
 typedef enum  {
@@ -246,6 +251,8 @@ void infer_diode_style(void);
 void infer_low_battery(void); 
 void infer_relative_measurement(void); 
 void infer_decimal_point_position(void); 
+void read_active_range(void); 
+void read_active_function(void); 
 /***************** Slow tasks monitor end ***********************/
 
 
@@ -305,7 +312,6 @@ void infer_sign(void);
 void fast_tasks_monitor_initialize(void); 
 void fast_tasks_monitor_tasks(void); 
 /***************** Fast tasks monitor end *************************/
-#endif // TFT_8050A_H
 
 
 
@@ -393,3 +399,5 @@ void draw_diode(void);
 
 
 /***************** Display monitor end ************************/
+
+#endif // TFT_8050A_H
