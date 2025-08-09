@@ -94,16 +94,32 @@ void ESP32_WROOM32_initialize(void);
 void display_initialize(void); 
 /**************** ESP32-WROOM32 configuration end ************/
 
-/***************** Function monitor start ***********************/
-/* Function states */
+
+
+
+
+
+/***************** Slow tasks monitor start ***********************/
+// These tasks change rarely -- at a cadence other than the measurement cadence. 
+// e.g., if the user presses a switch or if the battery changes from low to high. 
+// They should be checked and updated at a slow cadence.  
+// The user inputs are manually set by the user -- this means that you need not check it all the time. 
+// that you need not check it all the time -- maybe once per 500ms
+// -- measurement functions (resistance, voltage, current, gain) 
+// -- ranges and units (20M, 200nS, 2mS, Point 2, 200, 20, 2, 2000) 
+// -- diode, battery 
+
+#define UPDATE_SLOW_TASKS_EVERY_N_LOOPS 10
+
+/* slow tasks states */
 typedef enum  {
-    FUNCTION_MONITOR_STATE_INIT = 0, 
-    FUNCTION_MONITOR_STATE_WAIT = 1, 
-    FUNCTION_MONITOR_STATE_READ = 2
-} function_monitor_states; 
+    SLOW_TASKS_MONITOR_STATE_INIT = 0, 
+    SLOW_TASKS_MONITOR_STATE_WAIT = 1, 
+    SLOW_TASKS_MONITOR_STATE_READ = 2
+} slow_tasks_monitor_states; 
 
 
-/* Function data */
+/* User input data */
 typedef enum {                      // 0bDCBA
     RELATIVE_RESISTANCE_0 =  0,     // 0b0000
     RELATIVE_RESISTANCE_1 =  1,     // 0b0001
@@ -123,96 +139,21 @@ typedef enum {                      // 0bDCBA
     GAIN_DB_3             = 15      // 0b1111
 } measurement_function; 
 
-typedef struct {
-    function_monitor_states state; 
-    // unsigned char read_flag; 
-    measurement_function active_function; 
-} functionMonitorData; 
-
-/* Function prototypes */ 
-void function_monitor_initialize(void); 
-void function_monitor_tasks(void); 
-/***************** Function monitor end ***********************/
-
-/***************** Range monitor start ************************/
-/* Range states */
-typedef enum  {
-    RANGE_MONITOR_STATE_INIT = 0, 
-    RANGE_MONITOR_STATE_WAIT = 1, 
-    RANGE_MONITOR_STATE_READ = 2
-} range_monitor_states; 
-
 /* Range data */
 typedef enum {              // 0b0CBA
-    RANGE_20M     =  0,     // 0b0000
-    RANGE_200nS   =  1,     // 0b0001
-    RANGE_2mS     =  2,     // 0b0010 
-    RANGE_POINT_2 =  3,     // 0b0011
-    RANGE_200     =  4,     // 0b0100 
-    RANGE_20      =  5,     // 0b0101   
-    RANGE_2       =  6,     // 0b0110
-    RANGE_2000    =  7      // 0b0111
+  RANGE_20M     =  0,     // 0b0000
+  RANGE_200nS   =  1,     // 0b0001
+  RANGE_2mS     =  2,     // 0b0010 
+  RANGE_POINT_2 =  3,     // 0b0011
+  RANGE_200     =  4,     // 0b0100 
+  RANGE_20      =  5,     // 0b0101   
+  RANGE_2       =  6,     // 0b0110
+  RANGE_2000    =  7      // 0b0111
 } measurement_range; 
 
-typedef struct {
-    range_monitor_states state; 
-    //unsigned char read_flag; 
-    measurement_range active_range; 
-} rangeMonitorData; 
 
-/* Function prototypes */ 
-void range_monitor_initialize(void); 
-void range_monitor_tasks(void); 
-/***************** Range monitor end **************************/
 
-/***************** Digits monitor start ***********************/
-/* Digits states */
-typedef enum  {
-    DIGITS_MONITOR_STATE_INIT  = 0, 
-    DIGITS_MONITOR_STATE_WAIT  = 1, 
-    DIGITS_MONITOR_STATE_READ  = 2
-} digits_monitor_states; 
-
-typedef enum {
-    NO_STROBE = 0, 
-    ST0_0     = 1, 
-    ST0_1     = 2, 
-    ST0_2     = 3, 
-    ST1       = 4, 
-    ST2       = 5, 
-    ST3       = 6, 
-    ST4       = 7
-} strobe_number; 
-
-/* Digits data */
-typedef struct {
-  digits_monitor_states state; 
-  strobe_number read_strobe;
-  unsigned int in_strobe_phase;
-  unsigned int read_flag; 
-  unsigned int st0_value0;
-  unsigned int st0_value1;
-  unsigned int st0_value2; 
-  unsigned int st1_value;
-  unsigned int st2_value; 
-  unsigned int st3_value; 
-  unsigned int st4_value; 
-} digitsMonitorData; 
-
-/* Function prototypes */ 
-void digits_monitor_initialize(void); 
-void digits_monitor_tasks(void); 
-/***************** Digits monitor end *************************/
-
-/***************** Contents monitor start *********************/
-/* Contents states */
-typedef enum  {
-  CONTENTS_MONITOR_STATE_INIT  = 0, 
-  CONTENTS_MONITOR_STATE_WAIT  = 1, 
-  CONTENTS_MONITOR_STATE_INFER = 2
-} contents_monitor_states; 
-
-/* Contents data */
+/* Units data */
 typedef enum  {
   NO_UNIT       =  0, 
   VOLT          =  1, 
@@ -228,11 +169,11 @@ typedef enum  {
   IMPENDANCE_Z  = 11
 } units; 
 
-typedef enum {
-  NO_VOLTAGE_LEVEL = 0,
-  LOW_VOLTAGE = 1, 
-  HIGH_VOLTAGE = 2
-} voltage_levels; 
+// typedef enum {
+//   NO_VOLTAGE_LEVEL = 0,
+//   LOW_VOLTAGE = 1, 
+//   HIGH_VOLTAGE = 2
+// } voltage_levels; 
 
 typedef enum {
   NO_ACDC = 0,
@@ -281,33 +222,90 @@ typedef enum {
   RELATIVE_MEASUREMENT = 1
 } relative_measurement_styles; 
 
-typedef struct { 
-  contents_monitor_states state; 
+typedef struct {
+  slow_tasks_monitor_states state; 
   units unit; 
   quantities quantity; 
   diode_styles diode_style;
   decimal_point_positions decimal_point_position;
-  signs sign; 
   battery_styles battery;
   acdc_modes acdc_mode;
-  voltage_levels voltage_level;
   relative_measurement_styles relative_measurement;
-} contentsMonitorData; 
+  measurement_function active_function; 
+  measurement_range active_range; 
+  unsigned int loop_counter; 
+} slowTasksMonitorData; 
 
-void contents_monitor_initialize(void); 
-void contents_monitor_tasks(void); 
+/* Function prototypes */ 
+void slow_tasks_monitor_initialize(void); 
+void slow_tasks_monitor_tasks(void); 
 void infer_alternating_current(void); 
 void infer_unit(void); 
 void infer_quantity(void); 
 void infer_diode_style(void); 
-void infer_high_voltage(void); 
 void infer_low_battery(void); 
 void infer_relative_measurement(void); 
-void infer_sign(void); 
 void infer_decimal_point_position(void); 
-/***************** Contents monitor end ***********************/
+/***************** Slow tasks monitor end ***********************/
 
 
+
+/***************** Fast tasks monitor start ***********************/
+// The fast tasks monitor state machine reads the strobe lines 
+// and updates the fast tasks monitor data structure. 
+// These change fast -- so you need to check it all the time, once per loop iteration. 
+// also, it reads the voltage level, and the sign bit for the digits.
+
+
+/* Digits states */
+typedef enum  {
+  FAST_TASKS_MONITOR_STATE_INIT  = 0, 
+  FAST_TASKS_MONITOR_STATE_WAIT  = 1, 
+  FAST_TASKS_MONITOR_STATE_READ  = 2
+} fast_tasks_monitor_states; 
+
+typedef enum {
+  NO_STROBE = 0, 
+  ST0_0     = 1, 
+  ST0_1     = 2, 
+  ST0_2     = 3, 
+  ST1       = 4, 
+  ST2       = 5, 
+  ST3       = 6, 
+  ST4       = 7
+} strobe_number; 
+
+
+typedef enum {
+NO_VOLTAGE_LEVEL = 0,
+LOW_VOLTAGE = 1, 
+HIGH_VOLTAGE = 2
+} voltage_levels; 
+
+/* Digits data */
+typedef struct {
+fast_tasks_monitor_states state; 
+strobe_number isr_active_strobe;
+bool isr_in_strobe_phase;
+bool isr_read_flag; 
+unsigned int st0_value0;
+unsigned int st0_value1;
+unsigned int st0_value2; 
+unsigned int st1_value;
+unsigned int st2_value; 
+unsigned int st3_value; 
+unsigned int st4_value; 
+voltage_levels voltage_level; 
+signs sign; 
+} fastTasksMonitorData; 
+
+/* Function prototypes */ 
+void infer_high_voltage(void); 
+void infer_sign(void); 
+void fast_tasks_monitor_initialize(void); 
+void fast_tasks_monitor_tasks(void); 
+/***************** Fast tasks monitor end *************************/
+#endif // TFT_8050A_H
 
 
 
@@ -350,6 +348,7 @@ typedef struct {
   String digits_str; 
   float relative_reference;
   String impedance_reference_str;
+
 } displayMonitorData; 
 
 
@@ -394,5 +393,3 @@ void draw_diode(void);
 
 
 /***************** Display monitor end ************************/
-
-#endif // TFT_8050A_H
