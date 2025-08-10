@@ -6,40 +6,48 @@ void slow_tasks_monitor_initialize(void) {
   slow_tasks_monitor.quantity = NO_QUANTITY; 
   slow_tasks_monitor.diode_style = NO_DIODE; 
   slow_tasks_monitor.decimal_point_position = NO_DECIMAL_POINT; 
-  slow_tasks_monitor.battery = NO_BATTERY; 
+  slow_tasks_monitor.battery = NORMAL_BATTERY; 
   slow_tasks_monitor.acdc_mode = NO_ACDC; 
   slow_tasks_monitor.relative_measurement = ABSOLUTE_MEASUREMENT; 
   slow_tasks_monitor.active_function = RELATIVE_RESISTANCE_0; 
   slow_tasks_monitor.active_range = RANGE_20M; 
-  slow_tasks_monitor.loop_counter = 0; 
+  slow_tasks_monitor.new_values_flag = true; 
 }
 
 void slow_tasks_monitor_tasks(void) {
   switch(slow_tasks_monitor.state) {
     case SLOW_TASKS_MONITOR_STATE_INIT: {
       slow_tasks_monitor.state = SLOW_TASKS_MONITOR_STATE_WAIT;
-      slow_tasks_monitor.loop_counter = 0; 
       break;
     }
     case SLOW_TASKS_MONITOR_STATE_WAIT: {
-      slow_tasks_monitor.loop_counter++; 
-      if (slow_tasks_monitor.loop_counter == UPDATE_SLOW_TASKS_EVERY_N_LOOPS) {
+      measurement_range new_active_range = read_active_range(); 
+      measurement_function new_active_function = read_active_function(); 
+      battery_styles new_battery_style = read_battery(); 
+      
+      if (new_active_range != slow_tasks_monitor.active_range) {
+        slow_tasks_monitor.active_range = new_active_range;
+        slow_tasks_monitor.state = SLOW_TASKS_MONITOR_STATE_READ;
+      } 
+      if (new_active_function != slow_tasks_monitor.active_function) {
+        slow_tasks_monitor.active_function = new_active_function;
+        slow_tasks_monitor.state = SLOW_TASKS_MONITOR_STATE_READ;
+      }
+      if (new_battery_style != slow_tasks_monitor.battery) {
+        slow_tasks_monitor.battery = new_battery_style;
         slow_tasks_monitor.state = SLOW_TASKS_MONITOR_STATE_READ;
       }
       break;
     }
     case SLOW_TASKS_MONITOR_STATE_READ: {
-      slow_tasks_monitor.loop_counter = 0; 
-      read_active_function(); 
-      read_active_range(); 
       infer_unit(); 
       infer_quantity(); 
       infer_diode_style(); 
       infer_decimal_point_position(); 
-      infer_low_battery(); 
       infer_relative_measurement(); 
       infer_alternating_current(); 
       slow_tasks_monitor.state = SLOW_TASKS_MONITOR_STATE_WAIT;
+      slow_tasks_monitor.new_values_flag = true; 
       break;
     }
   }
@@ -66,20 +74,20 @@ void infer_relative_measurement(void) {
 //     HIGH_VOLTAGE : LOW_VOLTAGE; 
 // } 
 
-void infer_low_battery(void) {
-  // fluke8050a_BT is set when battery is low. 
-  switch(slow_tasks_monitor.battery) {
-    case NORMAL_BATTERY:  
-    case LOW_BATTERY: 
-      slow_tasks_monitor.battery = digitalRead(fluke8050a_BT) ? 
-        LOW_BATTERY : NORMAL_BATTERY; 
-      break;
+// void infer_low_battery(void) {
+//   // fluke8050a_BT is set when battery is low. 
+//   switch(slow_tasks_monitor.battery) {
+//     case NORMAL_BATTERY:  
+//     case LOW_BATTERY: 
+//       slow_tasks_monitor.battery = digitalRead(fluke8050a_BT) ? 
+//         LOW_BATTERY : NORMAL_BATTERY; 
+//       break;
     
-    case NO_BATTERY:
-    default: 
-      break; 
-  }
-} 
+//     case NO_BATTERY:
+//     default: 
+//       break; 
+//   }
+// } 
 
 void infer_quantity(void) {
   // This can be made easier by checking only 
@@ -240,22 +248,29 @@ void infer_decimal_point_position(void) {
 
 
 
-void read_active_range(void) {
-  slow_tasks_monitor.active_range = 
-    (measurement_range) 
+measurement_range read_active_range(void) {
+  return (measurement_range) 
       ((digitalRead(fluke8050a_RNG_C)<<2)|
        (digitalRead(fluke8050a_RNG_B)<<1)|
        (digitalRead(fluke8050a_RNG_A)   )); 
 }
 
-void read_active_function(void) {
-  slow_tasks_monitor.active_function = 
-    (measurement_function)
+measurement_function read_active_function(void) {
+  return (measurement_function)
       ((digitalRead(fluke8050a_FUNC_D)<<3)|
        (digitalRead(fluke8050a_FUNC_C)<<2)|
        (digitalRead(fluke8050a_FUNC_B)<<1)|
        (digitalRead(fluke8050a_FUNC_A)   )); 
 }
+
+battery_styles read_battery(void) {
+  if (slow_tasks_monitor.battery == NO_BATTERY) {
+    return NO_BATTERY; 
+  } else {
+    return digitalRead(fluke8050a_BT) ? LOW_BATTERY : NORMAL_BATTERY; 
+  }
+}
+
 
 
 // void infer_sign(void) {

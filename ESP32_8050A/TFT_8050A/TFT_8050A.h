@@ -229,6 +229,9 @@ typedef enum {
 
 typedef struct {
   slow_tasks_monitor_states state; 
+  measurement_function active_function; 
+  measurement_range active_range; 
+  bool new_values_flag; 
   units unit; 
   quantities quantity; 
   diode_styles diode_style;
@@ -236,9 +239,6 @@ typedef struct {
   battery_styles battery;
   acdc_modes acdc_mode;
   relative_measurement_styles relative_measurement;
-  measurement_function active_function; 
-  measurement_range active_range; 
-  unsigned int loop_counter; 
 } slowTasksMonitorData; 
 
 /* Function prototypes */ 
@@ -251,8 +251,9 @@ void infer_diode_style(void);
 void infer_low_battery(void); 
 void infer_relative_measurement(void); 
 void infer_decimal_point_position(void); 
-void read_active_range(void); 
-void read_active_function(void); 
+measurement_range read_active_range(void); 
+measurement_function read_active_function(void); 
+battery_styles read_battery(void); 
 /***************** Slow tasks monitor end ***********************/
 
 
@@ -320,8 +321,8 @@ void fast_tasks_monitor_tasks(void);
 typedef enum  {
   DISPLAY_MONITOR_STATE_INIT                       = 0, 
   DISPLAY_MONITOR_STATE_WAIT                       = 1, 
-  DISPLAY_MONITOR_STATE_SHOW_BACKGROUND_STATUS     = 3, 
-  DISPLAY_MONITOR_STATE_SHOW_MEASUREMENT           = 4
+  DISPLAY_MONITOR_STATE_UPDATE_BACKGROUND_STATUS   = 2, 
+  DISPLAY_MONITOR_STATE_UPDATE_MEASUREMENT         = 3
 } display_monitor_states; 
 
 typedef struct {
