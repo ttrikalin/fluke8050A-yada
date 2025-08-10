@@ -56,10 +56,10 @@ const struct {
 #define fluke8050a_BT      17     // TX2
 
 // func 
-#define fluke8050a_FUNC_B  16     // RX2
-#define fluke8050a_FUNC_D  4
-#define fluke8050a_FUNC_A  2
 #define fluke8050a_FUNC_C  15
+#define fluke8050a_FUNC_A  2
+#define fluke8050a_FUNC_D  4
+#define fluke8050a_FUNC_B  16     // RX2
 
 // 8050A strobe lines
 #define fluke8050a_ST0     13

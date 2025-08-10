@@ -12,33 +12,33 @@ void display_monitor_initialize(void) {
 
   display_monitor.non_high_voltage_theme.splash_background_color      = TFT_DARKGREEN;
   display_monitor.non_high_voltage_theme.splash_text_color            = TFT_WHITE;
-  display_monitor.non_high_voltage_theme.voltage_background_color     = TFT_BLACK;
-  display_monitor.non_high_voltage_theme.voltage_text_color           = TFT_WHITE;
-  display_monitor.non_high_voltage_theme.current_background_color     = TFT_BLACK;
-  display_monitor.non_high_voltage_theme.current_text_color           = TFT_WHITE;
-  display_monitor.non_high_voltage_theme.resistance_background_color  = TFT_BLACK;
-  display_monitor.non_high_voltage_theme.resistance_text_color        = TFT_WHITE;
-  display_monitor.non_high_voltage_theme.conductance_background_color = TFT_BLACK;
-  display_monitor.non_high_voltage_theme.conductance_text_color       = TFT_WHITE;
-  display_monitor.non_high_voltage_theme.gain_background_color        = TFT_BLACK;
-  display_monitor.non_high_voltage_theme.gain_text_color              = TFT_WHITE;
-  display_monitor.non_high_voltage_theme.invalid_background_color     = TFT_RED;
-  display_monitor.non_high_voltage_theme.invalid_text_color           = TFT_WHITE;
+  display_monitor.non_high_voltage_theme.voltage_background_color     = TFT_LIGHTGREEN;
+  display_monitor.non_high_voltage_theme.voltage_text_color           = TFT_BLACK;
+  display_monitor.non_high_voltage_theme.current_background_color     = TFT_SALMON;
+  display_monitor.non_high_voltage_theme.current_text_color           = TFT_BLACK;
+  display_monitor.non_high_voltage_theme.resistance_background_color  = TFT_LIGHTMUSTARD;
+  display_monitor.non_high_voltage_theme.resistance_text_color        = TFT_BLACK;
+  display_monitor.non_high_voltage_theme.conductance_background_color = TFT_LIGHTMUSTARD;
+  display_monitor.non_high_voltage_theme.conductance_text_color       = TFT_BLACK;
+  display_monitor.non_high_voltage_theme.gain_background_color        = TFT_WHITE;
+  display_monitor.non_high_voltage_theme.gain_text_color              = TFT_BLACK;
+  display_monitor.non_high_voltage_theme.invalid_background_color     = TFT_WHITE;
+  display_monitor.non_high_voltage_theme.invalid_text_color           = TFT_RED;
 
-  display_monitor.high_voltage_theme.splash_background_color      = TFT_GREEN;
+  display_monitor.high_voltage_theme.splash_background_color      = TFT_DARKRED;
   display_monitor.high_voltage_theme.splash_text_color            = TFT_WHITE;
-  display_monitor.high_voltage_theme.voltage_background_color     = TFT_BLACK;
-  display_monitor.high_voltage_theme.voltage_text_color           = TFT_RED;
-  display_monitor.high_voltage_theme.current_background_color     = TFT_BLACK;
-  display_monitor.high_voltage_theme.current_text_color           = TFT_RED;
-  display_monitor.high_voltage_theme.resistance_background_color  = TFT_BLACK;
-  display_monitor.high_voltage_theme.resistance_text_color        = TFT_RED;
-  display_monitor.high_voltage_theme.conductance_background_color = TFT_BLACK;
-  display_monitor.high_voltage_theme.conductance_text_color       = TFT_RED;
-  display_monitor.high_voltage_theme.gain_background_color        = TFT_BLACK;
-  display_monitor.high_voltage_theme.gain_text_color              = TFT_RED;
-  display_monitor.high_voltage_theme.invalid_background_color     = TFT_RED;
-  display_monitor.high_voltage_theme.invalid_text_color           = TFT_WHITE;
+  display_monitor.high_voltage_theme.voltage_background_color     = TFT_DARKRED;
+  display_monitor.high_voltage_theme.voltage_text_color           = TFT_WHITE;
+  display_monitor.high_voltage_theme.current_background_color     = TFT_DARKRED;
+  display_monitor.high_voltage_theme.current_text_color           = TFT_WHITE;
+  display_monitor.high_voltage_theme.resistance_background_color  = TFT_DARKRED;
+  display_monitor.high_voltage_theme.resistance_text_color        = TFT_WHITE;
+  display_monitor.high_voltage_theme.conductance_background_color = TFT_DARKRED;
+  display_monitor.high_voltage_theme.conductance_text_color       = TFT_WHITE;
+  display_monitor.high_voltage_theme.gain_background_color        = TFT_DARKRED;
+  display_monitor.high_voltage_theme.gain_text_color              = TFT_WHITE;
+  display_monitor.high_voltage_theme.invalid_background_color     = TFT_WHITE;
+  display_monitor.high_voltage_theme.invalid_text_color           = TFT_RED;
 
   large_decimal_point.width = W_DP_LG; 
   large_decimal_point.height = H_DP_LG; 
@@ -387,7 +387,8 @@ point draw_symbol_array_element_to_tft(TFT_eSPI &tft, arrayOfSymbols &array_of_s
 
 
 void draw_background_status_screen(void){
-  if(false) {return ;}
+  update_colors();
+  
   point p = {X_BATTERY, Y_BATTERY};
   tft.fillScreen(display_monitor.active_background_color);
   if(true || slow_tasks_monitor.battery == NORMAL_BATTERY){

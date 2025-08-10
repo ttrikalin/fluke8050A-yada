@@ -49,6 +49,11 @@
 
 
 
+#define TFT_LIGHTBLUE 0x7BEF
+#define TFT_SALMON 0xFC8E
+#define TFT_DARKRED 0x8000
+#define TFT_LIGHTMUSTARD 0xEFE0
+#define TFT_LIGHTGREEN 0x97E6
 
 
 #endif // TFT_320x240_H
