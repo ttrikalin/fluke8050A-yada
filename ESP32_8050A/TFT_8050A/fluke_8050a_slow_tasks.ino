@@ -11,14 +11,14 @@ void slow_tasks_monitor_initialize(void) {
   slow_tasks_monitor.relative_measurement = ABSOLUTE_MEASUREMENT; 
   slow_tasks_monitor.active_function = RELATIVE_RESISTANCE_0; 
   slow_tasks_monitor.active_range = RANGE_20M; 
-  slow_tasks_monitor.loop_counter = UPDATE_SLOW_TASKS_EVERY_N_LOOPS; 
+  slow_tasks_monitor.loop_counter = 0; 
 }
 
 void slow_tasks_monitor_tasks(void) {
   switch(slow_tasks_monitor.state) {
     case SLOW_TASKS_MONITOR_STATE_INIT: {
       slow_tasks_monitor.state = SLOW_TASKS_MONITOR_STATE_WAIT;
-      slow_tasks_monitor.loop_counter = UPDATE_SLOW_TASKS_EVERY_N_LOOPS; 
+      slow_tasks_monitor.loop_counter = 0; 
       break;
     }
     case SLOW_TASKS_MONITOR_STATE_WAIT: {

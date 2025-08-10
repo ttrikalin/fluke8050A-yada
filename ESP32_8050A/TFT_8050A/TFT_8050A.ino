@@ -16,7 +16,7 @@ provided the decoding of the strobe lines and the function and range truth table
 TFT_eSPI tft = TFT_eSPI();   
 
 
-TFT_eSprite canvas = TFT_eSprite(&tft);
+TFT_eSprite measurements_sprite = TFT_eSprite(&tft);
 //TFT_eSprite high_voltage = TFT_eSprite(&tft);
 //TFT_eSprite battery = TFT_eSprite(&tft);
 //TFT_eSprite diode = TFT_eSprite(&tft);
@@ -37,7 +37,10 @@ fastTasksMonitorData fast_tasks_monitor;
 
 oneSymbol large_decimal_point; 
 oneSymbol small_decimal_point; 
-
+oneSymbol battery_full; 
+oneSymbol battery_low; 
+oneSymbol diode; 
+oneSymbol high_voltage; 
 
 arrayOfSymbols large_sign; 
 arrayOfSymbols small_sign; 

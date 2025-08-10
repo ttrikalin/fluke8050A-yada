@@ -4,7 +4,7 @@
 #define HV_WIDTH  42 
 #define HV_HEIGHT 36
 
-#define INVERT_COLORS_HV false
+#define INVERT_COLORS_HV true
 
 const uint8_t high_voltage_symbol[] PROGMEM = {
 0xff,0xff,0xf3,0xff,0xff,0xc0

@@ -91,9 +91,33 @@ void display_monitor_initialize(void) {
   small_mode_symbol.y_offset = 0;
   small_mode_symbol.symbols = mode_sm;
 
+
+  battery_full.width = BATTERY_WIDTH;
+  battery_full.height = BATTERY_HEIGHT;
+  battery_full.y_offset = 0;
+  battery_full.symbol = battery_full_symbol;
+  
+  battery_low.width = BATTERY_WIDTH;
+  battery_low.height = BATTERY_HEIGHT;
+  battery_low.y_offset = 0;
+  battery_low.symbol = battery_low_symbol;
+
+  diode.width = DIODE_WIDTH;
+  diode.height = DIODE_HEIGHT;
+  diode.y_offset = 0;
+  diode.symbol = diode_symbol;
+
+  high_voltage.width = HV_WIDTH;
+  high_voltage.height = HV_HEIGHT;
+  high_voltage.y_offset = 0;
+  high_voltage.symbol = high_voltage_symbol;
+
   tft.init();
   tft.setRotation(TFT_SCREEN_ROTATION);
   tft.fillScreen(display_monitor.active_background_color);
+
+  measurements_sprite.createSprite(MEASUREMENTS_WIDTH, MEASUREMENTS_HEIGHT);
+  measurements_sprite.fillSprite(display_monitor.active_background_color);
 
   // delay(1000);
   //  tft.fillScreen(TFT_GREEN);
@@ -124,30 +148,24 @@ void display_monitor_tasks(void) {
 
     case DISPLAY_MONITOR_STATE_WAIT:
       //canvas.pushSprite(0,0);
-      if (!fast_tasks_monitor.isr_in_strobe_phase) {
-        display_monitor.state = DISPLAY_MONITOR_STATE_SHOW_ZONE_0;
+      if (!fast_tasks_monitor.isr_in_strobe_phase && 
+          slow_tasks_monitor.loop_counter == 0) {
+        display_monitor.state = DISPLAY_MONITOR_STATE_SHOW_BACKGROUND_STATUS;
+      } else {
+        display_monitor.state = DISPLAY_MONITOR_STATE_SHOW_MEASUREMENT;
       }
       break;
 
-    case DISPLAY_MONITOR_STATE_SHOW_ZONE_0:
-      display_monitor.state = DISPLAY_MONITOR_STATE_SHOW_MEASUREMENT_ZONE_1;
-      draw_zone_0();         
+    case DISPLAY_MONITOR_STATE_SHOW_BACKGROUND_STATUS:
+      display_monitor.state = DISPLAY_MONITOR_STATE_SHOW_MEASUREMENT;
+      draw_background_status_screen();         
       break;
 
-    case DISPLAY_MONITOR_STATE_SHOW_MEASUREMENT_ZONE_1:
-      display_monitor.state = DISPLAY_MONITOR_STATE_SHOW_ZONE_2;
-      draw_zone_1(); 
-      break; 
-
-    case DISPLAY_MONITOR_STATE_SHOW_ZONE_2: 
-      display_monitor.state = DISPLAY_MONITOR_STATE_SHOW_ZONE_3;
-      draw_zone_2(); 
-      break;
-
-    case DISPLAY_MONITOR_STATE_SHOW_ZONE_3: 
+    case DISPLAY_MONITOR_STATE_SHOW_MEASUREMENT:
       display_monitor.state = DISPLAY_MONITOR_STATE_WAIT;
-      draw_zone_3();
-      break;
+      draw_measurement(); 
+      measurements_sprite.pushSprite(X_MEASUREMENTS, Y_MEASUREMENTS);
+      break; 
 
     default:
       break; 
@@ -263,149 +281,182 @@ void draw_splash_screen(void) {
 } 
 
 
-void draw_using_one_symbol(TFT_eSPI &tft, oneSymbol &one_symbol, bool invert_colors, unsigned int &x, unsigned int &y){
+point draw_symbol_to_tft(TFT_eSPI &tft, oneSymbol &symbol, bool invert_colors, point p){
   unsigned int fg = display_monitor.active_text_color;
   unsigned int bg = display_monitor.active_background_color;
   if(invert_colors){
     fg = display_monitor.active_background_color;
     bg = display_monitor.active_text_color;
   }
-  tft.drawBitmap(x, y+one_symbol.y_offset, one_symbol.symbol, one_symbol.width, one_symbol.height, fg, bg);
-  x += one_symbol.width;
+  tft.drawBitmap(p.x, p.y+symbol.y_offset, symbol.symbol, symbol.width, symbol.height, fg, bg);
+  return point{p.x+symbol.width, p.y};
 }
 
-void draw_using_array_of_symbols(TFT_eSPI &tft, arrayOfSymbols &array_of_symbols, unsigned int d, bool invert_colors, unsigned int &x, unsigned int &y){
+point draw_symbol_to_sprite(TFT_eSprite &sprite, oneSymbol &symbol, bool invert_colors, point p){
   unsigned int fg = display_monitor.active_text_color;
   unsigned int bg = display_monitor.active_background_color;
   if(invert_colors){
     fg = display_monitor.active_background_color;
     bg = display_monitor.active_text_color;
   }
-  tft.drawBitmap(x, y+array_of_symbols.y_offset, array_of_symbols.symbols [d], array_of_symbols.width, array_of_symbols.height, fg, bg);
-  x += array_of_symbols.width;
+  sprite.drawBitmap(p.x, p.y+symbol.y_offset, symbol.symbol, symbol.width, symbol.height, fg, bg);
+  return point{p.x+symbol.width, p.y};
 }
 
-
-
-void draw_battery(void) {
+point draw_symbol_array_element_to_sprite(TFT_eSprite &sprite, arrayOfSymbols &array_of_symbols, unsigned int d, bool invert_colors, point p){
   unsigned int fg = display_monitor.active_text_color;
   unsigned int bg = display_monitor.active_background_color;
-  unsigned int x = X_BATTERY;
-  unsigned int y = Y_BATTERY;
-
-  if(INVERT_COLORS_BATTERY){
+  if(invert_colors){
     fg = display_monitor.active_background_color;
     bg = display_monitor.active_text_color;
   }
-  if (slow_tasks_monitor.battery == LOW_BATTERY) 
-  {
-    tft.drawBitmap(x,y,battery_low_symbol, BATTERY_WIDTH, BATTERY_HEIGHT, fg, bg);  
-  } 
-  else if  (slow_tasks_monitor.battery == NORMAL_BATTERY) 
-  {
-    tft.drawBitmap(x,y,battery_full_symbol, BATTERY_WIDTH, BATTERY_HEIGHT, fg, bg);  
-  }
-} 
+  sprite.drawBitmap(p.x, p.y+array_of_symbols.y_offset, array_of_symbols.symbols [d], array_of_symbols.width, array_of_symbols.height, fg, bg);
+  return point{p.x+array_of_symbols.width, p.y};
+}
 
-void draw_diode(void){
+point draw_symbol_array_element_to_tft(TFT_eSPI &tft, arrayOfSymbols &array_of_symbols, unsigned int d, bool invert_colors, point p){
   unsigned int fg = display_monitor.active_text_color;
   unsigned int bg = display_monitor.active_background_color;
-  unsigned int x = X_DIODE;
-  unsigned int y = Y_DIODE;
-  if(INVERT_COLORS_DIODE){
+  if(invert_colors){
     fg = display_monitor.active_background_color;
     bg = display_monitor.active_text_color;
   }
-  if (slow_tasks_monitor.diode_style != NO_DIODE) {
-    tft.drawBitmap(x,y, diode_symbol, DIODE_WIDTH, DIODE_HEIGHT, fg, bg);  
-  }
+  tft.drawBitmap(p.x, p.y+array_of_symbols.y_offset, array_of_symbols.symbols [d], array_of_symbols.width, array_of_symbols.height, fg, bg);
+  return point{p.x+array_of_symbols.width, p.y};
 }
 
+// void draw_battery(void) {
+//   unsigned int fg = display_monitor.active_text_color;
+//   unsigned int bg = display_monitor.active_background_color;
+//   unsigned int x = X_BATTERY;
+//   unsigned int y = Y_BATTERY;
 
-void draw_high_voltage(void){
-  unsigned int fg = display_monitor.active_text_color;
-  unsigned int bg = display_monitor.active_background_color;
-  unsigned int x = X_HIGH_VOLTAGE;
-  unsigned int y = Y_HIGH_VOLTAGE;
-  if(INVERT_COLORS_HV){
-    fg = display_monitor.active_background_color;
-    bg = display_monitor.active_text_color;
-  }
-  if(fast_tasks_monitor.voltage_level == HIGH_VOLTAGE) {
-    tft.drawBitmap(x,y,high_voltage_symbol, HV_WIDTH, HV_HEIGHT, fg, bg);
-  }
-}
+//   if(INVERT_COLORS_BATTERY){
+//     fg = display_monitor.active_background_color;
+//     bg = display_monitor.active_text_color;
+//   }
+//   if (slow_tasks_monitor.battery == LOW_BATTERY) 
+//   {
+//     tft.drawBitmap(x,y,battery_low_symbol, BATTERY_WIDTH, BATTERY_HEIGHT, fg, bg);  
+//   } 
+//   else if  (slow_tasks_monitor.battery == NORMAL_BATTERY) 
+//   {
+//     tft.drawBitmap(x,y,battery_full_symbol, BATTERY_WIDTH, BATTERY_HEIGHT, fg, bg);  
+//   }
+// } 
 
-void format_zone_0(void){
-  unsigned int x = 0;
-  unsigned int y = 0;
+// void draw_diode(void){
+//   unsigned int fg = display_monitor.active_text_color;
+//   unsigned int bg = display_monitor.active_background_color;
+//   unsigned int x = X_DIODE;
+//   unsigned int y = Y_DIODE;
+//   if(INVERT_COLORS_DIODE){
+//     fg = display_monitor.active_background_color;
+//     bg = display_monitor.active_text_color;
+//   }
+//   if (slow_tasks_monitor.diode_style != NO_DIODE) {
+//     tft.drawBitmap(x,y, diode_symbol, DIODE_WIDTH, DIODE_HEIGHT, fg, bg);  
+//   }
+// }
 
+// void draw_icon(TFT_eSPSI &tft, const unsigned int x, const unsigned int y, const &symbol, const unsigned int width, unsigned int height, bool invert_colors){
+//   unsigned int fg = display_monitor.active_text_color;
+//   unsigned int bg = display_monitor.active_background_color;
+//   if(invert_colors){
+//     fg = display_monitor.active_background_color;
+//     bg = display_monitor.active_text_color;
+//   }
+//   tft.drawBitmap(x,y,symbol, width, height, fg, bg);
+// }
+
+// void draw_high_voltage(unsigned int x, unsigned int y){
+//   unsigned int fg = display_monitor.active_text_color;
+//   unsigned int bg = display_monitor.active_background_color;
+//   //unsigned int x = REL_IN_ZONE_X_HIGH_VOLTAGE;
+//   //unsigned int y = REL_IN_ZONE_Y_HIGH_VOLTAGE;
+//   //if(true ){//||fast_tasks_monitor.voltage_level == HIGH_VOLTAGE) {
+//     if(INVERT_COLORS_HV){
+//       fg = display_monitor.active_background_color;
+//       bg = display_monitor.active_text_color;
+//     }
+//     measurements_sprite.drawBitmap(x,y,high_voltage_symbol, HV_WIDTH, HV_HEIGHT, fg, bg);
+//   //}
+// }
+
+void draw_background_status_screen(void){
+  if(false) {return ;}
+  point p = {X_BATTERY, Y_BATTERY};
   tft.fillScreen(display_monitor.active_background_color);
-
-  if(slow_tasks_monitor.battery != NO_BATTERY){
-    draw_battery();   
-  }
-  if(fast_tasks_monitor.voltage_level == HIGH_VOLTAGE){
-    draw_high_voltage();
+  if(slow_tasks_monitor.battery == NORMAL_BATTERY){
+    draw_symbol_to_tft(tft, battery_full, INVERT_COLORS_BATTERY, p);
+  } else if(slow_tasks_monitor.battery == LOW_BATTERY){
+    draw_symbol_to_tft(tft, battery_low, INVERT_COLORS_BATTERY, p);
   }
   if(slow_tasks_monitor.diode_style != NO_DIODE){
-    draw_diode();
+    p.x = X_DIODE;
+    p.y = Y_DIODE;
+    draw_symbol_to_tft(tft, diode, INVERT_COLORS_DIODE, p);
   }
-  //canvas.pushToSprite(&canvas, X_ZONE_0, Y_ZONE_0);
+  if(slow_tasks_monitor.unit != NO_UNIT){ 
+    p.x = X_UNITS;
+    p.y = Y_UNITS;
+    draw_symbol_array_element_to_tft(tft, large_unit_symbol, slow_tasks_monitor.unit, INVERT_COLORS_UNIT, p);
+  }
+  if(slow_tasks_monitor.acdc_mode != NO_ACDC){
+    p.x = X_MODE;
+    p.y = Y_MODE;
+    draw_symbol_array_element_to_tft(tft, small_mode_symbol , slow_tasks_monitor.acdc_mode, INVERT_COLORS_MODE, p);
+  }
 }
 
-// candidate for deletion 
-void draw_zone_0(void){
-  //canvas.fillSprite(display_monitor.active_background_color);
-  format_zone_0();
-  //canvas.pushToSprite(&canvas, X_ZONE_0, Y_ZONE_0);
-} 
 
-void format_zone_1(void){
 
-  unsigned int x = X_ZONE_1;
-  unsigned int y = Y_ZONE_1;
+void draw_measurement(void){
+
+  point p = {0, 0};
+
+  measurements_sprite.fillSprite(display_monitor.active_background_color);
+
+  if(true || fast_tasks_monitor.voltage_level == HIGH_VOLTAGE){
+    p = draw_symbol_to_sprite(measurements_sprite, high_voltage, INVERT_COLORS_HV, p);
+  } else {
+    p.x += HV_WIDTH; 
+  }
 
   if(fast_tasks_monitor.sign != NO_SIGN) {
-    draw_using_array_of_symbols(tft, large_sign, fast_tasks_monitor.sign, INVERT_COLORS_SIGN_LG, x, y);
+    p = draw_symbol_array_element_to_sprite(measurements_sprite, large_sign, fast_tasks_monitor.sign, INVERT_COLORS_SIGN_LG, p);
   } else {
-    x += large_sign.width;
+    p.x += large_sign.width;
   }
   if(slow_tasks_monitor.decimal_point_position == DECIMAL_POINT_AT_ZERO){
-    draw_using_one_symbol(tft, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
+    p = draw_symbol_to_sprite(measurements_sprite, large_decimal_point, INVERT_COLORS_DIGIT_LG, p);
   } 
-  draw_using_array_of_symbols(tft, large_digit, fast_tasks_monitor.st0_value0, INVERT_COLORS_DIGIT_LG, x, y);
+  p = draw_symbol_array_element_to_sprite(measurements_sprite, large_digit, fast_tasks_monitor.st0_value0, INVERT_COLORS_DIGIT_LG, p);
   if(slow_tasks_monitor.decimal_point_position == DECIMAL_POINT_AT_ONE){
-    draw_using_one_symbol(tft, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
+    p = draw_symbol_to_sprite(measurements_sprite, large_decimal_point, INVERT_COLORS_DIGIT_LG, p);
   } 
-  draw_using_array_of_symbols(tft, large_digit, fast_tasks_monitor.st1_value, INVERT_COLORS_DIGIT_LG, x, y);
+  p = draw_symbol_array_element_to_sprite(measurements_sprite, large_digit, fast_tasks_monitor.st1_value, INVERT_COLORS_DIGIT_LG, p);
   if(slow_tasks_monitor.decimal_point_position == DECIMAL_POINT_AT_TWO){
-    draw_using_one_symbol(tft, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
+    p = draw_symbol_to_sprite(measurements_sprite, large_decimal_point, INVERT_COLORS_DIGIT_LG, p);
   } 
-  draw_using_array_of_symbols(tft, large_digit, fast_tasks_monitor.st2_value, INVERT_COLORS_DIGIT_LG, x, y);
+  p = draw_symbol_array_element_to_sprite(measurements_sprite, large_digit, fast_tasks_monitor.st2_value, INVERT_COLORS_DIGIT_LG, p);
   if(slow_tasks_monitor.decimal_point_position == DECIMAL_POINT_AT_THREE){
-    draw_using_one_symbol(tft, large_decimal_point, INVERT_COLORS_DIGIT_LG, x, y);
+    p = draw_symbol_to_sprite(measurements_sprite, large_decimal_point, INVERT_COLORS_DIGIT_LG, p);
   } 
-  draw_using_array_of_symbols(tft, large_digit, fast_tasks_monitor.st3_value, INVERT_COLORS_DIGIT_LG, x, y);
+  p = draw_symbol_array_element_to_sprite(measurements_sprite, large_digit, fast_tasks_monitor.st3_value, INVERT_COLORS_DIGIT_LG, p);
 
   // add the unit symbol and mode symbol
-  x +=  REL_IN_ZONE_X_UNITS;
-  y +=  REL_IN_ZONE_Y_UNITS;
-  draw_using_array_of_symbols(tft, large_unit_symbol, slow_tasks_monitor.unit, INVERT_COLORS_UNIT, x, y);
-  x +=  REL_IN_ZONE_X_MODE - REL_IN_ZONE_X_UNITS - W_UNIT_LG;
-  y +=  REL_IN_ZONE_Y_MODE - REL_IN_ZONE_Y_UNITS;
-  draw_using_array_of_symbols(tft, small_mode_symbol, slow_tasks_monitor.acdc_mode, INVERT_COLORS_MODE, x, y);
-}
-
-// candidate for deletion 
-void draw_zone_1(){
-  format_zone_1();
+  //x +=  REL_IN_ZONE_X_UNITS;
+  //y +=  REL_IN_ZONE_Y_UNITS;
+  p = draw_symbol_array_element_to_sprite(measurements_sprite, large_unit_symbol, slow_tasks_monitor.unit, INVERT_COLORS_UNIT, p);
+  //x += large_unit_symbol.width + 2;
+  //x +=  REL_IN_ZONE_X_MODE - REL_IN_ZONE_X_UNITS - W_UNIT_LG;
+  //y +=  REL_IN_ZONE_Y_MODE - REL_IN_ZONE_Y_UNITS;
+  p = draw_symbol_array_element_to_sprite(measurements_sprite, small_mode_symbol, slow_tasks_monitor.acdc_mode, INVERT_COLORS_MODE, p);
 }
 
 
-void format_zone_2(void){}
-void draw_zone_2(void){}
 
-void format_zone_3(void){}
-void draw_zone_3(void){}
+
+
 

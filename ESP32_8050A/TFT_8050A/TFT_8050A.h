@@ -102,7 +102,7 @@ void display_initialize(void);
 
 
 /***************** Slow tasks monitor start ***********************/
-// These tasks change rarely -- at a cadence other than the measurement cadence. 
+// These tasks change rarely -- at a cadence slower than the measurement cadence. 
 // e.g., if the user presses a switch or if the battery changes from low to high. 
 // They should be checked and updated at a slow cadence.  
 // The user inputs are manually set by the user -- this means that you need not check it all the time. 
@@ -112,8 +112,8 @@ void display_initialize(void);
 // -- diode, battery 
 
 
-#define UPDATE_SLOW_TASKS_EVERY_N_LOOPS 10
-#define LOOP_DELAY_MILLISECONDS 10
+#define UPDATE_SLOW_TASKS_EVERY_N_LOOPS 1000
+#define LOOP_DELAY_MILLISECONDS 1
 
 
 /* slow tasks states */
@@ -318,12 +318,10 @@ void fast_tasks_monitor_tasks(void);
 
 /* Display states */
 typedef enum  {
-  DISPLAY_MONITOR_STATE_INIT                    = 0, 
-  DISPLAY_MONITOR_STATE_WAIT                    = 1, 
-  DISPLAY_MONITOR_STATE_SHOW_ZONE_0             = 2, 
-  DISPLAY_MONITOR_STATE_SHOW_MEASUREMENT_ZONE_1 = 3, 
-  DISPLAY_MONITOR_STATE_SHOW_ZONE_2             = 4, 
-  DISPLAY_MONITOR_STATE_SHOW_ZONE_3             = 5, 
+  DISPLAY_MONITOR_STATE_INIT                       = 0, 
+  DISPLAY_MONITOR_STATE_WAIT                       = 1, 
+  DISPLAY_MONITOR_STATE_SHOW_BACKGROUND_STATUS     = 3, 
+  DISPLAY_MONITOR_STATE_SHOW_MEASUREMENT           = 4
 } display_monitor_states; 
 
 typedef struct {
@@ -373,7 +371,10 @@ typedef struct {
   const uint8_t * * symbols; 
 } arrayOfSymbols; 
 
-
+typedef struct {
+  unsigned int x; 
+  unsigned int y; 
+} point; 
 
 void display_monitor_initialize(void);
 void display_monitor_tasks(void);
@@ -381,21 +382,16 @@ void use_colors(unsigned int background_color,
                 unsigned int text_color);
 void update_colors(void);
 void draw_splash_screen(void); 
-void format_zone_0(void);
-void format_zone_1(void);
-void format_zone_2(void);
-void format_zone_3(void);
 
-void draw_using_one_symbol(TFT_eSprite &sprite, oneSymbol &one_symbol, bool invert_colors, unsigned int &x, unsigned int &y);
-void draw_using_array_of_symbols(TFT_eSprite &sprite, arrayOfSymbols &array_of_symbols, unsigned int d, bool invert_colors, unsigned int &x, unsigned int &y);
-void draw_zone_0(void);
-void draw_zone_1(void);
-void draw_zone_2(void);
-void draw_zone_3(void);
 
-void draw_battery(void);
-void draw_high_voltage(void);
-void draw_diode(void);
+point draw_symbol_to_sprite(TFT_eSprite &sprite, oneSymbol &symbol, bool invert_colors, point p);
+point draw_symbol_array_element_to_sprite(TFT_eSprite &sprite, arrayOfSymbols &array_of_symbols, unsigned int d, bool invert_colors, point p);
+point draw_symbol_to_tft(TFT_eSPI &tft, oneSymbol &symbol, bool invert_colors, point p);
+point draw_symbol_array_element_to_tft(TFT_eSPI &tft, arrayOfSymbols &array_of_symbols, unsigned int d, bool invert_colors, point p);
+
+void draw_background_status_screen(void);
+void draw_measurement(void);
+
 
 
 /***************** Display monitor end ************************/
