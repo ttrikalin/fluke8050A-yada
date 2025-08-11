@@ -113,7 +113,7 @@ void display_initialize(void);
 
 
 #define UPDATE_SLOW_TASKS_EVERY_N_LOOPS 1000
-#define LOOP_DELAY_MILLISECONDS 1
+#define LOOP_DELAY_MILLISECONDS 0
 
 
 /* slow tasks states */
@@ -239,6 +239,7 @@ typedef struct {
   battery_styles battery;
   acdc_modes acdc_mode;
   relative_measurement_styles relative_measurement;
+  unsigned int loop_counter; 
 } slowTasksMonitorData; 
 
 /* Function prototypes */ 

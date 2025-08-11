@@ -17,19 +17,6 @@ TFT_eSPI tft = TFT_eSPI();
 
 
 TFT_eSprite measurements_sprite = TFT_eSprite(&tft);
-//TFT_eSprite high_voltage = TFT_eSprite(&tft);
-//TFT_eSprite battery = TFT_eSprite(&tft);
-//TFT_eSprite diode = TFT_eSprite(&tft);
-//TFT_eSprite zone_0 = TFT_eSprite(&tft);
-//TFT_eSprite zone_1 = TFT_eSprite(&tft);
-//TFT_eSprite zone_2 = TFT_eSprite(&tft);
-//TFT_eSprite zone_3 = TFT_eSprite(&tft);
-
-
-//functionMonitorData function_monitor; 
-//rangeMonitorData range_monitor; 
-//digitsMonitorData digits_monitor; 
-//contentsMonitorData contents_monitor; 
 
 displayMonitorData display_monitor; 
 slowTasksMonitorData slow_tasks_monitor; 
@@ -52,28 +39,20 @@ arrayOfSymbols large_mode_symbol;
 arrayOfSymbols small_mode_symbol; 
 
 
-
-
-
-
 // the setup and loop
 void setup(void) {
   
   ESP32_WROOM32_initialize();
   slow_tasks_monitor_initialize(); 
   fast_tasks_monitor_initialize();
-  //digits_monitor_initialize();
-  //contents_monitor_initialize();
   display_monitor_initialize();
   
 }
 
 void loop(void) {
-  delay(LOOP_DELAY_MILLISECONDS); 
+  //delay(LOOP_DELAY_MILLISECONDS); 
   slow_tasks_monitor_tasks(); 
   fast_tasks_monitor_tasks();
-  //digits_monitor_tasks(); 
-  //contents_monitor_tasks();
   display_monitor_tasks(); 
 }
 

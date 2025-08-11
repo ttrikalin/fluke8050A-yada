@@ -6,12 +6,13 @@ void slow_tasks_monitor_initialize(void) {
   slow_tasks_monitor.quantity = NO_QUANTITY; 
   slow_tasks_monitor.diode_style = NO_DIODE; 
   slow_tasks_monitor.decimal_point_position = NO_DECIMAL_POINT; 
-  slow_tasks_monitor.battery = NORMAL_BATTERY; 
-  slow_tasks_monitor.acdc_mode = NO_ACDC; 
+  slow_tasks_monitor.battery = LOW_BATTERY; 
+  slow_tasks_monitor.acdc_mode = DC; 
   slow_tasks_monitor.relative_measurement = ABSOLUTE_MEASUREMENT; 
   slow_tasks_monitor.active_function = RELATIVE_RESISTANCE_0; 
   slow_tasks_monitor.active_range = RANGE_20M; 
-  slow_tasks_monitor.new_values_flag = true; 
+  slow_tasks_monitor.new_values_flag = true;
+  slow_tasks_monitor.loop_counter = 0; 
 }
 
 void slow_tasks_monitor_tasks(void) {
@@ -37,6 +38,11 @@ void slow_tasks_monitor_tasks(void) {
         slow_tasks_monitor.battery = new_battery_style;
         slow_tasks_monitor.state = SLOW_TASKS_MONITOR_STATE_READ;
       }
+      if (slow_tasks_monitor.loop_counter == UPDATE_SLOW_TASKS_EVERY_N_LOOPS) {
+        slow_tasks_monitor.loop_counter = 0; 
+        slow_tasks_monitor.state = SLOW_TASKS_MONITOR_STATE_READ;
+      } 
+      slow_tasks_monitor.loop_counter++; 
       break;
     }
     case SLOW_TASKS_MONITOR_STATE_READ: {

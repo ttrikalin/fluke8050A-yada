@@ -118,21 +118,6 @@ void display_monitor_initialize(void) {
   measurements_sprite.createSprite(MEASUREMENTS_WIDTH, MEASUREMENTS_HEIGHT);
   measurements_sprite.fillSprite(display_monitor.active_background_color);
 
-  // delay(1000);
-  //  tft.fillScreen(TFT_GREEN);
-  // delay(1000);
-  // tft.fillScreen(TFT_BLUE);
-  // delay(1000);
-
-  // int j = 100; 
-  // for(int i = 0; NULL == canvas.createSprite(j + i, j + i); i++) {
-  //   canvas.deleteSprite();
-  //   j = 100 + i; 
-  // }
-  
-  // tft.fillScreen(TFT_RED);
-  // canvas.createSprite(j, j);
-  // canvas.fillSprite(display_monitor.active_background_color);
   
 }
 
@@ -147,7 +132,7 @@ void display_monitor_tasks(void) {
 
     case DISPLAY_MONITOR_STATE_WAIT:
       //canvas.pushSprite(0,0);
-      if (!fast_tasks_monitor.isr_in_strobe_phase && 
+      if (//!fast_tasks_monitor.isr_in_strobe_phase && 
           slow_tasks_monitor.new_values_flag) {
         display_monitor.state = DISPLAY_MONITOR_STATE_UPDATE_BACKGROUND_STATUS;
       } else {
@@ -391,12 +376,12 @@ void draw_background_status_screen(void){
   
   point p = {X_BATTERY, Y_BATTERY};
   tft.fillScreen(display_monitor.active_background_color);
-  if(true || slow_tasks_monitor.battery == NORMAL_BATTERY){
+  if(slow_tasks_monitor.battery == NORMAL_BATTERY){
     draw_symbol_to_tft(tft, battery_full, INVERT_COLORS_BATTERY, p);
   } else if(slow_tasks_monitor.battery == LOW_BATTERY){
     draw_symbol_to_tft(tft, battery_low, INVERT_COLORS_BATTERY, p);
   }
-  if(true || slow_tasks_monitor.diode_style != NO_DIODE){
+  if(slow_tasks_monitor.diode_style != NO_DIODE){
     p.x = X_DIODE;
     p.y = Y_DIODE;
     draw_symbol_to_tft(tft, diode, INVERT_COLORS_DIODE, p);
@@ -421,7 +406,7 @@ void draw_measurement(void){
 
   measurements_sprite.fillSprite(display_monitor.active_background_color);
 
-  if(true || fast_tasks_monitor.voltage_level == HIGH_VOLTAGE){
+  if(fast_tasks_monitor.voltage_level == HIGH_VOLTAGE){
     p = draw_symbol_to_sprite(measurements_sprite, high_voltage, INVERT_COLORS_HV, p);
   } else {
     p.x += HV_WIDTH; 
