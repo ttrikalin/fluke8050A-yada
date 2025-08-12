@@ -75,16 +75,14 @@ const struct {
 #define fluke8050a_Y       35
 #define fluke8050a_X       34
 #define fluke8050a_W       39      // VN
-// #define BIT_1           fluke8050a_Z
-// #define BIT_PLUS        fluke8050a_X
-// #define BIT_MINUS       fluke8050a_W
 
-// // These are defined in the User_Setup.h
+/** These are defined in the User_Setup.h
 // #define TFT_SCLK 21
 // #define TFT_MOSI  3  // (RX0) Also called SDI 
 // #define TFT_DC    1  // (TX0) Data Command or register select (RS) control pin
 // #define TFT_RST  22  //       Reset pin (could connect to RST pin)
 // #define TFT_CS   23  //       Chip select control pin
+***************************************************************/
 
 /* Function prototypes */
 void IRAM_ATTR strobe0_ISR(void);

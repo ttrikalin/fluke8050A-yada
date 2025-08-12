@@ -23,6 +23,7 @@ void fast_tasks_monitor_tasks(void) {
       break;
     }
     case FAST_TASKS_MONITOR_STATE_WAIT: {
+      read_high_voltage(); 
       if (fast_tasks_monitor.isr_read_flag) {
         fast_tasks_monitor.state = FAST_TASKS_MONITOR_STATE_READ;
       }
@@ -49,6 +50,7 @@ void read_strobe(void) {
   switch(fast_tasks_monitor.isr_active_strobe){
     case ST0_0: {
       fast_tasks_monitor.st0_value0 = tmp; 
+      infer_sign(); 
       break;
     }
     case ST0_1: {
@@ -81,4 +83,23 @@ void read_strobe(void) {
       break;
     }
   }
+}
+
+void read_high_voltage(void) {
+  fast_tasks_monitor.voltage_level = digitalRead(fluke8050a_HV) ? 
+    HIGH_VOLTAGE : LOW_VOLTAGE; 
+} 
+
+
+void infer_sign(void) {
+  // The sign is determined by the ST0 digit (0bWXYZ)
+  // bits W==1 (vertical part of '+'), X==1 (minus part '-') or nothing
+  // as per the logic below  
+  fast_tasks_monitor.sign = NO_SIGN;
+  if ( test_bit(fast_tasks_monitor.st0_value0, 2) ) {
+    fast_tasks_monitor.sign = NEGATIVE_SIGN;
+  } 
+  if ( test_bit(fast_tasks_monitor.st0_value0, 3) ) {
+    fast_tasks_monitor.sign = POSITIVE_SIGN;
+  } 
 }
