@@ -307,7 +307,7 @@ signs sign;
 } fastTasksMonitorData; 
 
 /* Function prototypes */ 
-void infer_high_voltage(void); 
+void read_high_voltage(void); 
 void infer_sign(void); 
 void fast_tasks_monitor_initialize(void); 
 void fast_tasks_monitor_tasks(void); 
