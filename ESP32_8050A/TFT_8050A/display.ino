@@ -25,7 +25,7 @@ void display_monitor_initialize(void) {
   display_monitor.non_high_voltage_theme.gain_text_color              = TFT_BLACK;
   display_monitor.non_high_voltage_theme.invalid_background_color     = TFT_WHITE;
   display_monitor.non_high_voltage_theme.invalid_text_color           = TFT_RED;
-  display_monitor.non_high_voltage_theme.negative_meter_color  = TFT_RED;
+  display_monitor.non_high_voltage_theme.negative_meter_color         = TFT_RED;
 
   display_monitor.high_voltage_theme.splash_background_color      = TFT_DARKRED;
   display_monitor.high_voltage_theme.splash_text_color            = TFT_WHITE;
@@ -41,7 +41,7 @@ void display_monitor_initialize(void) {
   display_monitor.high_voltage_theme.gain_text_color              = TFT_WHITE;
   display_monitor.high_voltage_theme.invalid_background_color     = TFT_WHITE;
   display_monitor.high_voltage_theme.invalid_text_color           = TFT_RED;
-  display_monitor.high_voltage_theme.negative_meter_color  = TFT_WHITE;
+  display_monitor.high_voltage_theme.negative_meter_color         = TFT_BLACK;
 
   large_decimal_point.width = W_DP_LG; 
   large_decimal_point.height = H_DP_LG; 
@@ -156,7 +156,7 @@ void display_monitor_tasks(void) {
       fast_tasks_monitor.st1_value = 5;
       fast_tasks_monitor.st2_value = 0;
       fast_tasks_monitor.st3_value = 0;
-      fast_tasks_monitor.sign = POSITIVE_SIGN;
+      fast_tasks_monitor.sign = NEGATIVE_SIGN;
 
       display_monitor.state = DISPLAY_MONITOR_STATE_WAIT;
       draw_measurement(); 
@@ -376,8 +376,9 @@ void draw_measurement(void){
 
   if(fast_tasks_monitor.sign != NO_SIGN) {
     p = draw_symbol_array_element_to_sprite(measurements_sprite, large_sign, fast_tasks_monitor.sign, INVERT_COLORS_SIGN_LG, p);
-  } else {
     p.x += large_sign.width;
+  } else {
+    p.x += 2*large_sign.width;
   }
   if(slow_tasks_monitor.decimal_point_position == DECIMAL_POINT_AT_ZERO){
     p = draw_symbol_to_sprite(measurements_sprite, large_decimal_point, INVERT_COLORS_DIGIT_LG, p);
@@ -411,34 +412,34 @@ void draw_measurement(void){
 void draw_analog_meter(bool is_signed){
   analog_meter_sprite.fillSprite(display_monitor.active_background_color);
 
-  int y_0 = 0;
-  int y_1 = (ANALOG_METER_HEIGHT);
-  int x_0 = 0;
-  int x_1 = 0;
+  int y = 0;
+  int h = (ANALOG_METER_HEIGHT);
+  int x = 0;
+  int w = 0;
   if(is_signed){
-    x_0 = (ANALOG_METER_WIDTH>>1);
-    x_1 =   (int) 
-            (((fast_tasks_monitor.st0_value0 * 1000) + 
+    x = (ANALOG_METER_WIDTH>>1);
+    w =   (int) 
+            ( (ANALOG_METER_WIDTH>>1) * ((fast_tasks_monitor.st0_value0 * 1000) + 
             (fast_tasks_monitor.st1_value * 100) + 
             (fast_tasks_monitor.st2_value * 10) + 
-            fast_tasks_monitor.st3_value) * ((float) x_0 /  1999.0f));
+            fast_tasks_monitor.st3_value) / 1999.0f);
     if(fast_tasks_monitor.sign == POSITIVE_SIGN){
-      analog_meter_sprite.fillRect(x_0, y_0 , x_0 + x_1, y_1 , display_monitor.active_text_color);
+      analog_meter_sprite.fillRect(x, y , w, h , display_monitor.active_text_color);
     } else {
-      analog_meter_sprite.fillRect(x_0-x_1, y_0, x_0, y_1 , display_monitor.active_negative_meter_color);
+      analog_meter_sprite.fillRect(x-w, y, w, h , display_monitor.active_negative_meter_color);
     }
   } else {
-    x_1 = (int) 
-            (((fast_tasks_monitor.st0_value0 * 1000) + 
+    w = (int) 
+            ( ANALOG_METER_WIDTH * ((fast_tasks_monitor.st0_value0 * 1000) + 
             (fast_tasks_monitor.st1_value * 100) + 
             (fast_tasks_monitor.st2_value * 10) + 
-            fast_tasks_monitor.st3_value) * ((float) ANALOG_METER_WIDTH /  1999.0f));
-    analog_meter_sprite.fillRect(x_0, y_0 , x_1, y_1 , display_monitor.active_text_color);
+            fast_tasks_monitor.st3_value) / 1999.0f);
+    analog_meter_sprite.fillRect(x, y , w, h , display_monitor.active_text_color);
   }
   
   
   analog_meter_sprite.drawRect(0, 0, ANALOG_METER_WIDTH, ANALOG_METER_HEIGHT, display_monitor.active_text_color);
-  analog_meter_sprite.drawLine(x_0, y_0, x_0, y_1, display_monitor.active_text_color); 
+  analog_meter_sprite.drawLine(x, y, x, y+h, display_monitor.active_text_color); 
 
 }
 
