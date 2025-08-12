@@ -161,7 +161,7 @@ void use_colors(unsigned int background_color,
                 unsigned int text_color) {
   if(display_monitor.active_background_color != background_color) {
     display_monitor.active_background_color = background_color; 
-    tft.fillScreen(background_color);
+    //tft.fillScreen(background_color);
   }
   if(display_monitor.active_text_color != text_color) {
     display_monitor.active_text_color = text_color; 
@@ -310,65 +310,6 @@ point draw_symbol_array_element_to_tft(TFT_eSPI &tft, arrayOfSymbols &array_of_s
   return point{p.x+array_of_symbols.width, p.y};
 }
 
-// void draw_battery(void) {
-//   unsigned int fg = display_monitor.active_text_color;
-//   unsigned int bg = display_monitor.active_background_color;
-//   unsigned int x = X_BATTERY;
-//   unsigned int y = Y_BATTERY;
-
-//   if(INVERT_COLORS_BATTERY){
-//     fg = display_monitor.active_background_color;
-//     bg = display_monitor.active_text_color;
-//   }
-//   if (slow_tasks_monitor.battery == LOW_BATTERY) 
-//   {
-//     tft.drawBitmap(x,y,battery_low_symbol, BATTERY_WIDTH, BATTERY_HEIGHT, fg, bg);  
-//   } 
-//   else if  (slow_tasks_monitor.battery == NORMAL_BATTERY) 
-//   {
-//     tft.drawBitmap(x,y,battery_full_symbol, BATTERY_WIDTH, BATTERY_HEIGHT, fg, bg);  
-//   }
-// } 
-
-// void draw_diode(void){
-//   unsigned int fg = display_monitor.active_text_color;
-//   unsigned int bg = display_monitor.active_background_color;
-//   unsigned int x = X_DIODE;
-//   unsigned int y = Y_DIODE;
-//   if(INVERT_COLORS_DIODE){
-//     fg = display_monitor.active_background_color;
-//     bg = display_monitor.active_text_color;
-//   }
-//   if (slow_tasks_monitor.diode_style != NO_DIODE) {
-//     tft.drawBitmap(x,y, diode_symbol, DIODE_WIDTH, DIODE_HEIGHT, fg, bg);  
-//   }
-// }
-
-// void draw_icon(TFT_eSPSI &tft, const unsigned int x, const unsigned int y, const &symbol, const unsigned int width, unsigned int height, bool invert_colors){
-//   unsigned int fg = display_monitor.active_text_color;
-//   unsigned int bg = display_monitor.active_background_color;
-//   if(invert_colors){
-//     fg = display_monitor.active_background_color;
-//     bg = display_monitor.active_text_color;
-//   }
-//   tft.drawBitmap(x,y,symbol, width, height, fg, bg);
-// }
-
-// void draw_high_voltage(unsigned int x, unsigned int y){
-//   unsigned int fg = display_monitor.active_text_color;
-//   unsigned int bg = display_monitor.active_background_color;
-//   //unsigned int x = REL_IN_ZONE_X_HIGH_VOLTAGE;
-//   //unsigned int y = REL_IN_ZONE_Y_HIGH_VOLTAGE;
-//   //if(true ){//||fast_tasks_monitor.voltage_level == HIGH_VOLTAGE) {
-//     if(INVERT_COLORS_HV){
-//       fg = display_monitor.active_background_color;
-//       bg = display_monitor.active_text_color;
-//     }
-//     measurements_sprite.drawBitmap(x,y,high_voltage_symbol, HV_WIDTH, HV_HEIGHT, fg, bg);
-//   //}
-// }
-
-
 
 
 void draw_background_status_screen(void){
@@ -404,13 +345,14 @@ void draw_measurement(void){
 
   point p = {0, 0};
 
-  measurements_sprite.fillSprite(display_monitor.active_background_color);
 
   if(fast_tasks_monitor.voltage_level == HIGH_VOLTAGE){
     update_colors();
+    measurements_sprite.fillSprite(display_monitor.active_background_color);
     p = draw_symbol_to_sprite(measurements_sprite, high_voltage, INVERT_COLORS_HV, p);
   } else {
     p.x += HV_WIDTH; 
+    measurements_sprite.fillSprite(display_monitor.active_background_color);
   }
 
   if(fast_tasks_monitor.sign != NO_SIGN) {

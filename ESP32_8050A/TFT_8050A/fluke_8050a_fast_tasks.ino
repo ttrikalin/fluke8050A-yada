@@ -23,7 +23,12 @@ void fast_tasks_monitor_tasks(void) {
       break;
     }
     case FAST_TASKS_MONITOR_STATE_WAIT: {
-      read_high_voltage(); 
+      voltage_levels new_voltage_level = read_high_voltage(); 
+      if (new_voltage_level == HIGH_VOLTAGE && 
+          fast_tasks_monitor.voltage_level == LOW_VOLTAGE) {
+        slow_tasks_monitor.new_values_flag = true; 
+      }
+      fast_tasks_monitor.voltage_level = new_voltage_level; 
       if (fast_tasks_monitor.isr_read_flag) {
         fast_tasks_monitor.state = FAST_TASKS_MONITOR_STATE_READ;
       }
@@ -85,9 +90,8 @@ void read_strobe(void) {
   }
 }
 
-void read_high_voltage(void) {
-  fast_tasks_monitor.voltage_level = digitalRead(fluke8050a_HV) ? 
-    HIGH_VOLTAGE : LOW_VOLTAGE; 
+voltage_levels read_high_voltage(void) {
+  return digitalRead(fluke8050a_HV) ? HIGH_VOLTAGE : LOW_VOLTAGE; 
 } 
 
 
