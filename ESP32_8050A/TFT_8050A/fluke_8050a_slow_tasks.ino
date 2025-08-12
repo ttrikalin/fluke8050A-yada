@@ -75,25 +75,7 @@ void infer_relative_measurement(void) {
       ABSOLUTE_MEASUREMENT : RELATIVE_MEASUREMENT; 
 } 
 
-// void infer_high_voltage(void) {
-//   contents_monitor.voltage_level = digitalRead(fluke8050a_HV) ? 
-//     HIGH_VOLTAGE : LOW_VOLTAGE; 
-// } 
 
-// void infer_low_battery(void) {
-//   // fluke8050a_BT is set when battery is low. 
-//   switch(slow_tasks_monitor.battery) {
-//     case NORMAL_BATTERY:  
-//     case LOW_BATTERY: 
-//       slow_tasks_monitor.battery = digitalRead(fluke8050a_BT) ? 
-//         LOW_BATTERY : NORMAL_BATTERY; 
-//       break;
-    
-//     case NO_BATTERY:
-//     default: 
-//       break; 
-//   }
-// } 
 
 void infer_quantity(void) {
   // This can be made easier by checking only 
@@ -272,22 +254,7 @@ measurement_function read_active_function(void) {
 battery_styles read_battery(void) {
   if (slow_tasks_monitor.battery == NO_BATTERY) {
     return NO_BATTERY; 
-  } else {
-    return digitalRead(fluke8050a_BT) ? LOW_BATTERY : NORMAL_BATTERY; 
-  }
+  } 
+  return digitalRead(fluke8050a_BT) ? LOW_BATTERY : NORMAL_BATTERY; 
 }
 
-
-
-// void infer_sign(void) {
-//   // The sign is determined by the ST0 digit (0bWXYZ)
-//   // bits W==1 (vertical part of '+'), X==1 (minus part '-') or nothing
-//   // as per the logic below  
-//   if ( test_bit(digits_monitor.st0_value0, 3) ) {
-//     contents_monitor.sign = POSITIVE_SIGN;
-//   } else if ( test_bit(digits_monitor.st0_value0, 2) ) {
-//     contents_monitor.sign = NEGATIVE_SIGN;
-//   } else {
-//     contents_monitor.sign = NO_SIGN;
-//   }
-// }

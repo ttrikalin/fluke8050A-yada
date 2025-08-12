@@ -75,16 +75,14 @@ const struct {
 #define fluke8050a_Y       35
 #define fluke8050a_X       34
 #define fluke8050a_W       39      // VN
-// #define BIT_1           fluke8050a_Z
-// #define BIT_PLUS        fluke8050a_X
-// #define BIT_MINUS       fluke8050a_W
 
-// // These are defined in the User_Setup.h
+/** These are defined in the User_Setup.h
 // #define TFT_SCLK 21
 // #define TFT_MOSI  3  // (RX0) Also called SDI 
 // #define TFT_DC    1  // (TX0) Data Command or register select (RS) control pin
 // #define TFT_RST  22  //       Reset pin (could connect to RST pin)
 // #define TFT_CS   23  //       Chip select control pin
+***************************************************************/
 
 /* Function prototypes */
 void IRAM_ATTR strobe0_ISR(void);
@@ -93,7 +91,6 @@ void IRAM_ATTR strobe2_ISR(void);
 void IRAM_ATTR strobe3_ISR(void);
 void IRAM_ATTR strobe4_ISR(void);
 void ESP32_WROOM32_initialize(void); 
-void display_initialize(void); 
 /**************** ESP32-WROOM32 configuration end ************/
 
 
@@ -309,7 +306,7 @@ signs sign;
 } fastTasksMonitorData; 
 
 /* Function prototypes */ 
-void infer_high_voltage(void); 
+voltage_levels read_high_voltage(void); 
 void infer_sign(void); 
 void fast_tasks_monitor_initialize(void); 
 void fast_tasks_monitor_tasks(void); 
@@ -341,6 +338,7 @@ typedef struct {
   unsigned int gain_text_color;
   unsigned int invalid_background_color;
   unsigned int invalid_text_color;
+  unsigned int negative_meter_color;
 } color_themes;
 
 typedef struct {
@@ -350,6 +348,7 @@ typedef struct {
   color_themes non_high_voltage_theme;
   unsigned int active_background_color; 
   unsigned int active_text_color; 
+  unsigned int active_negative_meter_color; 
 
   String digits_str; 
   float relative_reference;
@@ -381,7 +380,8 @@ typedef struct {
 void display_monitor_initialize(void);
 void display_monitor_tasks(void);
 void use_colors(unsigned int background_color, 
-                unsigned int text_color);
+                unsigned int text_color,
+                unsigned int negative_meter_color);
 void update_colors(void);
 void draw_splash_screen(void); 
 
@@ -393,7 +393,7 @@ point draw_symbol_array_element_to_tft(TFT_eSPI &tft, arrayOfSymbols &array_of_s
 
 void draw_background_status_screen(void);
 void draw_measurement(void);
-
+void draw_analog_meter(bool is_signed);
 
 
 /***************** Display monitor end ************************/

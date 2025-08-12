@@ -17,6 +17,7 @@ TFT_eSPI tft = TFT_eSPI();
 
 
 TFT_eSprite measurements_sprite = TFT_eSprite(&tft);
+TFT_eSprite analog_meter_sprite = TFT_eSprite(&tft);
 
 displayMonitorData display_monitor; 
 slowTasksMonitorData slow_tasks_monitor; 
