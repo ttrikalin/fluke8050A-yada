@@ -91,7 +91,6 @@ void IRAM_ATTR strobe2_ISR(void);
 void IRAM_ATTR strobe3_ISR(void);
 void IRAM_ATTR strobe4_ISR(void);
 void ESP32_WROOM32_initialize(void); 
-void display_initialize(void); 
 /**************** ESP32-WROOM32 configuration end ************/
 
 
@@ -339,6 +338,7 @@ typedef struct {
   unsigned int gain_text_color;
   unsigned int invalid_background_color;
   unsigned int invalid_text_color;
+  unsigned int negative_meter_color;
 } color_themes;
 
 typedef struct {
@@ -348,6 +348,7 @@ typedef struct {
   color_themes non_high_voltage_theme;
   unsigned int active_background_color; 
   unsigned int active_text_color; 
+  unsigned int active_negative_meter_color; 
 
   String digits_str; 
   float relative_reference;
@@ -379,7 +380,8 @@ typedef struct {
 void display_monitor_initialize(void);
 void display_monitor_tasks(void);
 void use_colors(unsigned int background_color, 
-                unsigned int text_color);
+                unsigned int text_color,
+                unsigned int negative_meter_color);
 void update_colors(void);
 void draw_splash_screen(void); 
 
@@ -391,7 +393,7 @@ point draw_symbol_array_element_to_tft(TFT_eSPI &tft, arrayOfSymbols &array_of_s
 
 void draw_background_status_screen(void);
 void draw_measurement(void);
-
+void draw_analog_meter(bool is_signed);
 
 
 /***************** Display monitor end ************************/

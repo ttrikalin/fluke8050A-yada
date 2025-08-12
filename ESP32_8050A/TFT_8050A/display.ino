@@ -5,6 +5,7 @@ void display_monitor_initialize(void) {
 
   display_monitor.active_background_color = TFT_BLACK;
   display_monitor.active_text_color = TFT_WHITE;
+  display_monitor.active_negative_meter_color = TFT_RED;
 
   display_monitor.relative_reference = 0.0;
   display_monitor.digits_str = "-.0000";
@@ -24,6 +25,7 @@ void display_monitor_initialize(void) {
   display_monitor.non_high_voltage_theme.gain_text_color              = TFT_BLACK;
   display_monitor.non_high_voltage_theme.invalid_background_color     = TFT_WHITE;
   display_monitor.non_high_voltage_theme.invalid_text_color           = TFT_RED;
+  display_monitor.non_high_voltage_theme.negative_meter_color  = TFT_RED;
 
   display_monitor.high_voltage_theme.splash_background_color      = TFT_DARKRED;
   display_monitor.high_voltage_theme.splash_text_color            = TFT_WHITE;
@@ -39,6 +41,7 @@ void display_monitor_initialize(void) {
   display_monitor.high_voltage_theme.gain_text_color              = TFT_WHITE;
   display_monitor.high_voltage_theme.invalid_background_color     = TFT_WHITE;
   display_monitor.high_voltage_theme.invalid_text_color           = TFT_RED;
+  display_monitor.high_voltage_theme.negative_meter_color  = TFT_WHITE;
 
   large_decimal_point.width = W_DP_LG; 
   large_decimal_point.height = H_DP_LG; 
@@ -118,7 +121,9 @@ void display_monitor_initialize(void) {
   measurements_sprite.createSprite(MEASUREMENTS_WIDTH, MEASUREMENTS_HEIGHT);
   measurements_sprite.fillSprite(display_monitor.active_background_color);
 
-  
+
+  analog_meter_sprite.createSprite(ANALOG_METER_WIDTH, ANALOG_METER_HEIGHT);
+  analog_meter_sprite.fillSprite(display_monitor.active_background_color);
 }
 
 
@@ -131,7 +136,6 @@ void display_monitor_tasks(void) {
       break;
 
     case DISPLAY_MONITOR_STATE_WAIT:
-      //canvas.pushSprite(0,0);
       if (//!fast_tasks_monitor.isr_in_strobe_phase && 
           slow_tasks_monitor.new_values_flag) {
         display_monitor.state = DISPLAY_MONITOR_STATE_UPDATE_BACKGROUND_STATUS;
@@ -147,9 +151,18 @@ void display_monitor_tasks(void) {
       break;
 
     case DISPLAY_MONITOR_STATE_UPDATE_MEASUREMENT:
+
+      fast_tasks_monitor.st0_value0 = 0;
+      fast_tasks_monitor.st1_value = 5;
+      fast_tasks_monitor.st2_value = 0;
+      fast_tasks_monitor.st3_value = 0;
+      fast_tasks_monitor.sign = POSITIVE_SIGN;
+
       display_monitor.state = DISPLAY_MONITOR_STATE_WAIT;
       draw_measurement(); 
       measurements_sprite.pushSprite(X_MEASUREMENTS, Y_MEASUREMENTS);
+      draw_analog_meter(slow_tasks_monitor.quantity == CURRENT || slow_tasks_monitor.quantity == VOLTAGE);
+      analog_meter_sprite.pushSprite(X_ANALOG_METER, Y_ANALOG_METER);
       break; 
 
     default:
@@ -158,13 +171,13 @@ void display_monitor_tasks(void) {
 }
 
 void use_colors(unsigned int background_color, 
-                unsigned int text_color) {
-  if(display_monitor.active_background_color != background_color) {
-    display_monitor.active_background_color = background_color; 
-    //tft.fillScreen(background_color);
-  }
+                unsigned int text_color,
+                unsigned int negative_meter_color) {
+  display_monitor.active_background_color = background_color; 
+  display_monitor.active_text_color = text_color;
+  display_monitor.active_negative_meter_color = negative_meter_color;
+
   if(display_monitor.active_text_color != text_color) {
-    display_monitor.active_text_color = text_color; 
     tft.setTextColor(display_monitor.active_text_color, 
                      display_monitor.active_background_color, 
                      true);  
@@ -183,32 +196,38 @@ void update_colors(void) {
   if(slow_tasks_monitor.quantity == NO_QUANTITY) 
   {
     use_colors(theme->splash_background_color, 
-                 theme->splash_text_color);
+                 theme->splash_text_color, 
+                 theme->negative_meter_color);
   } 
   else if (slow_tasks_monitor.quantity == RESISTANCE)
   {
     use_colors(theme->resistance_background_color, 
-                 theme->resistance_text_color);
+                 theme->resistance_text_color,
+                 theme->negative_meter_color);
   }
   else if (slow_tasks_monitor.quantity == VOLTAGE)
   {
     use_colors(theme->voltage_background_color, 
-                 theme->voltage_text_color);
+                 theme->voltage_text_color,
+                 theme->negative_meter_color);
   }
   else if (slow_tasks_monitor.quantity == CURRENT)
   {
     use_colors(theme->current_background_color, 
-                 theme->current_text_color);
+                 theme->current_text_color,
+                 theme->negative_meter_color);
   } 
   else if (slow_tasks_monitor.quantity == CONDUCTANCE)
   {
     use_colors(theme->conductance_background_color, 
-                 theme->conductance_text_color);
+                 theme->conductance_text_color,
+                 theme->negative_meter_color);
   }
   else if (slow_tasks_monitor.quantity == GAIN)
   {
     use_colors(theme->gain_background_color, 
-                 theme->gain_text_color);
+                 theme->gain_text_color,
+                 theme->negative_meter_color);
   }
 }
 
@@ -387,6 +406,41 @@ void draw_measurement(void){
   p = draw_symbol_array_element_to_sprite(measurements_sprite, small_mode_symbol, slow_tasks_monitor.acdc_mode, INVERT_COLORS_MODE, p);
 }
 
+
+
+void draw_analog_meter(bool is_signed){
+  analog_meter_sprite.fillSprite(display_monitor.active_background_color);
+
+  int y_0 = 0;
+  int y_1 = (ANALOG_METER_HEIGHT);
+  int x_0 = 0;
+  int x_1 = 0;
+  if(is_signed){
+    x_0 = (ANALOG_METER_WIDTH>>1);
+    x_1 =   (int) 
+            (((fast_tasks_monitor.st0_value0 * 1000) + 
+            (fast_tasks_monitor.st1_value * 100) + 
+            (fast_tasks_monitor.st2_value * 10) + 
+            fast_tasks_monitor.st3_value) * ((float) x_0 /  1999.0f));
+    if(fast_tasks_monitor.sign == POSITIVE_SIGN){
+      analog_meter_sprite.fillRect(x_0, y_0 , x_0 + x_1, y_1 , display_monitor.active_text_color);
+    } else {
+      analog_meter_sprite.fillRect(x_0-x_1, y_0, x_0, y_1 , display_monitor.active_negative_meter_color);
+    }
+  } else {
+    x_1 = (int) 
+            (((fast_tasks_monitor.st0_value0 * 1000) + 
+            (fast_tasks_monitor.st1_value * 100) + 
+            (fast_tasks_monitor.st2_value * 10) + 
+            fast_tasks_monitor.st3_value) * ((float) ANALOG_METER_WIDTH /  1999.0f));
+    analog_meter_sprite.fillRect(x_0, y_0 , x_1, y_1 , display_monitor.active_text_color);
+  }
+  
+  
+  analog_meter_sprite.drawRect(0, 0, ANALOG_METER_WIDTH, ANALOG_METER_HEIGHT, display_monitor.active_text_color);
+  analog_meter_sprite.drawLine(x_0, y_0, x_0, y_1, display_monitor.active_text_color); 
+
+}
 
 
 
