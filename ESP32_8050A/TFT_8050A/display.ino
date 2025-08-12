@@ -407,6 +407,7 @@ void draw_measurement(void){
   measurements_sprite.fillSprite(display_monitor.active_background_color);
 
   if(fast_tasks_monitor.voltage_level == HIGH_VOLTAGE){
+    update_colors();
     p = draw_symbol_to_sprite(measurements_sprite, high_voltage, INVERT_COLORS_HV, p);
   } else {
     p.x += HV_WIDTH; 
