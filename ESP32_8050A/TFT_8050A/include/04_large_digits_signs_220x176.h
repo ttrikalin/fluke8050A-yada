@@ -16,8 +16,10 @@
 #define INVERT_COLORS_SIGN_LG true
 
 
-#define DIGIT_LG(n) (n<10?(uint8_t*)pgm_read_word(&(digit_lg[n])):0)
+//#define DIGIT_LG(n) (n<10?(uint8_t*)pgm_read_word(&(digit_lg[n])):0)
 
+extern const uint8_t *  digit_lg[10]; 
+extern const uint8_t *  sign_lg[2];
 
 const uint8_t sign_lg_plus[] PROGMEM = 
 {0xff,0xff,0xff,0xf8
@@ -696,23 +698,7 @@ const uint8_t digit_lg_9[] PROGMEM =
 ,0xfe,0x7f,0xff,0xf8
 }; 
 
-const uint8_t *  digit_lg[10] PROGMEM = {
-  digit_lg_0,
-  digit_lg_1,
-  digit_lg_2,
-  digit_lg_3,
-  digit_lg_4,
-  digit_lg_5,
-  digit_lg_6,
-  digit_lg_7,
-  digit_lg_8,
-  digit_lg_9
-};
 
-const uint8_t *  sign_lg[2] PROGMEM = {
-  sign_lg_plus,
-  sign_lg_minus
-};
 
 
 const uint8_t dp_lg[] PROGMEM = {

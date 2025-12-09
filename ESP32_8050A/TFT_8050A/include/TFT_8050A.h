@@ -2,6 +2,9 @@
 #define TFT_8050A_H
 
 
+#include <Arduino.h>
+#include <esp_attr.h>
+#include <String.h>
 
 #define IS_ODD(x) ((x) & 0x01)
 
@@ -27,9 +30,7 @@ const struct {
 #include "05_small_digits_signs.h"
 #include "06_symbol_unit.h"
 #include "07_symbol_mode.h"
-// #include "10_TFT_220x176.h"
 #include "11_TFT_320x240.h"
-//#include <User_Setup.h>
 #include <TFT_eSPI.h> 
 #include <SPI.h>
 
@@ -85,11 +86,11 @@ const struct {
 ***************************************************************/
 
 /* Function prototypes */
-void IRAM_ATTR strobe0_ISR(void);
-void IRAM_ATTR strobe1_ISR(void);
-void IRAM_ATTR strobe2_ISR(void);
-void IRAM_ATTR strobe3_ISR(void);
-void IRAM_ATTR strobe4_ISR(void);
+void strobe0_ISR(void);
+void strobe1_ISR(void);
+void strobe2_ISR(void);
+void strobe3_ISR(void);
+void strobe4_ISR(void);
 void ESP32_WROOM32_initialize(void); 
 /**************** ESP32-WROOM32 configuration end ************/
 
@@ -246,7 +247,7 @@ void infer_alternating_current(void);
 void infer_unit(void); 
 void infer_quantity(void); 
 void infer_diode_style(void); 
-void infer_low_battery(void); 
+//void infer_low_battery(void); 
 void infer_relative_measurement(void); 
 void infer_decimal_point_position(void); 
 measurement_range read_active_range(void); 
@@ -309,7 +310,8 @@ signs sign;
 voltage_levels read_high_voltage(void); 
 void infer_sign(void); 
 void fast_tasks_monitor_initialize(void); 
-void fast_tasks_monitor_tasks(void); 
+void fast_tasks_monitor_tasks(void);
+void read_strobe(void); 
 /***************** Fast tasks monitor end *************************/
 
 

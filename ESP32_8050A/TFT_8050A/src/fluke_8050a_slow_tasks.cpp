@@ -1,5 +1,9 @@
 #include "TFT_8050A.h"
 
+
+
+extern slowTasksMonitorData slow_tasks_monitor; 
+
 void slow_tasks_monitor_initialize(void) {
   slow_tasks_monitor.state = SLOW_TASKS_MONITOR_STATE_INIT; 
   slow_tasks_monitor.unit = NO_UNIT; 

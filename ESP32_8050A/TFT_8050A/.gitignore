@@ -7,3 +7,8 @@ KiCAD/
 *.tar.xz
 *.tar.lzma
 *.tar.lzma.xz
+
+
+.pio/
+
+.vscode/

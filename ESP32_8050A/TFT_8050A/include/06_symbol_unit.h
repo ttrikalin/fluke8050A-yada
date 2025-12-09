@@ -12,8 +12,8 @@
 #define INVERT_COLORS_UNIT_LG INVERT_COLORS_UNIT
 #define INVERT_COLORS_UNIT_SM INVERT_COLORS_UNIT
 
-#define UNIT_LG(n)  (n?(uint8_t*)pgm_read_word(&(unit_lg[n-1])):0)
-#define UNIT_SM(n)  (n?(uint8_t*)pgm_read_word(&(unit_sm[n-1])):0)
+//#define UNIT_LG(n)  (n?(uint8_t*)pgm_read_word(&(unit_lg[n-1])):0)
+//#define UNIT_SM(n)  (n?(uint8_t*)pgm_read_word(&(unit_sm[n-1])):0)
 
   // V
 const uint8_t unit_lg_0[] PROGMEM =
@@ -489,19 +489,7 @@ const uint8_t unit_lg_10[] PROGMEM =
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
-const uint8_t * unit_lg[11] PROGMEM = {
-  unit_lg_0,
-  unit_lg_1,  
-  unit_lg_2,
-  unit_lg_3,
-  unit_lg_4,
-  unit_lg_5,
-  unit_lg_6,
-  unit_lg_7,
-  unit_lg_8,
-  unit_lg_9,
-  unit_lg_10
-};
+extern const uint8_t * unit_lg[11];
 
   // V
 const uint8_t unit_sm_0[] PROGMEM =
@@ -757,18 +745,19 @@ const uint8_t unit_sm_10[] PROGMEM =
     0x00, 0x00, 0x00,
     0x00, 0x00, 0x00 };
 
-const uint8_t * unit_sm[11] PROGMEM = {
-  unit_sm_0,
-  unit_sm_1,
-  unit_sm_2,
-  unit_sm_3,
-  unit_sm_4,
-  unit_sm_5,
-  unit_sm_6,
-  unit_sm_7,
-  unit_sm_8,
-  unit_sm_9,
-  unit_sm_10
-};
+extern const uint8_t * unit_sm[11];
+// const uint8_t * unit_sm[11] PROGMEM = {
+//   unit_sm_0,
+//   unit_sm_1,
+//   unit_sm_2,
+//   unit_sm_3,
+//   unit_sm_4,
+//   unit_sm_5,
+//   unit_sm_6,
+//   unit_sm_7,
+//   unit_sm_8,
+//   unit_sm_9,
+//   unit_sm_10
+// };
 
 #endif // SYMBOLUNIT_H

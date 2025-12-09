@@ -28,7 +28,7 @@ oneSymbol small_decimal_point;
 oneSymbol battery_full; 
 oneSymbol battery_low; 
 oneSymbol diode; 
-oneSymbol high_voltage; 
+oneSymbol high_voltage;
 
 arrayOfSymbols large_sign; 
 arrayOfSymbols small_sign; 

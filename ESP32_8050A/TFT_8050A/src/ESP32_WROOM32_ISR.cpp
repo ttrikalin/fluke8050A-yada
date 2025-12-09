@@ -1,5 +1,6 @@
 #include "TFT_8050A.h"
 
+extern fastTasksMonitorData fast_tasks_monitor; 
 
 void IRAM_ATTR strobe0_ISR(void) {
   fast_tasks_monitor.isr_read_flag = true; 

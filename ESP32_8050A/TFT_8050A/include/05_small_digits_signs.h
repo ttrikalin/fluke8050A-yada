@@ -16,7 +16,7 @@
 #define INVERT_COLORS_DIGIT_SM true
 #define INVERT_COLORS_SIGN_SM true
 
-#define DIGIT_SM(n) (n<10?(uint8_t*)pgm_read_word(&(digit_sm[n])):0)
+//#define DIGIT_SM(n) (n<10?(uint8_t*)pgm_read_word(&(digit_sm[n])):0)
 
 
 
@@ -400,24 +400,9 @@ const uint8_t digit_sm_9[] PROGMEM = {
   0x0F, 0x80
 };
 
-const uint8_t *  digit_sm[10] PROGMEM = {
-  digit_sm_0,
-  digit_sm_1,
-  digit_sm_2,
-  digit_sm_3,
-  digit_sm_4,
-  digit_sm_5,
-  digit_sm_6,
-  digit_sm_7,
-  digit_sm_8,
-  digit_sm_9
-};
+extern const uint8_t *  digit_sm[10];
+extern const uint8_t * sign_sm[2];
 
-
-const uint8_t * sign_sm[2] PROGMEM = {
-  sign_sm_plus,
-  sign_sm_minus
-};
 
 const uint8_t dp_sm[] PROGMEM = {
   0x00,

@@ -17,8 +17,8 @@
 #define SIGN_MINUS 2
 
 
-#define SIGN_LG(n) (n?(uint8_t*)pgm_read_word(&(symbolSign_lg[n-1])):SIGN_NONE)
-#define SIGN_SM(n) (n?(uint8_t*)pgm_read_word(&(symbolSign_sm[n-1])):SIGN_NONE)
+//#define SIGN_LG(n) (n?(uint8_t*)pgm_read_word(&(symbolSign_lg[n-1])):SIGN_NONE)
+//#define SIGN_SM(n) (n?(uint8_t*)pgm_read_word(&(symbolSign_sm[n-1])):SIGN_NONE)
 
   // plus
 const uint8_t symbolSign_lg_0[] PROGMEM =

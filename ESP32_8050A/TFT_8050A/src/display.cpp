@@ -1,5 +1,30 @@
 #include "TFT_8050A.h"
 
+
+
+extern displayMonitorData display_monitor;
+extern TFT_eSPI tft;
+
+extern TFT_eSprite measurements_sprite;
+extern TFT_eSprite analog_meter_sprite;
+ 
+extern fastTasksMonitorData fast_tasks_monitor;
+extern slowTasksMonitorData slow_tasks_monitor;  
+extern oneSymbol large_decimal_point; 
+extern oneSymbol small_decimal_point; 
+extern oneSymbol battery_full; 
+extern oneSymbol battery_low; 
+extern oneSymbol diode; 
+extern oneSymbol high_voltage;
+extern arrayOfSymbols large_sign; 
+extern arrayOfSymbols small_sign; 
+extern arrayOfSymbols large_digit; 
+extern arrayOfSymbols small_digit; 
+extern arrayOfSymbols large_unit_symbol; 
+extern arrayOfSymbols small_unit_symbol; 
+extern arrayOfSymbols large_mode_symbol; 
+extern arrayOfSymbols small_mode_symbol; 
+
 void display_monitor_initialize(void) {
   display_monitor.state = DISPLAY_MONITOR_STATE_INIT;
 

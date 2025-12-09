@@ -13,8 +13,11 @@
 #define INVERT_COLORS_MODE_LG INVERT_COLORS_MODE
 #define INVERT_COLORS_MODE_SM INVERT_COLORS_MODE
 
-#define MODE_LG(n) (n?(uint8_t*)pgm_read_word(&(mode_lg[n-1])):0)
-#define MODE_SM(n) (n?(uint8_t*)pgm_read_word(&(mode_sm[n-1])):0)
+
+extern const uint8_t * mode_lg[3];
+
+//#define MODE_LG(n) (n?(uint8_t*)pgm_read_word(&(mode_lg[n-1])):0)
+//#define MODE_SM(n) (n?(uint8_t*)pgm_read_word(&(mode_sm[n-1])):0)
 
 // DC
 const uint8_t dc_symbol_lg[] PROGMEM = {
@@ -126,11 +129,7 @@ const uint8_t rel_symbol_lg[] PROGMEM = {
   0x00, 0x00, 0x00, 0x00, 0x00
 };
 
-const uint8_t * mode_lg[3] PROGMEM = {
-  dc_symbol_lg,
-  ac_symbol_lg,
-  rel_symbol_lg
-};
+
 
 // DC
 const uint8_t dc_symbol_sm[] PROGMEM = {
@@ -167,10 +166,7 @@ const uint8_t ac_symbol_sm[] PROGMEM = {
   0xC1, 0x83, 0x80
 };
 
-const uint8_t * mode_sm[2] PROGMEM = {
-  dc_symbol_sm,
-  ac_symbol_sm
-};
+extern const uint8_t * mode_sm[2]; 
 
 // setZ 
 const uint8_t setZ_symbol_lg[] PROGMEM =

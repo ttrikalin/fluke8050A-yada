@@ -1,4 +1,7 @@
 #include "TFT_8050A.h"
+ 
+extern fastTasksMonitorData fast_tasks_monitor;
+extern slowTasksMonitorData slow_tasks_monitor;  
 
 void fast_tasks_monitor_initialize(void) {
   fast_tasks_monitor.state = FAST_TASKS_MONITOR_STATE_INIT; 
