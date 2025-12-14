@@ -118,7 +118,6 @@ void display_monitor_initialize(void) {
   small_mode_symbol.y_offset = 0;
   small_mode_symbol.symbols = mode_sm;
 
-
   battery_full.width = BATTERY_WIDTH;
   battery_full.height = BATTERY_HEIGHT;
   battery_full.y_offset = 0;
@@ -146,7 +145,6 @@ void display_monitor_initialize(void) {
   measurements_sprite.createSprite(MEASUREMENTS_WIDTH, MEASUREMENTS_HEIGHT);
   measurements_sprite.fillSprite(display_monitor.active_background_color);
 
-
   analog_meter_sprite.createSprite(ANALOG_METER_WIDTH, ANALOG_METER_HEIGHT);
   analog_meter_sprite.fillSprite(display_monitor.active_background_color);
 }
@@ -161,8 +159,7 @@ void display_monitor_tasks(void) {
       break;
 
     case DISPLAY_MONITOR_STATE_WAIT:
-      if (//!fast_tasks_monitor.isr_in_strobe_phase && 
-          slow_tasks_monitor.new_values_flag) {
+      if (slow_tasks_monitor.new_values_flag) {
         display_monitor.state = DISPLAY_MONITOR_STATE_UPDATE_BACKGROUND_STATUS;
       } else {
         display_monitor.state = DISPLAY_MONITOR_STATE_UPDATE_MEASUREMENT;
@@ -176,13 +173,6 @@ void display_monitor_tasks(void) {
       break;
 
     case DISPLAY_MONITOR_STATE_UPDATE_MEASUREMENT:
-
-      // fast_tasks_monitor.st0_value0 = 0;
-      // fast_tasks_monitor.st1_value = 5;
-      // fast_tasks_monitor.st2_value = 0;
-      // fast_tasks_monitor.st3_value = 0;
-      // fast_tasks_monitor.sign = NEGATIVE_SIGN;
-
       display_monitor.state = DISPLAY_MONITOR_STATE_WAIT;
       draw_measurement(); 
       measurements_sprite.pushSprite(X_MEASUREMENTS, Y_MEASUREMENTS);

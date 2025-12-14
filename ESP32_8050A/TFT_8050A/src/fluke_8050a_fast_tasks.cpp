@@ -36,17 +36,15 @@ void fast_tasks_monitor_tasks(void) {
       fast_tasks_monitor.state = FAST_TASKS_MONITOR_STATE_WAIT;
       read_strobe(); 
       voltage_levels new_voltage_level = read_high_voltage(); 
-      if (new_voltage_level == HIGH_VOLTAGE && 
-          fast_tasks_monitor.voltage_level == LOW_VOLTAGE) {
+      //if (new_voltage_level == HIGH_VOLTAGE && fast_tasks_monitor.voltage_level == LOW_VOLTAGE) {
+      if (new_voltage_level != fast_tasks_monitor.voltage_level) {
         slow_tasks_monitor.new_values_flag = true; 
       }
       fast_tasks_monitor.voltage_level = new_voltage_level; 
       break;
     }
-    default: {
-      fast_tasks_monitor.state = FAST_TASKS_MONITOR_STATE_INIT;
+    default: 
       break; 
-    }
   }
 }
 
