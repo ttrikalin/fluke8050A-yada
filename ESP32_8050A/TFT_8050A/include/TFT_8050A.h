@@ -51,31 +51,31 @@ const struct {
 /**************** ESP32-WROOM32 configuration start ************/
 // 8050A range and function switches
 // rng 
-#define fluke8050a_RNG_C   19
-#define fluke8050a_RNG_B   18
-#define fluke8050a_RNG_A   5
-#define fluke8050a_BT      17     // TX2
+#define fluke8050a_RNG_C   36
+#define fluke8050a_RNG_B   39
+#define fluke8050a_RNG_A   34
+#define fluke8050a_BT       0     
 
 // func 
-#define fluke8050a_FUNC_C  15
-#define fluke8050a_FUNC_A  2
-#define fluke8050a_FUNC_D  4
-#define fluke8050a_FUNC_B  16     // RX2
+#define fluke8050a_FUNC_C  13
+#define fluke8050a_FUNC_A  12
+#define fluke8050a_FUNC_D  14
+#define fluke8050a_FUNC_B  35     
 
 // 8050A strobe lines
-#define fluke8050a_ST0     13
-#define fluke8050a_ST1     12
-#define fluke8050a_ST2     14
-#define fluke8050a_ST3     27
-#define fluke8050a_ST4     26
+#define fluke8050a_ST0     27
+#define fluke8050a_ST1     26
+#define fluke8050a_ST2     25
+#define fluke8050a_ST3     33
+#define fluke8050a_ST4     32
 
 // 8050A scancode lines
-#define fluke8050a_HV      25
-#define fluke8050a_DP      33
-#define fluke8050a_Z       32
-#define fluke8050a_Y       35
-#define fluke8050a_X       34
-#define fluke8050a_W       39      // VN
+#define fluke8050a_HV      16
+#define fluke8050a_DP       4
+#define fluke8050a_Z       19
+#define fluke8050a_Y       18
+#define fluke8050a_X        5
+#define fluke8050a_W       17      
 
 /** These are defined in the User_Setup.h
 // #define TFT_SCLK 21
