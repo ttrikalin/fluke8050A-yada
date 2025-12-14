@@ -177,11 +177,11 @@ void display_monitor_tasks(void) {
 
     case DISPLAY_MONITOR_STATE_UPDATE_MEASUREMENT:
 
-      fast_tasks_monitor.st0_value0 = 0;
-      fast_tasks_monitor.st1_value = 5;
-      fast_tasks_monitor.st2_value = 0;
-      fast_tasks_monitor.st3_value = 0;
-      fast_tasks_monitor.sign = NEGATIVE_SIGN;
+      // fast_tasks_monitor.st0_value0 = 0;
+      // fast_tasks_monitor.st1_value = 5;
+      // fast_tasks_monitor.st2_value = 0;
+      // fast_tasks_monitor.st3_value = 0;
+      // fast_tasks_monitor.sign = NEGATIVE_SIGN;
 
       display_monitor.state = DISPLAY_MONITOR_STATE_WAIT;
       draw_measurement(); 
