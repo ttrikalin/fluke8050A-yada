@@ -48,7 +48,6 @@ void fast_tasks_monitor_tasks(void) {
   }
 }
 
-
 void read_strobe(void) {
   unsigned int tmp; 
 

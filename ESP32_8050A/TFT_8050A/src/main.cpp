@@ -15,7 +15,6 @@ provided the decoding of the strobe lines and the function and range truth table
 
 TFT_eSPI tft = TFT_eSPI();   
 
-
 TFT_eSprite measurements_sprite = TFT_eSprite(&tft);
 TFT_eSprite analog_meter_sprite = TFT_eSprite(&tft);
 

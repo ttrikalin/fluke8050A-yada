@@ -54,7 +54,7 @@ const struct {
 #define fluke8050a_RNG_C   36
 #define fluke8050a_RNG_B   39
 #define fluke8050a_RNG_A   34
-#define fluke8050a_BT       0     
+#define fluke8050a_BT       2     
 
 // func 
 #define fluke8050a_FUNC_C  13
