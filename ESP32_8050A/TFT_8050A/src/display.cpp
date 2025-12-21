@@ -174,7 +174,7 @@ void display_monitor_tasks(void) {
 
     case DISPLAY_MONITOR_STATE_UPDATE_MEASUREMENT:
       display_monitor.state = DISPLAY_MONITOR_STATE_WAIT;
-      draw_measurement(); 
+      //draw_measurement(); 
       measurements_sprite.pushSprite(X_MEASUREMENTS, Y_MEASUREMENTS);
       draw_analog_meter(slow_tasks_monitor.quantity == CURRENT || slow_tasks_monitor.quantity == VOLTAGE);
       analog_meter_sprite.pushSprite(X_ANALOG_METER, Y_ANALOG_METER);

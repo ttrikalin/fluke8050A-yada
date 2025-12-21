@@ -50,9 +50,23 @@ void setup(void) {
 }
 
 void loop(void) {
-  //delay(LOOP_DELAY_MILLISECONDS); 
   slow_tasks_monitor_tasks(); 
   fast_tasks_monitor_tasks();
   display_monitor_tasks(); 
+
+  Serial.print("st0_0: "); 
+  Serial.print(fast_tasks_monitor.st0_value0);
+  Serial.print("st0_1: "); 
+  Serial.print(fast_tasks_monitor.st0_value1);
+  Serial.print("st0_2: "); 
+  Serial.print(fast_tasks_monitor.st0_value2);
+  Serial.print(" | st1: "); 
+  Serial.print(fast_tasks_monitor.st1_value);
+  Serial.print(" | st2: "); 
+  Serial.print(fast_tasks_monitor.st2_value);
+  Serial.print(" | st3: "); 
+  Serial.print(fast_tasks_monitor.st3_value);
+  Serial.print(" | st4: "); 
+  Serial.println(fast_tasks_monitor.st4_value);
 }
 
