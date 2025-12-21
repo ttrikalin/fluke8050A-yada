@@ -18,8 +18,9 @@ TFT_eSPI tft = TFT_eSPI();
 TFT_eSprite measurements_sprite = TFT_eSprite(&tft);
 TFT_eSprite analog_meter_sprite = TFT_eSprite(&tft);
 
-displayMonitorData display_monitor; 
-slowTasksMonitorData slow_tasks_monitor; 
+displayMonitorData display_monitor;
+RawInputs raw_inputs{0,0,false,false}; 
+InputsMonitorData inputs_monitor; 
 fastTasksMonitorData fast_tasks_monitor; 
 
 oneSymbol large_decimal_point; 
@@ -43,14 +44,14 @@ arrayOfSymbols small_mode_symbol;
 void setup(void) {
   
   ESP32_WROOM32_initialize();
-  slow_tasks_monitor_initialize(); 
+  inputs_monitor_initialize(); 
   fast_tasks_monitor_initialize();
   display_monitor_initialize();
   
 }
 
 void loop(void) {
-  slow_tasks_monitor_tasks(); 
+  inputs_monitor_tasks(); 
   fast_tasks_monitor_tasks();
   display_monitor_tasks(); 
 

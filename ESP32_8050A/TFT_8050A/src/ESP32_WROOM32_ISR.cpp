@@ -5,12 +5,16 @@ extern fastTasksMonitorData fast_tasks_monitor;
 void IRAM_ATTR strobe0_ISR(void) {
   fast_tasks_monitor.isr_read_flag = true; 
   fast_tasks_monitor.isr_in_strobe_phase = true; 
-  if (fast_tasks_monitor.isr_active_strobe == ST0_0) {
-    fast_tasks_monitor.isr_active_strobe = ST0_1;  
-  } else if (fast_tasks_monitor.isr_active_strobe == ST0_1) {
-    fast_tasks_monitor.isr_active_strobe = ST0_2;
-  } else {
-    fast_tasks_monitor.isr_active_strobe = ST0_0;
+  switch(fast_tasks_monitor.isr_active_strobe) {
+    case ST0_0:
+      fast_tasks_monitor.isr_active_strobe = ST0_1;
+      break;
+    case ST0_1:
+      fast_tasks_monitor.isr_active_strobe = ST0_2;
+      break;
+    default:
+      fast_tasks_monitor.isr_active_strobe = ST0_0;
+      break;
   }
 }
 
