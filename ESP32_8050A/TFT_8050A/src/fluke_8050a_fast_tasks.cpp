@@ -1,13 +1,13 @@
 #include "TFT_8050A.h"
  
-extern fastTasksMonitorData fast_tasks_monitor;
+extern FastTasksMonitorData fast_tasks_monitor;
 //extern InputsMonitorData inputs_monitor;  
 
 void fast_tasks_monitor_initialize(void) {
   fast_tasks_monitor.state = FAST_TASKS_MONITOR_STATE_INIT; 
   fast_tasks_monitor.isr_active_strobe = NO_STROBE;  // set in the ISR's , reset in read_strobe()
   fast_tasks_monitor.isr_read_flag = false;          // set in the ISR's , reset in read_strobe()
-  fast_tasks_monitor.isr_in_strobe_phase = false;    // set in the ISR's , reset in read_strobe()
+  //fast_tasks_monitor.isr_in_strobe_phase = false;    // set in the ISR's , reset in read_strobe()
   fast_tasks_monitor.st0_value0 = 0; 
   fast_tasks_monitor.st0_value1 = 0; 
   fast_tasks_monitor.st0_value2 = 0; 
@@ -36,12 +36,7 @@ void fast_tasks_monitor_tasks(void) {
       fast_tasks_monitor.isr_read_flag = false; 
       fast_tasks_monitor.state = FAST_TASKS_MONITOR_STATE_WAIT;
       read_strobe(); 
-      voltage_levels new_voltage_level = read_high_voltage(); 
-
-      // if (new_voltage_level != fast_tasks_monitor.voltage_level) {
-      //   inputs_monitor.new_values_flag = true; 
-      // }
-      fast_tasks_monitor.voltage_level = new_voltage_level; 
+      fast_tasks_monitor.voltage_level = read_high_voltage(); 
       
       // Check if another interrupt occurred while we were reading
       // If so, immediately process it
@@ -91,7 +86,7 @@ void read_strobe(void) {
     }
     case ST4: {
       fast_tasks_monitor.st4_value = tmp;
-      fast_tasks_monitor.isr_in_strobe_phase = false;  
+      //fast_tasks_monitor.isr_in_strobe_phase = false;  
       fast_tasks_monitor.isr_active_strobe = NO_STROBE; 
       break;
     }
@@ -111,10 +106,11 @@ void infer_sign(void) {
   // bits W==1 (vertical part of '+'), X==1 (minus part '-') or nothing
   // as per the logic below  
   fast_tasks_monitor.sign = Sign::NO_SIGN;
-  if ( test_bit(fast_tasks_monitor.st0_value0, 2) ) {
+  if (test_bit(fast_tasks_monitor.st0_value0, 2)) {
     fast_tasks_monitor.sign = Sign::NEGATIVE_SIGN;
   } 
-  if ( test_bit(fast_tasks_monitor.st0_value0, 3) ) {
+  if (test_bit(fast_tasks_monitor.st0_value0, 2) &&
+      test_bit(fast_tasks_monitor.st0_value0, 3)) {
     fast_tasks_monitor.sign = Sign::POSITIVE_SIGN;
   } 
 }

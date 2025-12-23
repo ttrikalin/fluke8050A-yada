@@ -9,11 +9,11 @@ void ESP32_WROOM32_initialize(void) {
   pinMode(fluke8050a_BT, INPUT);
 
   // func 
-  pinMode(fluke8050a_FUNC_B, INPUT);
-  pinMode(fluke8050a_FUNC_D, INPUT);
-  pinMode(fluke8050a_FUNC_A, INPUT);
+  pinMode(fluke8050a_FUNC_A, INPUT);    // DC LOW
+  pinMode(fluke8050a_FUNC_B, INPUT);    
   pinMode(fluke8050a_FUNC_C, INPUT);
-
+  pinMode(fluke8050a_FUNC_D, INPUT);    // relative LOW
+  
   // 8050A strobe lines, set as interrupts 
   pinMode(fluke8050a_ST0, INPUT);
   attachInterrupt(fluke8050a_ST0, strobe0_ISR, FALLING);

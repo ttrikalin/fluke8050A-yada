@@ -21,7 +21,7 @@ TFT_eSprite analog_meter_sprite = TFT_eSprite(&tft);
 displayMonitorData display_monitor;
 RawInputs raw_inputs{0,0,false,false}; 
 InputsMonitorData inputs_monitor; 
-fastTasksMonitorData fast_tasks_monitor; 
+FastTasksMonitorData fast_tasks_monitor; 
 
 oneSymbol large_decimal_point; 
 oneSymbol small_decimal_point; 

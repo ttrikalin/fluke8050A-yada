@@ -8,7 +8,7 @@ extern TFT_eSPI tft;
 extern TFT_eSprite measurements_sprite;
 extern TFT_eSprite analog_meter_sprite;
  
-extern fastTasksMonitorData fast_tasks_monitor;
+extern FastTasksMonitorData fast_tasks_monitor;
 extern InputsMonitorData inputs_monitor;  
 extern oneSymbol large_decimal_point; 
 extern oneSymbol small_decimal_point; 
@@ -159,6 +159,7 @@ void display_monitor_tasks(void) {
       break;
 
     case DISPLAY_MONITOR_STATE_WAIT:
+      if (fast_tasks_monitor.isr_active_strobe != NO_STROBE) break;
       #ifdef DEBUG_ENABLE
         display_monitor.state = DISPLAY_MONITOR_STATE_DEBUG_SCREEN;
       #else
@@ -546,7 +547,10 @@ void draw_debug_screen (void) {
   tft.print(" | RNG_B=");
   tft.print((unsigned int)digitalRead(fluke8050a_RNG_B));
   tft.print(" | RNG_C=");
-  tft.println((unsigned int)digitalRead(fluke8050a_RNG_C));
+  tft.print((unsigned int)digitalRead(fluke8050a_RNG_C));
+  tft.print(" == ");
+  tft.println((unsigned int) inputs_monitor.range);
+
 
   tft.print("F_A=");
   tft.print((unsigned int)digitalRead(fluke8050a_FUNC_A));
@@ -555,7 +559,10 @@ void draw_debug_screen (void) {
   tft.print(" | F_C=");
   tft.print((unsigned int)digitalRead(fluke8050a_FUNC_C));
   tft.print(" | F_D=");
-  tft.println((unsigned int)digitalRead(fluke8050a_FUNC_D));
+  tft.print((unsigned int)digitalRead(fluke8050a_FUNC_D));
+  tft.print(" == ");
+  tft.println((unsigned int) inputs_monitor.function);
+
   tft.print("BattLow=");
   tft.println((unsigned int)digitalRead(fluke8050a_BT));
 

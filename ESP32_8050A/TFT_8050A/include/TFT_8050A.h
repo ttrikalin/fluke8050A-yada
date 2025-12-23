@@ -47,7 +47,7 @@ const struct {
 #define fluke8050a_WITH_BATTERY 
 #define fluke8050a_HARDWARE_IMPEDANCE_REFERENCE_STR " 600"
 
-#define DEBUG_ENABLE
+//#define DEBUG_ENABLE
 /**************** FLUKE 8050A config end ***********************/
 
 /**************** ESP32-WROOM32 configuration start ************/
@@ -112,7 +112,7 @@ void ESP32_WROOM32_initialize(void);
 // -- diode, battery 
 
 
-#define UPDATE_INPUTS_EVERY_N_LOOPS 1000
+//#define UPDATE_INPUTS_EVERY_N_LOOPS 8
 
 /* slow tasks states */
 typedef enum  {
@@ -198,19 +198,23 @@ enum struct Sign {
   NEGATIVE_SIGN = 1,
   NO_SIGN       = 2 
 };  
+
 enum struct BatteryStyle {
   NORMAL_BATTERY = 0, 
   LOW_BATTERY = 1, 
   NO_BATTERY = 2 
 };
+
 enum struct RelativeMeasurementStyle{
-  ABSOLUTE_MEASUREMENT = 0, 
-  RELATIVE_MEASUREMENT = 1
+  RELATIVE_MEASUREMENT = 0,
+  ABSOLUTE_MEASUREMENT = 1 
 }; 
 
 struct RawInputs {
   unsigned int range_bits; 
   unsigned int function_bits;
+  bool AC_flag; 
+  bool absolute_flag;
   bool battery_low_flag;
   bool new_values_flag;
 }; 
@@ -226,7 +230,7 @@ struct InputsMonitorData {
   BatteryStyle battery;
   Mode acdc_mode;
   RelativeMeasurementStyle relative_measurement;
-  unsigned int loop_counter;
+  //unsigned int loop_counter;
   bool new_values_flag; 
   bool valid_input_combination;
 };
@@ -279,21 +283,21 @@ HIGH_VOLTAGE = 2
 } voltage_levels; 
 
 /* Digits data */
-typedef struct {
-fast_tasks_monitor_states state; 
-volatile strobe_number isr_active_strobe;  // Shared with ISR - must be volatile
-volatile bool isr_in_strobe_phase;         // Shared with ISR - must be volatile
-volatile bool isr_read_flag;                // Shared with ISR - must be volatile
-volatile unsigned int st0_value0;          // Shared with ISR - must be volatile
-volatile unsigned int st0_value1;          // Shared with ISR - must be volatile
-volatile unsigned int st0_value2;          // Shared with ISR - must be volatile
-volatile unsigned int st1_value;           // Shared with ISR - must be volatile
-volatile unsigned int st2_value;           // Shared with ISR - must be volatile
-volatile unsigned int st3_value;           // Shared with ISR - must be volatile
-volatile unsigned int st4_value;           // Shared with ISR - must be volatile
-voltage_levels voltage_level; 
-Sign sign; 
-} fastTasksMonitorData; 
+struct FastTasksMonitorData {
+  fast_tasks_monitor_states state; 
+  volatile strobe_number isr_active_strobe;  // Shared with ISR - must be volatile
+  //volatile bool isr_in_strobe_phase;         // Shared with ISR - must be volatile
+  volatile unsigned int st0_value0;          // Shared with ISR - must be volatile
+  volatile unsigned int st0_value1;          // Shared with ISR - must be volatile
+  volatile unsigned int st0_value2;          // Shared with ISR - must be volatile
+  volatile unsigned int st1_value;           // Shared with ISR - must be volatile
+  volatile unsigned int st2_value;           // Shared with ISR - must be volatile
+  volatile unsigned int st3_value;           // Shared with ISR - must be volatile
+  volatile unsigned int st4_value;           // Shared with ISR - must be volatile
+  voltage_levels voltage_level; 
+  volatile Sign sign; 
+  volatile bool isr_read_flag;                // Shared with ISR - must be volatile
+}; 
 
 /* Function prototypes */ 
 voltage_levels read_high_voltage(void); 
