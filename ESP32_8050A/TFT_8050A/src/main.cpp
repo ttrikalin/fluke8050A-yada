@@ -52,7 +52,7 @@ void setup(void) {
 
 void loop(void) {
   inputs_monitor_tasks(); 
-  fast_tasks_monitor_tasks();
+  //fast_tasks_monitor_tasks();
   display_monitor_tasks(); 
 
   Serial.print("st0_0: "); 

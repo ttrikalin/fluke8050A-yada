@@ -13,7 +13,7 @@ void inputs_monitor_initialize(void) {
   inputs_monitor.base_unit = BaseUnit::INVALID;
   inputs_monitor.unit  = Unit::NO_UNIT;
   inputs_monitor.diode_style = DiodeStyle::NO_DIODE; 
-  inputs_monitor.decimal_point_position = DecimalPointPosition::NO_DECIMAL_POINT; 
+  //inputs_monitor.decimal_point_position = DecimalPointPosition::NO_DECIMAL_POINT; 
   inputs_monitor.battery = BatteryStyle::NO_BATTERY; 
   inputs_monitor.acdc_mode = Mode::NO_ACDC; 
   inputs_monitor.relative_measurement = RelativeMeasurementStyle::ABSOLUTE_MEASUREMENT; 
@@ -135,35 +135,35 @@ bool is_valid_input_combination(Function function, Range range){
   return(function != Function::INVALID && range != Range::INVALID);
 }
 
-DecimalPointPosition infer_decimal_point_position(const Function function, const Range range) {
-  if(function == Function::GAIN && range == Range::R_20M){ 
-    return DecimalPointPosition::NO_DECIMAL_POINT;
-  }
-  if(function == Function::GAIN && range != Range::R_20M){ 
-    return DecimalPointPosition::DECIMAL_POINT_AT_TWO;
-  }
-  switch (range){
-    case Range::R_2: {
-      return DecimalPointPosition::DECIMAL_POINT_AT_ZERO;
-    }
-    case Range::R_20M:
-    case Range::R_20: {
-      return DecimalPointPosition::DECIMAL_POINT_AT_ONE;
-    }
-    case Range::R_0P2:
-    case Range::R_200:
-    case Range::R_200nS:
-    case Range::R_2mS: {
-      return DecimalPointPosition::DECIMAL_POINT_AT_TWO;
-    }
-    case Range::R_2000: {
-      return DecimalPointPosition::DECIMAL_POINT_AT_THREE;
-    }
-    default: {
-      return DecimalPointPosition::NO_DECIMAL_POINT;
-    }
-  }
-}
+// DecimalPointPosition infer_decimal_point_position(const Function function, const Range range) {
+//   if(function == Function::GAIN && range == Range::R_20M){ 
+//     return DecimalPointPosition::NO_DECIMAL_POINT;
+//   }
+//   if(function == Function::GAIN && range != Range::R_20M){ 
+//     return DecimalPointPosition::DECIMAL_POINT_AT_TWO;
+//   }
+//   switch (range){
+//     case Range::R_2: {
+//       return DecimalPointPosition::DECIMAL_POINT_AT_ZERO;
+//     }
+//     case Range::R_20M:
+//     case Range::R_20: {
+//       return DecimalPointPosition::DECIMAL_POINT_AT_ONE;
+//     }
+//     case Range::R_0P2:
+//     case Range::R_200:
+//     case Range::R_200nS:
+//     case Range::R_2mS: {
+//       return DecimalPointPosition::DECIMAL_POINT_AT_TWO;
+//     }
+//     case Range::R_2000: {
+//       return DecimalPointPosition::DECIMAL_POINT_AT_THREE;
+//     }
+//     default: {
+//       return DecimalPointPosition::NO_DECIMAL_POINT;
+//     }
+//   }
+// }
 
 
 
@@ -175,7 +175,7 @@ void decode_raw_inputs(const RawInputs &raw_inputs, InputsMonitorData &imd) {
   if(!imd.valid_input_combination){
     imd.base_unit = BaseUnit::INVALID; 
     imd.unit = Unit::NO_UNIT; 
-    imd.decimal_point_position = DecimalPointPosition::NO_DECIMAL_POINT; 
+    //imd.decimal_point_position = DecimalPointPosition::NO_DECIMAL_POINT; 
     imd.acdc_mode = Mode::NO_ACDC; 
     return; 
   }
@@ -230,7 +230,7 @@ void decode_raw_inputs(const RawInputs &raw_inputs, InputsMonitorData &imd) {
   imd.diode_style = infer_diode_style(imd.function, imd.range);
 
   // decimal point position depends on both function and range
-  imd.decimal_point_position = infer_decimal_point_position(imd.function, imd.range);
+  // imd.decimal_point_position = infer_decimal_point_position(imd.function, imd.range);
 
   // battery style depends on battery flag
   #ifdef fluke8050a_WITH_BATTERY

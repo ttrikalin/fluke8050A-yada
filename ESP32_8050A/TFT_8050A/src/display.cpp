@@ -33,8 +33,8 @@ void display_monitor_initialize(void) {
   display_monitor.active_negative_meter_color = TFT_RED;
 
   display_monitor.relative_reference = 0.0;
-  display_monitor.digits_str = "-.0000";
-  display_monitor.impedance_reference_str = fluke8050a_HARDWARE_IMPEDANCE_REFERENCE_STR;
+  //display_monitor.digits_str = "-.0000";
+  //display_monitor.impedance_reference_str = fluke8050a_HARDWARE_IMPEDANCE_REFERENCE_STR;
 
   display_monitor.non_high_voltage_theme.splash_background_color      = TFT_DARKGREEN;
   display_monitor.non_high_voltage_theme.splash_text_color            = TFT_WHITE;
@@ -185,7 +185,7 @@ void display_monitor_tasks(void) {
       display_monitor.state = DISPLAY_MONITOR_STATE_WAIT;
       draw_measurement(); 
       measurements_sprite.pushSprite(X_MEASUREMENTS, Y_MEASUREMENTS);
-      draw_analog_meter(inputs_monitor.function == Function::CURRENT || inputs_monitor.function == Function::VOLTAGE);
+      draw_analog_meter(inputs_monitor.function == Function::CURRENT || inputs_monitor.function == Function::VOLTAGE || inputs_monitor.function == Function::GAIN);
       analog_meter_sprite.pushSprite(X_ANALOG_METER, Y_ANALOG_METER);
       break; 
 
@@ -397,12 +397,8 @@ void draw_background_status_screen(void){
 }
 
 
-
 void draw_measurement(void){
-
   point p = {0, 0};
-
-
   if(fast_tasks_monitor.voltage_level == HIGH_VOLTAGE){
     update_colors();
     measurements_sprite.fillSprite(display_monitor.active_background_color);
@@ -413,55 +409,59 @@ void draw_measurement(void){
   }
 
   if(fast_tasks_monitor.sign != Sign::NO_SIGN) {
-    p = draw_symbol_array_element_to_sprite(measurements_sprite, large_sign, (unsigned int)fast_tasks_monitor.sign, 
+    p = draw_symbol_array_element_to_sprite(measurements_sprite, large_sign, (fast_tasks_monitor.sign == Sign::NEGATIVE_SIGN), 
       INVERT_COLORS_SIGN_LG, p);
     p.x += large_sign.width;
   } else {
     p.x += 2*large_sign.width;
   }
-  if(fast_tasks_monitor.DP_flag1){// && inputs_monitor.decimal_point_position == DecimalPointPosition::DECIMAL_POINT_AT_ZERO){
-    p = draw_symbol_to_sprite(measurements_sprite, large_decimal_point, INVERT_COLORS_DIGIT_LG, p);
-  } 
-  // Bounds check: digit values are 4-bit (0-15), but arrays only have 0-9
-  unsigned int d0 = (fast_tasks_monitor.st0_value0 > 9) ? 0 : fast_tasks_monitor.st0_value0;
-  unsigned int d1 = (fast_tasks_monitor.st1_value > 9) ? 0 : fast_tasks_monitor.st1_value;
-  unsigned int d2 = (fast_tasks_monitor.st2_value > 9) ? 0 : fast_tasks_monitor.st2_value;
-  unsigned int d3 = (fast_tasks_monitor.st3_value > 9) ? 0 : fast_tasks_monitor.st3_value;
-  unsigned int d4 = (fast_tasks_monitor.st4_value > 9) ? 0 : fast_tasks_monitor.st4_value;
-  
-  p = draw_symbol_array_element_to_sprite(measurements_sprite, large_digit, d1, INVERT_COLORS_DIGIT_LG, p);
-  if(fast_tasks_monitor.DP_flag2){// && inputs_monitor.decimal_point_position == DecimalPointPosition::DECIMAL_POINT_AT_ONE){
-    p = draw_symbol_to_sprite(measurements_sprite, large_decimal_point, INVERT_COLORS_DIGIT_LG, p);
-  } 
-  p = draw_symbol_array_element_to_sprite(measurements_sprite, large_digit, d2, INVERT_COLORS_DIGIT_LG, p);
-  if(fast_tasks_monitor.DP_flag3){// && inputs_monitor.decimal_point_position == DecimalPointPosition::DECIMAL_POINT_AT_TWO){
-    p = draw_symbol_to_sprite(measurements_sprite, large_decimal_point, INVERT_COLORS_DIGIT_LG, p);
-  } 
-  p = draw_symbol_array_element_to_sprite(measurements_sprite, large_digit, d3, INVERT_COLORS_DIGIT_LG, p);
-  if(fast_tasks_monitor.DP_flag4){// && inputs_monitor.decimal_point_position == DecimalPointPosition::DECIMAL_POINT_AT_THREE){
-    p = draw_symbol_to_sprite(measurements_sprite, large_decimal_point, INVERT_COLORS_DIGIT_LG, p);
-  } 
-  p = draw_symbol_array_element_to_sprite(measurements_sprite, large_digit, d4, INVERT_COLORS_DIGIT_LG, p);
 
-  // add the unit symbol and mode symbol
-  //x +=  REL_IN_ZONE_X_UNITS;
-  //y +=  REL_IN_ZONE_Y_UNITS;
-  // Bounds check: Unit enum has NO_UNIT=-1, valid values are 0-10
-  if(inputs_monitor.unit != Unit::NO_UNIT) {
-    unsigned int unit_idx = (unsigned int)inputs_monitor.unit;
-    if(unit_idx <= 10) {  // Unit enum max is IMPEDANCE_Z=10
-      p = draw_symbol_array_element_to_sprite(measurements_sprite, large_unit_symbol, unit_idx, 
-        INVERT_COLORS_UNIT, p);
-    }
+  if(fast_tasks_monitor.st0_value0 !=2) {
+    p = draw_symbol_array_element_to_sprite(measurements_sprite, large_digit, fast_tasks_monitor.st0_value0, INVERT_COLORS_DIGIT_LG, p);
+  } else {
+    p.x += large_digit.width;
   }
-  //x += large_unit_symbol.width + 2;
-  //x +=  REL_IN_ZONE_X_MODE - REL_IN_ZONE_X_UNITS - W_UNIT_LG;
-  //y +=  REL_IN_ZONE_Y_MODE - REL_IN_ZONE_Y_UNITS;
-  // Bounds check: Mode enum has NO_ACDC=-1, valid values are 0-1
-  if(inputs_monitor.acdc_mode != Mode::NO_ACDC) {
-    unsigned int mode_idx = inputs_monitor.acdc_mode == Mode::DC ? 0 : 1;
-    p = draw_symbol_array_element_to_sprite(measurements_sprite, small_mode_symbol, mode_idx, INVERT_COLORS_MODE, p);
+   
+  if(fast_tasks_monitor.DP_flag1){
+    p = draw_symbol_to_sprite(measurements_sprite, large_decimal_point, INVERT_COLORS_DIGIT_LG, p);
+  } 
+
+  if(fast_tasks_monitor.st1_value < 10){
+    p = draw_symbol_array_element_to_sprite(measurements_sprite, large_digit, fast_tasks_monitor.st1_value, INVERT_COLORS_DIGIT_LG, p);
+  } else {
+    p.x += large_digit.width;
   }
+
+  if(fast_tasks_monitor.DP_flag2){
+    p = draw_symbol_to_sprite(measurements_sprite, large_decimal_point, INVERT_COLORS_DIGIT_LG, p);
+  }
+
+  if(fast_tasks_monitor.st2_value < 10){
+    p = draw_symbol_array_element_to_sprite(measurements_sprite, large_digit, fast_tasks_monitor.st2_value, INVERT_COLORS_DIGIT_LG, p);
+  } else {
+    p.x += large_digit.width;
+  }
+
+  if(fast_tasks_monitor.DP_flag3){
+    p = draw_symbol_to_sprite(measurements_sprite, large_decimal_point, INVERT_COLORS_DIGIT_LG, p);
+  }
+
+  if(fast_tasks_monitor.st3_value < 10){
+    p = draw_symbol_array_element_to_sprite(measurements_sprite, large_digit, fast_tasks_monitor.st3_value, INVERT_COLORS_DIGIT_LG, p);
+  } else {
+    p.x += large_digit.width;
+  }
+
+  if(fast_tasks_monitor.DP_flag4){
+    p = draw_symbol_to_sprite(measurements_sprite, large_decimal_point, INVERT_COLORS_DIGIT_LG, p);
+  }
+
+  if(fast_tasks_monitor.st4_value < 10){
+    p = draw_symbol_array_element_to_sprite(measurements_sprite, large_digit, fast_tasks_monitor.st4_value, INVERT_COLORS_DIGIT_LG, p);
+  } else {
+    p.x += large_digit.width;
+  }
+
 }
 
 
@@ -565,21 +565,5 @@ void draw_debug_screen (void) {
 
   tft.print("BattLow=");
   tft.println((unsigned int)digitalRead(fluke8050a_BT));
-
-  tft.print("HV="); 
-  tft.println((unsigned int)fast_tasks_monitor.voltage_level); 
-  
-  tft.print("DP="); 
-  tft.println((unsigned int)digitalRead(fluke8050a_DP)); 
-
-  tft.print("W=");
-  tft.print((unsigned int)digitalRead(fluke8050a_W));
-  tft.print(" | X=");
-  tft.print((unsigned int)digitalRead(fluke8050a_X));
-  tft.print(" | Y=");
-  tft.print((unsigned int)digitalRead(fluke8050a_Y));
-  tft.print(" | Z=");
-  tft.println((unsigned int)digitalRead(fluke8050a_Z));
-
   tft.unloadFont();
 }

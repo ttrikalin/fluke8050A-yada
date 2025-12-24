@@ -189,24 +189,24 @@ enum struct DiodeStyle {
   SMALL_DIODE = 1
 };
 
-enum struct DecimalPointPosition {
-  DECIMAL_POINT_AT_ZERO  = 0, 
-  DECIMAL_POINT_AT_ONE   = 1, 
-  DECIMAL_POINT_AT_TWO   = 2, 
-  DECIMAL_POINT_AT_THREE = 3, 
-  NO_DECIMAL_POINT       = 4
-};
+// enum struct DecimalPointPosition {
+//   DECIMAL_POINT_AT_ZERO  = 0, 
+//   DECIMAL_POINT_AT_ONE   = 1, 
+//   DECIMAL_POINT_AT_TWO   = 2, 
+//   DECIMAL_POINT_AT_THREE = 3, 
+//   NO_DECIMAL_POINT       = 4
+// };
 
 enum struct Sign {
+  NO_SIGN       = -1, 
   POSITIVE_SIGN = 0,
-  NEGATIVE_SIGN = 1,
-  NO_SIGN       = 2 
+  NEGATIVE_SIGN = 1
 };  
 
 enum struct BatteryStyle {
+  NO_BATTERY     = -1, 
   NORMAL_BATTERY = 0, 
-  LOW_BATTERY = 1, 
-  NO_BATTERY = 2 
+  LOW_BATTERY    = 1
 };
 
 enum struct RelativeMeasurementStyle{
@@ -230,11 +230,10 @@ struct InputsMonitorData {
   BaseUnit base_unit;
   Unit unit; 
   DiodeStyle diode_style;
-  DecimalPointPosition decimal_point_position;
+  //DecimalPointPosition decimal_point_position;
   BatteryStyle battery;
   Mode acdc_mode;
   RelativeMeasurementStyle relative_measurement;
-  //unsigned int loop_counter;
   bool new_values_flag; 
   bool valid_input_combination;
 };
@@ -247,7 +246,7 @@ void decode_raw_inputs(const RawInputs &raw_inputs, InputsMonitorData &inputs_mo
 Range infer_range(unsigned int range_bits); 
 Function infer_function(unsigned int function_bits); 
 bool is_valid_input_combination(Function function, Range range); 
-DecimalPointPosition infer_decimal_point_position(const Function function, const Range range);
+//DecimalPointPosition infer_decimal_point_position(const Function function, const Range range);
 DiodeStyle infer_diode_style(const Function function, const Range range);
 
 /***************** Inputs monitor end ***********************/
@@ -261,12 +260,12 @@ DiodeStyle infer_diode_style(const Function function, const Range range);
 // also, it reads the voltage level, and the sign bit for the digits.
 
 
-/* Digits states */
-typedef enum  {
-  FAST_TASKS_MONITOR_STATE_INIT  = 0, 
-  FAST_TASKS_MONITOR_STATE_WAIT  = 1, 
-  FAST_TASKS_MONITOR_STATE_READ  = 2
-} fast_tasks_monitor_states; 
+// /* Digits states */
+// typedef enum  {
+//   FAST_TASKS_MONITOR_STATE_INIT  = 0, 
+//   FAST_TASKS_MONITOR_STATE_WAIT  = 1, 
+//   FAST_TASKS_MONITOR_STATE_READ  = 2
+// } fast_tasks_monitor_states; 
 
 typedef enum {
   NO_STROBE = 0, 
@@ -288,9 +287,8 @@ HIGH_VOLTAGE = 2
 
 /* Digits data */
 struct FastTasksMonitorData {
-  fast_tasks_monitor_states state; 
+  //fast_tasks_monitor_states state; 
   volatile strobe_number isr_active_strobe;  // Shared with ISR - must be volatile
-  //volatile bool isr_in_strobe_phase;         // Shared with ISR - must be volatile
   volatile unsigned int st0_value0;          // Shared with ISR - must be volatile
   volatile unsigned int st0_value1;          // Shared with ISR - must be volatile
   volatile unsigned int st0_value2;          // Shared with ISR - must be volatile
@@ -307,14 +305,13 @@ struct FastTasksMonitorData {
   volatile bool DP_flag2;
   volatile bool DP_flag3;
   volatile bool DP_flag4;
-  //volatile bool isr_read_flag;                // Shared with ISR - must be volatile
 }; 
 
 /* Function prototypes */ 
 voltage_levels read_high_voltage(void); 
 void infer_sign(void); 
 void fast_tasks_monitor_initialize(void); 
-void fast_tasks_monitor_tasks(void);
+//void fast_tasks_monitor_tasks(void);
 void read_strobe(void); 
 /***************** Fast tasks monitor end *************************/
 
@@ -358,9 +355,9 @@ typedef struct {
   unsigned int active_text_color; 
   unsigned int active_negative_meter_color; 
 
-  String digits_str; 
+  //String digits_str; 
   float relative_reference;
-  String impedance_reference_str;
+  //String impedance_reference_str;
 
 } displayMonitorData; 
 
