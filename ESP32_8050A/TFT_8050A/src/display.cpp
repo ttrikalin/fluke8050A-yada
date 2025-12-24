@@ -183,7 +183,7 @@ void display_monitor_tasks(void) {
 
     case DISPLAY_MONITOR_STATE_UPDATE_MEASUREMENT:
       display_monitor.state = DISPLAY_MONITOR_STATE_WAIT;
-      //draw_measurement(); 
+      draw_measurement(); 
       measurements_sprite.pushSprite(X_MEASUREMENTS, Y_MEASUREMENTS);
       draw_analog_meter(inputs_monitor.function == Function::CURRENT || inputs_monitor.function == Function::VOLTAGE);
       analog_meter_sprite.pushSprite(X_ANALOG_METER, Y_ANALOG_METER);
@@ -419,7 +419,7 @@ void draw_measurement(void){
   } else {
     p.x += 2*large_sign.width;
   }
-  if(inputs_monitor.decimal_point_position == DecimalPointPosition::DECIMAL_POINT_AT_ZERO){
+  if(fast_tasks_monitor.DP_flag1){// && inputs_monitor.decimal_point_position == DecimalPointPosition::DECIMAL_POINT_AT_ZERO){
     p = draw_symbol_to_sprite(measurements_sprite, large_decimal_point, INVERT_COLORS_DIGIT_LG, p);
   } 
   // Bounds check: digit values are 4-bit (0-15), but arrays only have 0-9
@@ -427,20 +427,21 @@ void draw_measurement(void){
   unsigned int d1 = (fast_tasks_monitor.st1_value > 9) ? 0 : fast_tasks_monitor.st1_value;
   unsigned int d2 = (fast_tasks_monitor.st2_value > 9) ? 0 : fast_tasks_monitor.st2_value;
   unsigned int d3 = (fast_tasks_monitor.st3_value > 9) ? 0 : fast_tasks_monitor.st3_value;
+  unsigned int d4 = (fast_tasks_monitor.st4_value > 9) ? 0 : fast_tasks_monitor.st4_value;
   
-  p = draw_symbol_array_element_to_sprite(measurements_sprite, large_digit, d0, INVERT_COLORS_DIGIT_LG, p);
-  if(inputs_monitor.decimal_point_position == DecimalPointPosition::DECIMAL_POINT_AT_ONE){
-    p = draw_symbol_to_sprite(measurements_sprite, large_decimal_point, INVERT_COLORS_DIGIT_LG, p);
-  } 
   p = draw_symbol_array_element_to_sprite(measurements_sprite, large_digit, d1, INVERT_COLORS_DIGIT_LG, p);
-  if(inputs_monitor.decimal_point_position == DecimalPointPosition::DECIMAL_POINT_AT_TWO){
+  if(fast_tasks_monitor.DP_flag2){// && inputs_monitor.decimal_point_position == DecimalPointPosition::DECIMAL_POINT_AT_ONE){
     p = draw_symbol_to_sprite(measurements_sprite, large_decimal_point, INVERT_COLORS_DIGIT_LG, p);
   } 
   p = draw_symbol_array_element_to_sprite(measurements_sprite, large_digit, d2, INVERT_COLORS_DIGIT_LG, p);
-  if(inputs_monitor.decimal_point_position == DecimalPointPosition::DECIMAL_POINT_AT_THREE){
+  if(fast_tasks_monitor.DP_flag3){// && inputs_monitor.decimal_point_position == DecimalPointPosition::DECIMAL_POINT_AT_TWO){
     p = draw_symbol_to_sprite(measurements_sprite, large_decimal_point, INVERT_COLORS_DIGIT_LG, p);
   } 
   p = draw_symbol_array_element_to_sprite(measurements_sprite, large_digit, d3, INVERT_COLORS_DIGIT_LG, p);
+  if(fast_tasks_monitor.DP_flag4){// && inputs_monitor.decimal_point_position == DecimalPointPosition::DECIMAL_POINT_AT_THREE){
+    p = draw_symbol_to_sprite(measurements_sprite, large_decimal_point, INVERT_COLORS_DIGIT_LG, p);
+  } 
+  p = draw_symbol_array_element_to_sprite(measurements_sprite, large_digit, d4, INVERT_COLORS_DIGIT_LG, p);
 
   // add the unit symbol and mode symbol
   //x +=  REL_IN_ZONE_X_UNITS;
@@ -458,11 +459,8 @@ void draw_measurement(void){
   //y +=  REL_IN_ZONE_Y_MODE - REL_IN_ZONE_Y_UNITS;
   // Bounds check: Mode enum has NO_ACDC=-1, valid values are 0-1
   if(inputs_monitor.acdc_mode != Mode::NO_ACDC) {
-    unsigned int mode_idx = (unsigned int)inputs_monitor.acdc_mode;
-    if(mode_idx <= 1) {  // Mode enum max is AC=1
-      p = draw_symbol_array_element_to_sprite(measurements_sprite, small_mode_symbol, mode_idx, 
-        INVERT_COLORS_MODE, p);
-    }
+    unsigned int mode_idx = inputs_monitor.acdc_mode == Mode::DC ? 0 : 1;
+    p = draw_symbol_array_element_to_sprite(measurements_sprite, small_mode_symbol, mode_idx, INVERT_COLORS_MODE, p);
   }
 }
 
@@ -541,6 +539,8 @@ void draw_debug_screen (void) {
   tft.println((unsigned int)fast_tasks_monitor.st2_value);
   tft.print("ST3=");
   tft.println((unsigned int)fast_tasks_monitor.st3_value);
+  tft.print("ST4=");
+  tft.println((unsigned int)fast_tasks_monitor.st4_value);
 
   tft.print("RNG_A=");
   tft.print((unsigned int)digitalRead(fluke8050a_RNG_A));
@@ -567,7 +567,7 @@ void draw_debug_screen (void) {
   tft.println((unsigned int)digitalRead(fluke8050a_BT));
 
   tft.print("HV="); 
-  tft.println((unsigned int)digitalRead(fluke8050a_HV)); 
+  tft.println((unsigned int)fast_tasks_monitor.voltage_level); 
   
   tft.print("DP="); 
   tft.println((unsigned int)digitalRead(fluke8050a_DP)); 

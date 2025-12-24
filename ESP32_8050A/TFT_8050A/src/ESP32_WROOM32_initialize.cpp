@@ -16,15 +16,15 @@ void ESP32_WROOM32_initialize(void) {
   
   // 8050A strobe lines, set as interrupts 
   pinMode(fluke8050a_ST0, INPUT);
-  attachInterrupt(fluke8050a_ST0, strobe0_ISR, FALLING);
+  attachInterrupt(digitalPinToInterrupt(fluke8050a_ST0), strobe0_ISR, RISING);
   pinMode(fluke8050a_ST1, INPUT);
-  attachInterrupt(fluke8050a_ST1, strobe1_ISR, FALLING);
+  attachInterrupt(digitalPinToInterrupt(fluke8050a_ST1), strobe1_ISR, RISING);
   pinMode(fluke8050a_ST2, INPUT);
-  attachInterrupt(fluke8050a_ST2, strobe2_ISR, FALLING);
+  attachInterrupt(digitalPinToInterrupt(fluke8050a_ST2), strobe2_ISR, RISING);
   pinMode(fluke8050a_ST3, INPUT);
-  attachInterrupt(fluke8050a_ST3, strobe3_ISR, FALLING);
+  attachInterrupt(digitalPinToInterrupt(fluke8050a_ST3), strobe3_ISR, RISING);
   pinMode(fluke8050a_ST4, INPUT);
-  attachInterrupt(fluke8050a_ST4, strobe4_ISR, FALLING);
+  attachInterrupt(digitalPinToInterrupt(fluke8050a_ST4), strobe4_ISR, CHANGE);
 
   // 8050A scancode lines
   pinMode(fluke8050a_HV, INPUT);
@@ -40,4 +40,8 @@ void ESP32_WROOM32_initialize(void) {
   // pinMode(TFT_DC, OUTPUT);
   // pinMode(TFT_RST, OUTPUT);
   // pinMode(TFT_CS, OUTPUT);
+
+  #ifdef DEBUG_ENABLE
+    pinMode(DEBUG_LED, OUTPUT);
+  #endif
 }

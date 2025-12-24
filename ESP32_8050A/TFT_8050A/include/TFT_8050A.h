@@ -79,6 +79,10 @@ const struct {
 #define fluke8050a_X        5
 #define fluke8050a_W       17      
 
+
+#ifdef DEBUG_ENABLE
+  #define DEBUG_LED         2
+#endif
 /** These are defined in the User_Setup.h
 // #define TFT_SCLK 21
 // #define TFT_MOSI  3  // (RX0) Also called SDI 
@@ -294,9 +298,16 @@ struct FastTasksMonitorData {
   volatile unsigned int st2_value;           // Shared with ISR - must be volatile
   volatile unsigned int st3_value;           // Shared with ISR - must be volatile
   volatile unsigned int st4_value;           // Shared with ISR - must be volatile
-  voltage_levels voltage_level; 
+  volatile voltage_levels voltage_level; 
   volatile Sign sign; 
-  volatile bool isr_read_flag;                // Shared with ISR - must be volatile
+  volatile bool DP_flag0_0;
+  volatile bool DP_flag0_1;
+  volatile bool DP_flag0_2;
+  volatile bool DP_flag1;
+  volatile bool DP_flag2;
+  volatile bool DP_flag3;
+  volatile bool DP_flag4;
+  //volatile bool isr_read_flag;                // Shared with ISR - must be volatile
 }; 
 
 /* Function prototypes */ 
