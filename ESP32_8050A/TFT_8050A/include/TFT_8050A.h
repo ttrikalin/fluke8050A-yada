@@ -189,14 +189,6 @@ enum struct DiodeStyle {
   SMALL_DIODE = 1
 };
 
-// enum struct DecimalPointPosition {
-//   DECIMAL_POINT_AT_ZERO  = 0, 
-//   DECIMAL_POINT_AT_ONE   = 1, 
-//   DECIMAL_POINT_AT_TWO   = 2, 
-//   DECIMAL_POINT_AT_THREE = 3, 
-//   NO_DECIMAL_POINT       = 4
-// };
-
 enum struct Sign {
   NO_SIGN       = -1, 
   POSITIVE_SIGN = 0,
@@ -296,6 +288,7 @@ struct FastTasksMonitorData {
   volatile unsigned int st2_value;           // Shared with ISR - must be volatile
   volatile unsigned int st3_value;           // Shared with ISR - must be volatile
   volatile unsigned int st4_value;           // Shared with ISR - must be volatile
+  volatile int decimal_value;
   volatile voltage_levels voltage_level; 
   volatile Sign sign; 
   volatile bool DP_flag0_0;

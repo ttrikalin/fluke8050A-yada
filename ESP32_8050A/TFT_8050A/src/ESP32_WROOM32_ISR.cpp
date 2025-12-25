@@ -13,7 +13,6 @@ void IRAM_ATTR strobe0_ISR(void) {
     case ST0_0:
       fast_tasks_monitor.isr_active_strobe = ST0_1;
       fast_tasks_monitor.DP_flag0_0 = digitalRead(fluke8050a_DP); 
-      //fast_tasks_monitor.st0_value0 = (unsigned int)  ((digitalRead(fluke8050a_W)<<3)| (digitalRead(fluke8050a_X)<<2)|(digitalRead(fluke8050a_Y)<<1)|(digitalRead(fluke8050a_Z)));
       fast_tasks_monitor.st0_value0 = (unsigned int) ((digitalRead(fluke8050a_Y)<<1)|(digitalRead(fluke8050a_Z)));
       if (digitalRead(fluke8050a_W) && !digitalRead(fluke8050a_X)) {
         fast_tasks_monitor.sign = Sign::NEGATIVE_SIGN;
@@ -95,21 +94,30 @@ void IRAM_ATTR strobe4_ISR(void) {
                      (digitalRead(fluke8050a_X)<<2)|
                      (digitalRead(fluke8050a_Y)<<1)|
                      (digitalRead(fluke8050a_Z))); 
+  fast_tasks_monitor.decimal_value =   
+      (fast_tasks_monitor.sign == Sign::NEGATIVE_SIGN ? -1 : 1) *    
+      ((int)
+       (fast_tasks_monitor.st0_value0 == 1 ? 10000 : 0) +     
+       (fast_tasks_monitor.st1_value < 10 ? fast_tasks_monitor.st1_value * 1000 : 0) + 
+       (fast_tasks_monitor.st2_value < 10 ? fast_tasks_monitor.st2_value * 100 : 0) +
+       (fast_tasks_monitor.st3_value < 10 ? fast_tasks_monitor.st3_value * 10 : 0) +
+       (fast_tasks_monitor.st4_value < 10 ? fast_tasks_monitor.st4_value : 0));   
+  
 }
 
 
 
-void infer_sign(void) {
-  // The sign is determined by the ST0 digit (0bWXYZ)
-  // bits W==1 (minus or horizontal part of '+'), X==1 (vertical part '+') or nothing
-  // as per the logic below  
-  fast_tasks_monitor.sign = Sign::NO_SIGN;
-  if (test_bit(fast_tasks_monitor.st0_value0, 3)) {
-    fast_tasks_monitor.sign = Sign::NEGATIVE_SIGN;
-  } 
-  if (test_bit(fast_tasks_monitor.st0_value0, 2) &&
-      test_bit(fast_tasks_monitor.st0_value0, 3)) {
-    fast_tasks_monitor.sign = Sign::POSITIVE_SIGN;
-  } 
-}
+// void infer_sign(void) {
+//   // The sign is determined by the ST0 digit (0bWXYZ)
+//   // bits W==1 (minus or horizontal part of '+'), X==1 (vertical part '+') or nothing
+//   // as per the logic below  
+//   fast_tasks_monitor.sign = Sign::NO_SIGN;
+//   if (test_bit(fast_tasks_monitor.st0_value0, 3)) {
+//     fast_tasks_monitor.sign = Sign::NEGATIVE_SIGN;
+//   } 
+//   if (test_bit(fast_tasks_monitor.st0_value0, 2) &&
+//       test_bit(fast_tasks_monitor.st0_value0, 3)) {
+//     fast_tasks_monitor.sign = Sign::POSITIVE_SIGN;
+//   } 
+// }
 

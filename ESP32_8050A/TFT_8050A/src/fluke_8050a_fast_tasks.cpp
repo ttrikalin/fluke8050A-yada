@@ -12,7 +12,8 @@ void fast_tasks_monitor_initialize(void) {
   fast_tasks_monitor.st1_value = 0; 
   fast_tasks_monitor.st2_value = 0; 
   fast_tasks_monitor.st3_value = 0; 
-  fast_tasks_monitor.st4_value = 0; 
+  fast_tasks_monitor.st4_value = 0;
+  fast_tasks_monitor.decimal_value = 0; 
   fast_tasks_monitor.voltage_level = NO_VOLTAGE_LEVEL; 
   fast_tasks_monitor.sign = Sign::NO_SIGN;
   fast_tasks_monitor.DP_flag0_0 = false;  

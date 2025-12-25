@@ -394,6 +394,21 @@ void draw_background_status_screen(void){
     draw_symbol_array_element_to_tft(tft, large_mode_symbol , (unsigned int) inputs_monitor.acdc_mode, 
       INVERT_COLORS_MODE, p);
   }
+
+
+  if (inputs_monitor.relative_measurement == RelativeMeasurementStyle::RELATIVE_MEASUREMENT){
+    tft.loadFont(AA_FONT_MEDIUM);
+    tft.setCursor(X_RELATIVE_REFERENCE, Y_RELATIVE_REFERENCE);
+    tft.print("Rel to: ");
+    float scale = (float) //fast_tasks_monitor.DP_flag0_0 * 10000 +
+                          fast_tasks_monitor.DP_flag1 * 10000 + 
+                          fast_tasks_monitor.DP_flag2 * 1000 + 
+                          fast_tasks_monitor.DP_flag3 * 100 +
+                          fast_tasks_monitor.DP_flag4 * 10;
+    scale = (scale == 0 ? 1.0f : scale);
+    tft.print((float) fast_tasks_monitor.decimal_value/scale);
+    tft.unloadFont();
+  }
 }
 
 
@@ -461,10 +476,7 @@ void draw_measurement(void){
   } else {
     p.x += large_digit.width;
   }
-
 }
-
-
 
 void draw_analog_meter(bool is_signed){
   analog_meter_sprite.fillSprite(display_monitor.active_background_color);
@@ -475,25 +487,16 @@ void draw_analog_meter(bool is_signed){
   int w = 0;
   if(is_signed){
     x = (ANALOG_METER_WIDTH>>1);
-    w =   (int) 
-            ( (ANALOG_METER_WIDTH>>1) * ((fast_tasks_monitor.st0_value0 * 1000) + 
-            (fast_tasks_monitor.st1_value * 100) + 
-            (fast_tasks_monitor.st2_value * 10) + 
-            fast_tasks_monitor.st3_value) / 1999.0f);
+    w = (int) ((ANALOG_METER_WIDTH>>1) * abs(fast_tasks_monitor.decimal_value) / 19999.0f);
     if(fast_tasks_monitor.sign == Sign::POSITIVE_SIGN){
       analog_meter_sprite.fillRect(x, y , w, h , display_monitor.active_text_color);
     } else {
       analog_meter_sprite.fillRect(x-w, y, w, h , display_monitor.active_negative_meter_color);
     }
   } else {
-    w = (int) 
-            ( ANALOG_METER_WIDTH * ((fast_tasks_monitor.st0_value0 * 1000) + 
-            (fast_tasks_monitor.st1_value * 100) + 
-            (fast_tasks_monitor.st2_value * 10) + 
-            fast_tasks_monitor.st3_value) / 1999.0f);
+    w = (int) (ANALOG_METER_WIDTH * abs(fast_tasks_monitor.decimal_value) / 19999.0f);
     analog_meter_sprite.fillRect(x, y , w, h , display_monitor.active_text_color);
   }
-  
   
   analog_meter_sprite.drawRect(0, 0, ANALOG_METER_WIDTH, ANALOG_METER_HEIGHT, display_monitor.active_text_color);
   analog_meter_sprite.drawLine(x, y, x, y+h, display_monitor.active_text_color); 

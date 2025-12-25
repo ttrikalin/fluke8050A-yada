@@ -229,9 +229,6 @@ void decode_raw_inputs(const RawInputs &raw_inputs, InputsMonitorData &imd) {
   // diode style
   imd.diode_style = infer_diode_style(imd.function, imd.range);
 
-  // decimal point position depends on both function and range
-  // imd.decimal_point_position = infer_decimal_point_position(imd.function, imd.range);
-
   // battery style depends on battery flag
   #ifdef fluke8050a_WITH_BATTERY
     imd.battery = raw_inputs.battery_low_flag ? BatteryStyle::LOW_BATTERY : BatteryStyle::NORMAL_BATTERY; 
@@ -248,5 +245,6 @@ void decode_raw_inputs(const RawInputs &raw_inputs, InputsMonitorData &imd) {
 
   // relative measurement style depends on function bits
   imd.relative_measurement = raw_inputs.absolute_flag ? RelativeMeasurementStyle::ABSOLUTE_MEASUREMENT : RelativeMeasurementStyle::RELATIVE_MEASUREMENT;
+  
 }
 
