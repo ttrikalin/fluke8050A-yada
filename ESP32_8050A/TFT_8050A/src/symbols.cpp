@@ -39,10 +39,9 @@ const uint8_t * unit_sm[11] PROGMEM = {
 
 
 
-const uint8_t * mode_lg[3] PROGMEM = {
+const uint8_t * mode_lg[2] PROGMEM = {
   dc_symbol_lg,
-  ac_symbol_lg,
-  rel_symbol_lg
+  ac_symbol_lg
 };
 
 const uint8_t * unit_lg[11] PROGMEM = {

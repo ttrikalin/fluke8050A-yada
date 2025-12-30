@@ -14,7 +14,7 @@
 #define INVERT_COLORS_MODE_SM INVERT_COLORS_MODE
 
 
-extern const uint8_t * mode_lg[3];
+extern const uint8_t * mode_lg[2];
 
 //#define MODE_LG(n) (n?(uint8_t*)pgm_read_word(&(mode_lg[n-1])):0)
 //#define MODE_SM(n) (n?(uint8_t*)pgm_read_word(&(mode_sm[n-1])):0)

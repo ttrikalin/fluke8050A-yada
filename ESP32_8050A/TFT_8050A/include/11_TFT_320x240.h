@@ -1,7 +1,7 @@
 #ifndef TFT_320x240_H
 #define TFT_320x240_H
 
-#define TFT_SCREEN_ROTATION   3
+#define TFT_SCREEN_ROTATION   1
 #define CANVAS_WIDTH 320 
 #define CANVAS_HEIGHT 240 
 
@@ -63,7 +63,25 @@
 #define TFT_SALMON 0xFC8E
 #define TFT_DARKRED 0x8000
 #define TFT_LIGHTMUSTARD 0xEFE0
-#define TFT_LIGHTGREEN 0x97E6
+#define TFT_LIGHTGREEN  0x97E6
+#define TFT_BLACK		0x0000
+#define TFT_WHITE		0xFFFF
+#define TFT_RED			0xF800
+#define TFT_YELLOW		0xFFE0
+#define TFT_LIME		0x07E0
+#define TFT_AQUA		0x07FF
+#define TFT_TEAL		0x0410
+#define TFT_FUCHSIA		0xF81F
+#define TFT_BLUE		0x001F
+#define TFT_SILVER		0xC618
+#define TFT_GRAY		0x8410
+#define TFT_LIGHTPINK  0xFDB7
+//#define TFT_MAROON		0x8000
+//#define TFT_GREEN		0x0400
+//#define TFT_OLIVE		0x8400
+//#define TFT_NAVY		0x0010
+//#define TFT_PURPLE		0x8010
+//#define TFT_TRANSPARENT	0xFFFFFFFF
 
 
 #endif // TFT_320x240_H

@@ -27,9 +27,11 @@ const struct {
 #include "02_battery_41_16.h"
 #include "03_HV_42_36.h"
 #include "04_large_digits_signs_220x176.h"
+//#include "04b_large_digits_signs_320x240.h" // malformed
 #include "05_small_digits_signs.h"
 #include "06_symbol_unit.h"
 #include "07_symbol_mode.h"
+//#include "07b_symbol_mode.h" // malformed
 #include "11_TFT_320x240.h"
 #include <TFT_eSPI.h> 
 #include <SPI.h>
@@ -383,13 +385,12 @@ void use_colors(unsigned int background_color,
 void update_colors(void);
 void draw_splash_screen(void); 
 
-
 point draw_symbol_to_sprite(TFT_eSprite &sprite, oneSymbol &symbol, bool invert_colors, point p);
 point draw_symbol_array_element_to_sprite(TFT_eSprite &sprite, arrayOfSymbols &array_of_symbols, unsigned int d, bool invert_colors, point p);
 point draw_symbol_to_tft(TFT_eSPI &tft, oneSymbol &symbol, bool invert_colors, point p);
 point draw_symbol_array_element_to_tft(TFT_eSPI &tft, arrayOfSymbols &array_of_symbols, unsigned int d, bool invert_colors, point p);
 
-
+bool check_in_range(void); 
 
 void draw_background_status_screen(void);
 void draw_invalid_inputs_screen(void);

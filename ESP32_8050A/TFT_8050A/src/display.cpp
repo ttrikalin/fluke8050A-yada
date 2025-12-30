@@ -40,7 +40,7 @@ void display_monitor_initialize(void) {
   display_monitor.non_high_voltage_theme.splash_text_color            = TFT_WHITE;
   display_monitor.non_high_voltage_theme.voltage_background_color     = TFT_LIGHTGREEN;
   display_monitor.non_high_voltage_theme.voltage_text_color           = TFT_BLACK;
-  display_monitor.non_high_voltage_theme.current_background_color     = TFT_SALMON;
+  display_monitor.non_high_voltage_theme.current_background_color     = TFT_LIGHTPINK; // TFT_SALMON;
   display_monitor.non_high_voltage_theme.current_text_color           = TFT_BLACK;
   display_monitor.non_high_voltage_theme.resistance_background_color  = TFT_LIGHTMUSTARD;
   display_monitor.non_high_voltage_theme.resistance_text_color        = TFT_BLACK;
@@ -183,9 +183,13 @@ void display_monitor_tasks(void) {
 
     case DISPLAY_MONITOR_STATE_UPDATE_MEASUREMENT:
       display_monitor.state = DISPLAY_MONITOR_STATE_WAIT;
-      draw_measurement(); 
+      bool in_range; 
+      in_range = check_in_range(); 
+      if(in_range) {
+        draw_measurement(); 
+        draw_analog_meter(inputs_monitor.base_unit == BaseUnit::AMPERE || inputs_monitor.base_unit == BaseUnit::VOLT || inputs_monitor.base_unit == BaseUnit::DECIBEL);
+      }
       measurements_sprite.pushSprite(X_MEASUREMENTS, Y_MEASUREMENTS);
-      draw_analog_meter(inputs_monitor.function == Function::CURRENT || inputs_monitor.function == Function::VOLTAGE || inputs_monitor.function == Function::GAIN);
       analog_meter_sprite.pushSprite(X_ANALOG_METER, Y_ANALOG_METER);
       break; 
 
@@ -295,7 +299,7 @@ void draw_splash_screen(void) {
   tft.println(firmware_information.hardware);
   
 
-  delay(TFT_SPLASH_SCREEN_DURATION);   
+  delay(TFT_SPLASH_SCREEN_DURATION>> 2);   
   tft.fillScreen(bg);
 
 
@@ -316,7 +320,7 @@ void draw_splash_screen(void) {
   //tft.pushSprite(0,0);
 
   tft.unloadFont();
-  delay(TFT_SPLASH_SCREEN_DURATION<<1);   
+  delay(TFT_SPLASH_SCREEN_DURATION>>2);   
   tft.fillScreen(bg);
   //canvas.pushSprite(0,0);
 } 
@@ -388,16 +392,20 @@ void draw_background_status_screen(void){
     p.y = Y_UNITS;
     draw_symbol_array_element_to_tft(tft, large_unit_symbol, (unsigned int) inputs_monitor.unit, INVERT_COLORS_UNIT, p);
   }
+
+  tft.loadFont(AA_FONT_MEDIUM);
   if(inputs_monitor.acdc_mode != Mode::NO_ACDC){
-    p.x = X_MODE;
-    p.y = Y_MODE;
-    draw_symbol_array_element_to_tft(tft, large_mode_symbol , (unsigned int) inputs_monitor.acdc_mode, 
-      INVERT_COLORS_MODE, p);
+    tft.setCursor(X_MODE, Y_MODE);
+    tft.print((inputs_monitor.acdc_mode == Mode::AC) ? "AC" : "DC");
+    //p.x = X_MODE;
+    //p.y = Y_MODE;
+    // draw_symbol_array_element_to_tft(tft, large_mode_symbol , (unsigned int) inputs_monitor.acdc_mode, 
+    //   INVERT_COLORS_MODE, p);
   }
 
 
   if (inputs_monitor.relative_measurement == RelativeMeasurementStyle::RELATIVE_MEASUREMENT){
-    tft.loadFont(AA_FONT_MEDIUM);
+    //tft.loadFont(AA_FONT_MEDIUM);
     tft.setCursor(X_RELATIVE_REFERENCE, Y_RELATIVE_REFERENCE);
     tft.print("Rel to: ");
     float scale = (float) //fast_tasks_monitor.DP_flag0_0 * 10000 +
@@ -406,13 +414,69 @@ void draw_background_status_screen(void){
                           fast_tasks_monitor.DP_flag3 * 100 +
                           fast_tasks_monitor.DP_flag4 * 10;
     scale = (scale == 0 ? 1.0f : scale);
-    tft.print((float) fast_tasks_monitor.decimal_value/scale);
-    tft.unloadFont();
+    char buffer[20]; 
+    sprintf(buffer, "%.4g", fast_tasks_monitor.decimal_value/scale);
+    tft.print(buffer);
+    //tft.unloadFont();
   }
+  
+  tft.unloadFont();
+}
+
+bool check_in_range(void) {
+    if(fast_tasks_monitor.st0_value0 == 1 && 
+     fast_tasks_monitor.st1_value >  9 &&
+     fast_tasks_monitor.st2_value >  9 && 
+     fast_tasks_monitor.st3_value >  9 && 
+     fast_tasks_monitor.st4_value >  9 ) {
+      measurements_sprite.fillSprite(display_monitor.active_background_color);
+      measurements_sprite.unloadFont();
+      measurements_sprite.loadFont(AA_FONT_MEDIUM);
+      measurements_sprite.setTextColor(display_monitor.active_text_color, 
+                                      display_monitor.active_background_color, 
+                                      true);
+      char buffer[20];
+      if (fast_tasks_monitor.sign == Sign::NEGATIVE_SIGN) {
+        strcpy(buffer, "OL (< -"); 
+      } else {
+        strcpy(buffer, "OL (> ");
+      }
+      switch(inputs_monitor.range){
+        case Range::R_0P2:
+        case Range::R_200:
+        case Range::R_200nS:
+          strcat(buffer, "200)");
+          break; 
+        case Range::R_2:
+        case Range::R_2mS:
+          strcat(buffer, "2)");
+          break;
+        case Range::R_20:
+        case Range::R_20M:
+          strcat(buffer, "20)");
+          break;
+        case Range::R_2000:
+          strcat(buffer, "2000)");
+          break;
+        default: 
+          break;
+      }
+      measurements_sprite.setCursor((MEASUREMENTS_WIDTH - measurements_sprite.textWidth(buffer)-15), //MEASUREMENTS_HEIGHT);
+                                    (MEASUREMENTS_HEIGHT - measurements_sprite.fontHeight()));
+      measurements_sprite.print(buffer);
+      measurements_sprite.unloadFont();
+
+      analog_meter_sprite.fillSprite(display_monitor.active_background_color);
+
+      return false;
+    } else {
+      return true;
+     }
 }
 
 
 void draw_measurement(void){
+
   point p = {0, 0};
   if(fast_tasks_monitor.voltage_level == HIGH_VOLTAGE){
     update_colors();
@@ -426,9 +490,9 @@ void draw_measurement(void){
   if(fast_tasks_monitor.sign != Sign::NO_SIGN) {
     p = draw_symbol_array_element_to_sprite(measurements_sprite, large_sign, (fast_tasks_monitor.sign == Sign::NEGATIVE_SIGN), 
       INVERT_COLORS_SIGN_LG, p);
-    p.x += large_sign.width;
+    //p.x += large_sign.width;
   } else {
-    p.x += 2*large_sign.width;
+    p.x += large_sign.width;
   }
 
   if(fast_tasks_monitor.st0_value0 !=2) {
@@ -506,6 +570,7 @@ void draw_analog_meter(bool is_signed){
 
 void draw_invalid_inputs_screen (void) {
   tft.fillScreen(display_monitor.active_background_color);
+  tft.unloadFont();
   tft.loadFont(AA_FONT_SMALL);
   tft.setCursor((CANVAS_WIDTH - tft.textWidth(firmware_information.hardware))>>1, tft.fontHeight() +3);
   tft.println("Invalid Input\nCombination!");
@@ -527,6 +592,7 @@ void draw_invalid_inputs_screen (void) {
 
 void draw_debug_screen (void) {
   tft.fillScreen(display_monitor.active_background_color);
+  tft.unloadFont();
   tft.loadFont(AA_FONT_SMALL);
   tft.setCursor(0, tft.fontHeight() +3);
   tft.println("Debug Information");

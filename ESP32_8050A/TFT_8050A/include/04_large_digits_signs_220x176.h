@@ -1,5 +1,5 @@
-#ifndef DIGIT_LARGE_H
-#define DIGIT_LARGE_H
+#ifndef DIGIT_LARGE_220x176_H
+#define DIGIT_LARGE_220x176_H
 
 // digit width & height
 #define H_DIGIT_LG 49
@@ -15,8 +15,6 @@
 #define INVERT_COLORS_DIGIT_LG true
 #define INVERT_COLORS_SIGN_LG true
 
-
-//#define DIGIT_LG(n) (n<10?(uint8_t*)pgm_read_word(&(digit_lg[n])):0)
 
 extern const uint8_t *  digit_lg[10]; 
 extern const uint8_t *  sign_lg[2];

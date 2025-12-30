@@ -17,13 +17,13 @@
 #define W_SET_Z   64
 #define H_SET_Z   32
 
-#define MODE_NONE 0
-#define MODE_DC   1
-#define MODE_AC   2
-#define MODE_REL  3
+//#define MODE_NONE 0
+//#define MODE_DC   1
+//#define MODE_AC   2
+//#define MODE_REL  3
 
-#define MODE_LG(n) (n?(uint8_t*)pgm_read_word(&(symbolMode[n-1])):MODE_NONE)
-#define MODE_SM(n) (n?(uint8_t*)pgm_read_word(&(symbolMode_sm[n-1])):MODE_NONE)
+//#define MODE_LG(n) (n?(uint8_t*)pgm_read_word(&(symbolMode[n-1])):MODE_NONE)
+//#define MODE_SM(n) (n?(uint8_t*)pgm_read_word(&(symbolMode_sm[n-1])):MODE_NONE)
 
 // DC
 const uint8_t symbolMode_0[] PROGMEM = {
